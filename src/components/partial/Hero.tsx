@@ -3,7 +3,6 @@ import Image from "next/image";
 import {CalendarDays, Locate, MapPin, UserRound} from 'lucide-react';
 
 import carpoolBg from '@/assets/carpoolbg.svg'
-import {EnvelopeIcon} from "@heroicons/react/16/solid";
 
 const Hero = () => {
 
