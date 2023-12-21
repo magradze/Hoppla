@@ -80,7 +80,7 @@ const Hero = () => {
                                 </div>
                                 <div className="relative w-full h-16 rounded-md self-end">
                                     <button
-                                        className="bg-indigo-600 block w-full h-full rounded-b lg:rounded-bl-none lg:rounded-r-md border-0 px-24 py-1.5 text-white "
+                                        className="bg-secondary block w-full h-full rounded-b lg:rounded-bl-none lg:rounded-r-md border-0 px-24 py-1.5 text-white "
                                     >
                                         Search
                                     </button>

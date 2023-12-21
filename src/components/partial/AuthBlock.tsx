@@ -7,6 +7,7 @@ import {Fragment} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {BellIcon} from "@heroicons/react/24/outline";
+import avatarImage from '@/assets/avatar.png'
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -27,7 +28,7 @@ const AuthBlock = () => {
                     {!session && (
                         <>
                             <button
-                                className="relative inline-flex items-center gap-x-1.5 rounded-md bg-[#e84e3e] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#c43628] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="relative inline-flex items-center gap-x-1.5 rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primaryDark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 onClick={() => signIn()}
                             >
                                 Sign in
@@ -52,7 +53,7 @@ const AuthBlock = () => {
                                         <span className="sr-only">Open user menu</span>
                                         <Image
                                             className="h-8 w-8 rounded-full"
-                                            src={session?.user?.image || "https://via.placeholder.com/150"}
+                                            src={session?.user?.image || avatarImage}
                                             alt={session?.user?.name || "User"}
                                             width={32}
                                             height={32}
@@ -69,7 +70,7 @@ const AuthBlock = () => {
                                     leaveTo="transform opacity-0 scale-95"
                                 >
                                     <Menu.Items
-                                        className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        className="absolute right-0 z-20 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         {userNavigation.map((item, index) => (
                                             <Menu.Item key={index}>
                                                 {({active}: { active: boolean }) => (
