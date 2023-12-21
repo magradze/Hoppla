@@ -27,7 +27,7 @@ const AuthBlock = () => {
                     {!session && (
                         <>
                             <button
-                                className="rounded-md bg-blue-500 hover:bg-blue-600 text-white px-4 py-2"
+                                className="relative inline-flex items-center gap-x-1.5 rounded-md bg-[#e84e3e] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#c43628] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 onClick={() => signIn()}
                             >
                                 Sign in
