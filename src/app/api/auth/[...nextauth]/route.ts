@@ -20,7 +20,7 @@ export const authOptions: AuthOptions = {
                 email: {label: "Email", type: "text", placeholder: "johndoe@hoppla.ge"},
                 password: {label: "Password", type: "password", placeholder: "••••••"},
             },
-            async authorize(credentials, req) {
+            async authorize(credentials) {
                 if (!credentials?.email || !credentials?.password) return null;
 
                 try {
