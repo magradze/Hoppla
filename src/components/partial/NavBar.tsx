@@ -8,13 +8,13 @@ import hopplaLogo from '@/assets/hoppla.png'
 import Image from "next/image";
 import NavLink from "@/components/shared/NavLink";
 import MobileNavBar from "@/components/partial/MobileNavBar";
+import Link from "next/link";
 
 const navigation = [
     {name: 'Carpool', href: '/'},
     {name: 'Mini Bus', href: '/minibus'},
     {name: 'Bus', href: '/bus'},
 ]
-
 
 const Navbar = () => {
     return (

@@ -19,7 +19,7 @@ const userNavigation = [
 ]
 
 const AuthBlock = () => {
-    const {data: session} = useSession();
+    const {data: session, status} = useSession();
 
     return (
         <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
@@ -58,6 +58,7 @@ const AuthBlock = () => {
                                             width={32}
                                             height={32}
                                         />
+
                                     </Menu.Button>
                                 </div>
                                 <Transition

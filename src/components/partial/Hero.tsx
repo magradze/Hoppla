@@ -33,7 +33,7 @@ const Hero = () => {
                                         type="text"
                                         name="from"
                                         id="from"
-                                        className="block w-full h-full rounded-t md:rounded-l-md border-0 py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                        className="block w-full h-full rounded-t md:rounded-l-md md:rounded-tr-none border border-gray-300 border-b-0 md:border-b py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 "
                                         placeholder="Leaving from..."
                                     />
                                 </div>
@@ -46,7 +46,7 @@ const Hero = () => {
                                         type="text"
                                         name="going"
                                         id="going"
-                                        className="block w-full h-full rounded-none border-0 py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                        className="block w-full h-full rounded-none border border-gray-300 md:border-l-0 border-b-0 md:border-b py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                         placeholder="Going to..."
                                     />
                                 </div>
@@ -60,7 +60,7 @@ const Hero = () => {
                                             type="text"
                                             name="calendar"
                                             id="calendar"
-                                            className="block w-full h-full rounded-none border-0 py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                            className="block w-full h-full rounded-none border border-gray-300 md:border-l-0  py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                             placeholder="Today"
                                         />
                                     </div>
@@ -73,7 +73,7 @@ const Hero = () => {
                                             type="text"
                                             name="calendar"
                                             id="calendar"
-                                            className="block w-full h-full rounded-none border-0 py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                            className="block w-full h-full rounded-none border border-gray-300 md:border-l-0  py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                             placeholder="1"
                                         />
                                     </div>
