@@ -3,6 +3,7 @@ import React, {FormEvent, useRef} from 'react';
 import {signIn} from "next-auth/react";
 import Image from "next/image";
 import carPoolImage from "@/assets/carpool.svg";
+import Link from "next/link";
 
 const Login = () => {
 
@@ -26,17 +27,19 @@ const Login = () => {
             <div className="w-full md:w-1/2 mt-8 md:mt-0">
                 <div className="flex flex-col justify-center items-center">
                     <div className="w-full md:w-96">
-                        <h1 className="text-3xl font-bold">Welcome Back</h1>
-                        <p className="text-gray-500 mt-4">Please enter your credentials to proceed.</p>
+                        <h1 className="text-3xl font-bold alk-sanet">მოგესალმებით</h1>
+                        <p className="text-gray-500 mt-4 alk-sanet">გთხოვთ შეიყვანოთ თქვენი მონაცემები.</p>
                         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
                             <input type="hidden" name="remember" defaultValue="true"/>
                             <div className="rounded-md shadow-sm -space-y-px">
                                 <div>
-                                    <label htmlFor="email-address" className="sr-only">Email address</label>
+                                    <label htmlFor="email-address" className="sr-only">
+                                        ელ.ფოსტა
+                                    </label>
                                     <input id="email-address" name="email" type="email" autoComplete="email"
                                            required
-                                           className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
-                                           placeholder="Email address"
+                                           className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm alk-sanet"
+                                           placeholder="ელ.ფოსტა"
                                            onChange={(e) => (email.current = e.target.value)}
                                     />
                                 </div>
@@ -45,7 +48,7 @@ const Login = () => {
                                     <input id="password" name="password" type="password" autoComplete="current-password"
                                            required
                                            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
-                                           placeholder="Password"
+                                           placeholder="******"
                                            onChange={(e) => (password.current = e.target.value)}
                                     />
                                 </div>
@@ -54,20 +57,20 @@ const Login = () => {
                                 <div className="flex items-center">
                                     <input id="remember_me" name="remember_me" type="checkbox"
                                            className="h-4 w-4 text-secondary focus:ring-secondary border-gray-300 rounded"/>
-                                    <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
-                                        Remember me
+                                    <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900 alk-sanet">
+                                        დამიმახსოვრე
                                     </label>
                                 </div>
                                 <div className="text-sm">
-                                    <a href="#" className="font-medium text-secondary hover:text-secondary">
-                                        Forgot your password?
+                                    <a href="#" className="font-medium text-secondary hover:text-secondary alk-sanet">
+                                        პაროლის აღდგენა
                                     </a>
                                 </div>
                             </div>
                             <div>
                                 <button type="submit"
-                                        className="group relative w-full flex justify-center py-2  items-center gap-x-1.5 rounded-md px-3 text-sm font-semibold text-white bg-secondary/90 hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                    Sign in
+                                        className="group relative w-full flex justify-center py-2  items-center gap-x-1.5 rounded-md px-3 text-sm font-semibold text-white bg-secondary/90 hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 alk-sanet">
+                                    ავტორიზაცია
                                 </button>
                             </div>
                         </form>
@@ -82,7 +85,7 @@ const Login = () => {
                         <div className="flex items-center justify-center mt-6">
 
                             <button
-                                className="relative flex justify-center items-center gap-x-1.5 w-full rounded-md bg-secondary/10 px-3 py-2 text-sm font-semibold text-secondary hover:bg-secondary/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="relative flex justify-center items-center gap-x-1.5 w-full rounded-md bg-secondary/10 px-3 py-2 text-sm font-semibold text-secondary hover:bg-secondary/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 alk-sanet"
                                 onClick={() => signIn("google", {callbackUrl: "/"})}
                             >
                                 <svg className="w-5 h-5" viewBox="0 0 18 18" fill="currentColor"
@@ -100,17 +103,17 @@ const Login = () => {
                                         d="M9 3.58c1.31 0 2.485.45 3.41 1.33l2.557-2.558C13.46.891 11.43 0 9 0A8.996 8.996 0 0 0 .957 3.004L4.014 5.34A5.41 5.41 0 0 1 9 3.58z"
                                         fill="#EA4335"/>
                                 </svg>
-                                Sign in with Google
+                                Google ავტორიზაცია
                             </button>
 
                         </div>
                         <div className="flex items-center justify-center mt-6">
                             <div className="flex items-center">
                                 <div className="text-sm">
-                                    <a href="#" className="font-medium text-secondary hover:text-secondary">
-                                        {/* eslint-disable-next-line react/no-unescaped-entities */}
-                                        Don't have an account?
-                                    </a>
+                                    <Link href="#"
+                                          className="font-medium text-secondary hover:text-secondary alk-sanet">
+                                        არ გაქვთ ანგარიში?
+                                    </Link>
                                 </div>
                             </div>
                         </div>

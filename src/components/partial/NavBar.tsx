@@ -10,9 +10,9 @@ import NavLink from "@/components/shared/NavLink";
 import MobileNavBar from "@/components/partial/MobileNavBar";
 
 const navigation = [
-    {name: 'Carpool', href: '/'},
-    {name: 'Mini Bus', href: '/minibus'},
-    {name: 'Bus', href: '/bus'},
+    {name: 'მსუბუქი ავტომობილები', href: '/carpool'},
+    {name: 'მინიბუსები', href: '/minibus'},
+    {name: 'ავტობუსები', href: '/bus'},
 ]
 
 const Navbar = () => {
@@ -46,20 +46,20 @@ const Navbar = () => {
                                             priority
                                         />
                                     </div>
-                                    <div className="hidden md:ml-6 md:flex md:space-x-8">
+                                    <div className="hidden md:ml-6 md:flex md:space-x-8 alk-sanet">
                                         {navigation.map((item, index) => (
                                             <NavLink key={index} name={item.name} href={item.href}/>
                                         ))}
                                     </div>
                                 </div>
-                                <div className="flex items-center">
+                                <div className="flex items-center alk-sanet">
                                     <div className="flex-shrink-0">
                                         <button
                                             type="button"
-                                            className="relative inline-flex items-center gap-x-1.5 rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-secondary hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                            className="relative inline-flex items-center gap-x-1.5 rounded-md bg-transparent px-3 py-2 text-sm  text-secondary hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                         >
                                             <PlusIcon className="-ml-0.5 h-5 w-5" aria-hidden="true"/>
-                                            Publish a ride
+                                            <span className="pt-0.5">მოგზაურობის გამოქვეყნება</span>
                                         </button>
                                     </div>
 

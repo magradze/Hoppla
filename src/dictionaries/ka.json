@@ -1,0 +1,21 @@
+{
+  "auth": {
+    "signin": "ავტორიზაცია",
+    "signout": "გამოსვლა",
+    "signup": "რეგისტრაცია"
+  },
+  "hero": {
+    "search": "ძებნა",
+    "searchPlaceholder": "ძებნა...",
+    "from": "საიდან...",
+    "goingTo": "სად...",
+    "today": "დღეს",
+    "departureDate": "გასვლის თარიღი",
+    "returnDate": "დაბრუნების თარიღი",
+    "adults": "ზრდასრული",
+    "children": "ბავშვი",
+    "infants": "ჩვილები",
+    "searching": "ძებნა...",
+    "searchError": "შეცდომა ძებნისას"
+  }
+}

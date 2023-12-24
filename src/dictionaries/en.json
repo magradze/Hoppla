@@ -1,0 +1,20 @@
+{
+  "auth": {
+    "signin": "Sign In",
+    "signout": "Sign Out"
+  },
+  "hero": {
+    "search": "Search",
+    "searchPlaceholder": "Search...",
+    "from": "Leaving from...",
+    "goingTo": "Going to...",
+    "today": "Today",
+    "departureDate": "Departure Date",
+    "returnDate": "Return Date",
+    "adults": "Adults",
+    "children": "Children",
+    "infants": "Infants",
+    "searching": "Searching...",
+    "searchError": "Sorry, we couldn't find any results for your search."
+  }
+}

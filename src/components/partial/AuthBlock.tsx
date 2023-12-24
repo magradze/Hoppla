@@ -14,8 +14,8 @@ function classNames(...classes: string[]) {
 }
 
 const userNavigation = [
-    {name: 'Your Profile', href: '#'},
-    {name: 'Settings', href: '#'},
+    {name: 'პირადი კაბინეტი', href: '#'},
+    {name: 'პარამეტრები', href: '#'},
 ]
 
 const AuthBlock = () => {
@@ -31,7 +31,7 @@ const AuthBlock = () => {
                                 className="relative inline-flex items-center gap-x-1.5 rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primaryDark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 onClick={() => signIn()}
                             >
-                                Sign in
+                                ავტორიზაცია
                             </button>
                         </>
                     )}
@@ -58,6 +58,11 @@ const AuthBlock = () => {
                                             width={32}
                                             height={32}
                                         />
+                                        {session?.user?.role === "admin" && (
+                                            <span
+                                                className="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white bg-green-400"/>
+                                        )
+                                        }
 
                                     </Menu.Button>
                                 </div>
@@ -96,7 +101,7 @@ const AuthBlock = () => {
                                                         'block px-4 py-2 text-sm text-gray-700 w-full text-left'
                                                     )}
                                                 >
-                                                    Sign out
+                                                    გასვლა
                                                 </button>
                                             )}
                                         </Menu.Item>
