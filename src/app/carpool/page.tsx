@@ -9,6 +9,7 @@ import {
 } from '@heroicons/react/20/solid'
 import {Menu, Transition} from '@headlessui/react'
 import * as React from "react";
+import Image from "next/image";
 
 const rides = [
     {
@@ -238,7 +239,8 @@ const CarPool = () => {
                 <ol className="mt-4 divide-y divide-gray-100 text-sm leading-6 lg:col-span-7 xl:col-span-8">
                     {rides.map((ride) => (
                         <li key={ride.id} className="relative flex space-x-6 py-6 xl:static">
-                            <img src={ride.imageUrl} alt="" className="h-14 w-14 flex-none rounded-full"/>
+                            <Image src={ride.imageUrl} alt="" className="h-14 w-14 flex-none rounded-full" width={42}
+                                   height={42}/>
                             <div className="flex-auto">
                                 <div className="flex flex-col md:flex-row md:justify-between relative">
                                     <h3 className="pr-10 font-semibold text-gray-900 xl:pr-0 relative">
