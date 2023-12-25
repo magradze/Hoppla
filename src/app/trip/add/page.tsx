@@ -1,5 +1,5 @@
 "use client";
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect, MutableRefObject} from 'react';
 import AddTripForm from "@/components/shared/AddTripForm";
 
 import Map from "@/components/shared/Map";
@@ -7,18 +7,20 @@ import Map from "@/components/shared/Map";
 import {useJsApiLoader, Libraries} from '@react-google-maps/api';
 
 const AddTrip = () => {
-
-    const [map, setMap] = useState(/** @type google.maps.Map */"")
-    const [directionResponse, setDirectionResonse] = useState(null)
+    const [directionResponse, setDirectionResponse] = useState(null)
     const [distance, setDistance] = useState('')
     const [duration, setDuration] = useState('')
 
-    /** @type React.MutableRefObject<HTMLInputElement> */
-    const originRef = useRef(null)
-    /** @type React.MutableRefObject<HTMLInputElement> */
-    const destinationRef = useRef(null)
+    const originRef: MutableRefObject<HTMLInputElement | null> = useRef(null)
 
-    const libraries: Libraries = ['places'];
+    const destinationRef: MutableRefObject<HTMLInputElement | null> = useRef(null)
+
+    const [totalPrice, setTotalPrice] = useState(0)
+    const [price, setPrice] = useState(totalPrice)
+    const [passengers, setPassengers] = useState(1)
+
+    // @ts-ignore
+    const libraries: Libraries = [process.env.NEXT_PUBLIC_GOOGLE_MAPS_LIBRARIES];
 
 
     const {isLoaded} = useJsApiLoader({
@@ -26,6 +28,24 @@ const AddTrip = () => {
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
         libraries: libraries
     })
+
+    useEffect(() => {
+        setPrice(totalPrice / 4)
+        switch (passengers) {
+            case 1:
+                setPrice(totalPrice)
+                break;
+            case 2:
+                setPrice(totalPrice * 2)
+                break;
+            case 3:
+                setPrice(totalPrice * 3)
+                break;
+            case 4:
+                setPrice(totalPrice * 4)
+                break;
+        }
+    }, [passengers, totalPrice])
 
     if (!isLoaded) return null;
 
@@ -42,11 +62,17 @@ const AddTrip = () => {
         })
 
         // @ts-ignore
-        setDirectionResonse(result)
+        setDirectionResponse(result)
         // @ts-ignore
         setDistance(result.routes[0].legs[0].distance.text)
         // @ts-ignore
         setDuration(result.routes[0].legs[0].duration.text)
+
+        // setPrice(!duration && !distance ? 0 : (distance.split(" ")[0] * 0.3 * 2 / 4))
+        // if (result.status !== "OK") return
+        if (!result) return
+        // @ts-ignore
+        setTotalPrice(result.routes[0].legs[0].distance.text.split(" ")[0] * 0.3 * 2 / 4)
     }
 
     // @ts-ignore
@@ -56,19 +82,21 @@ const AddTrip = () => {
             <div className="page-wrapper">
             </div>
             <div className="page-wrapper grid grid-cols-1 gap-4 lg:grid-cols-2 py-0">
-                <div className="flex flex-col justify-center bg-white p-8 rounded-md">
-                    <h2 className="text-sm lg:text-lg font-semibold text-gray-900 mb-6 alk-sanet">დაზოგეთ 126 ლარამდე
+                <div className="flex flex-col justify-center bg-white p-4 lg:p-8 rounded-md">
+                    <h2 className="text-sm lg:text-lg font-semibold text-gray-900 mb-6 alk-sanet">დაზოგეთ <span
+                        className="text-primary font-semibold text-xl">{price.toFixed(2)}</span> ლარამდე
                         თქვენი
                         პირველი მგზავრობისას.</h2>
-                    <AddTripForm map={map} origin={originRef} destination={destinationRef}
-                                 calculateDistance={calculateDistance} distance={distance} duration={duration}/>
+                    <AddTripForm origin={originRef} destination={destinationRef}
+                                 calculateDistance={calculateDistance} distance={distance} duration={duration}
+                                 setPrice={setPrice} setPassengers={setPassengers} passengers={passengers}/>
                 </div>
                 <div className="flex flex-col justify-center">
 
                 </div>
             </div>
             <div className="absolute h-screen inset-0  -translate-y-16 -z-10 w-full object-cover bg-blend-screen">
-                <Map directionResponse={directionResponse} setMap={setMap} map={map}/>
+                <Map directionResponse={directionResponse} originRef={originRef} distance={distance}/>
             </div>
         </div>
     );
