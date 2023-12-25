@@ -21,7 +21,7 @@ const Hero = (
                     alt=""
                     className="absolute inset-0 -z-10 h-full w-full object-cover"
                 />
-                <div className="mx-auto max-w-4xl pt-8 ">
+                <div className="mx-auto max-w-7xl pt-8 ">
 
                     <div className="text-center min-h-12 lg:min-h-96 flex flex-col justify-between ">
                         <h1 className="text-2xl font-bold tracking-tight text-white sm:text-5xl alk-sanet">
@@ -32,7 +32,7 @@ const Hero = (
                                 className="bg-white rounded-md mx-4 flex flex-col lg:flex-row lg:justify-between items-center w-full translate-y-32 lg:translate-y-8 shadow shadow-black/20 alk-sanet">
                                 <div className="relative w-full h-16 rounded-md">
                                     <div
-                                        className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                                        className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 ">
                                         <Locate/>
                                     </div>
                                     <input
@@ -86,7 +86,7 @@ const Hero = (
                                 </div>
                                 <div className="relative w-full h-16 rounded-md self-end">
                                     <button
-                                        className="bg-secondary block w-full h-full rounded-b lg:rounded-bl-none lg:rounded-r-md border-0 px-24 py-1.5 text-white "
+                                        className="bg-primary hover:bg-primaryDark block w-full h-full rounded-b lg:rounded-bl-none lg:rounded-r-md border-0 px-24 py-1.5 text-white "
                                     >
                                         {dict.hero.search}
                                     </button>

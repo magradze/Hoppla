@@ -32,4 +32,8 @@ body {
     .alk-sanet {
         font-family: "ALK Sanet", sans-serif;
     }
+
+    .page-wrapper {
+        @apply max-w-7xl mx-auto py-8 px-8
+    }
 }
