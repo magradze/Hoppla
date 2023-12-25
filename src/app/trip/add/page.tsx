@@ -96,7 +96,7 @@ const AddTrip = () => {
                 </div>
             </div>
             <div className="absolute h-screen inset-0  -translate-y-16 -z-10 w-full object-cover bg-blend-screen">
-                <Map directionResponse={directionResponse} originRef={originRef} distance={distance}/>
+                <Map directionResponse={directionResponse}/>
             </div>
         </div>
     );
