@@ -140,7 +140,13 @@ const AddTripForm = ({
                 </span>
                 <span className="flex items-center gap-2">
                     <Clock width={18} height={18}/>
-                    დრო: {duration.split(" ")[2] ? `${duration.split(" ")[0]} სთ ${duration.split(" ")[2]} წთ` : `${duration.split(" ")[0]} წთ` || "0 სთ 0 წთ"}
+
+                    დრო: {!duration
+                    ? "0 სთ 0 წთ"
+                    : duration.split(" ")[2]
+                        ? duration.split(" ")[0] + " სთ" + " " + duration.split(" ")[2] + " წთ"
+                        : duration.split(" ")[0] + " წთ"
+                }
                 </span>
 
             </div>
