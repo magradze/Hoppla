@@ -62,7 +62,7 @@ const AddTripForm = ({
                     </button>
 
                     <Autocomplete
-                        onLoad={(autoComplete) => {
+                        onLoad={() => {
                             // console.log(autoComplete)
                         }}
                         onPlaceChanged={() => {
@@ -97,7 +97,7 @@ const AddTripForm = ({
                         <MapPin/>
                     </div>
                     <Autocomplete
-                        onLoad={(autoComplete) => {
+                        onLoad={() => {
                             // console.log(autoComplete)
                         }}
                         onPlaceChanged={() => {
