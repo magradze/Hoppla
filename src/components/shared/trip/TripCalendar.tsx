@@ -103,7 +103,7 @@ const TripCalendar = () => {
                         <time
                             dateTime={day.date}
                             className={classNames(
-                                'mx-auto flex h-7 w-7 items-center justify-center rounded-full',
+                                'mx-auto flex h-7 w-7 items-center justify-center rounded-md',
                                 // @ts-ignore
                                 day.isSelected && day.isToday && 'bg-indigo-600',
                                 day.isSelected && !day.isToday && 'bg-gray-900'

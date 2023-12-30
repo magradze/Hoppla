@@ -1,14 +1,12 @@
 "use client";
-import {ChangeEvent, useEffect, useState} from 'react';
-import {Check, Plus, Waypoints, X} from "lucide-react";
+import {useEffect} from 'react';
+import {Check, Waypoints, X} from "lucide-react";
 import Button from "@/components/shared/buttons/Button";
 import * as React from "react";
 import {useFieldArray, useForm} from "react-hook-form";
 
 const AddStopPlaces = ({
-                           stopPlaceField,
                            setStopPlaceField,
-                           disabled,
                            setDisable
                        }: {
     stopPlaceField: { name: string }[],
@@ -62,18 +60,10 @@ const AddStopPlaces = ({
                             </div>
                             <input
                                 type="text"
-                                // name="stopPlace"
-                                id="stopPlace"
-                                className="block w-full h-12 lg:h-16 rounded-md border border-gray-300 py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 alk-sanet"
+                                id={id}
+                                className="block w-full h-12 lg:h-16 rounded-md focus:shadow-md outline-none py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 alk-sanet"
                                 placeholder="დამატებითი გაჩერება"
                                 {...register(`place.${index}.name` as const, {required: true})}
-                                // onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                //     setStopPlaceField(prevState => {
-                                //         const newState = [...prevState]
-                                //         newState[index].place = e.target.value
-                                //         return newState
-                                //     })
-                                // }}
                             />
                             <div
                                 className="absolute top-0 right-0 h-full flex justify-center items-center px-1 lg:px-3">
@@ -96,7 +86,7 @@ const AddStopPlaces = ({
                     )
                 })}
                 <div>
-                    <Button onClick={() => append({name: ""})} className={"bg-primary text-white mb-4"}
+                    <Button onClick={() => append({name: ""})} className={"bg-secondary text-white mb-4 text-xs"}
                     >
                         დამატებითი გაჩერების დამატება
                     </Button>

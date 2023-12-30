@@ -10,26 +10,6 @@ import TripAllowedAction from "@/components/shared/trip/TripAllowedAction";
 import AddStopPlaces from "@/components/shared/forms/AddStopPlaces";
 import {useSearchParams, useRouter} from "next/navigation";
 
-import prisma from "@/lib/prisma";
-
-
-// interface iTripConfirm {
-//     id: string;
-//     name: string;
-//     description: string | null;
-//     startLocation: string;
-//     endLocation: string;
-//     distance: number;
-//     duration: string;
-//     passengers: number;
-//     price: number;
-//     startDate: Date;
-//     userId: string;
-//     stops: {
-//         name: string;
-//     }[]
-// }
-
 const TripConfirmForm = ({user}: { user: any }) => {
 
     const route = useRouter()
@@ -54,15 +34,15 @@ const TripConfirmForm = ({user}: { user: any }) => {
 
     if (!origin || !destination || !distance || !duration || !passengers || !price) return null
 
-    const directionsServ = async () => {
-        const directionsService = new google.maps.DirectionsService();
-        const result = await directionsService.route({
-            origin,
-            destination,
-            travelMode: google.maps.TravelMode.DRIVING
-        })
-        console.log(result)
-    }
+    // const directionsServ = async () => {
+    //     const directionsService = new google.maps.DirectionsService();
+    //     const result = await directionsService.route({
+    //         origin,
+    //         destination,
+    //         travelMode: google.maps.TravelMode.DRIVING
+    //     })
+    //     console.log(result)
+    // }
 
     const tripObject = {
         name: `${origin} - ${destination}`,
@@ -103,7 +83,7 @@ const TripConfirmForm = ({user}: { user: any }) => {
             <section aria-labelledby="summary-heading"
                      className="w-full lg:max-w-md flex-col lg:flex">
 
-                <ul role="list" className="overflow-y-auto px-6 alk-sanet text-sm bg-gray-50 rounded-t-md">
+                <ul role="list" className="overflow-y-auto px-6 alk-sanet text-sm bg-gray-100 rounded-t-md">
                     <li className="flex space-x-6 py-6">
                         <div className="flex flex-row gap-4 justify-center items-center">
                             <MapPin color={"#e84e3e"}/>
@@ -131,7 +111,7 @@ const TripConfirmForm = ({user}: { user: any }) => {
                     </li>
                 </ul>
 
-                <div className="sticky bottom-0 flex-none border-t border-gray-200 bg-gray-50 p-6 rounded-b-md">
+                <div className="sticky bottom-0 flex-none border-t border-gray-200 bg-gray-200 p-6 rounded-b-md">
                     <dl className=" space-y-6 text-sm font-medium text-gray-500 alk-sanet">
                         <div className="flex justify-between items-center">
                             <dt>მანძილი</dt>
@@ -152,19 +132,19 @@ const TripConfirmForm = ({user}: { user: any }) => {
                         </div>
                     </dl>
                     <Button
-                        className="mt-6 w-full bg-secondary hover:bg-secondaryDark text-white"
+                        className="mt-6 w-full bg-secondary hover:bg-secondaryDark text-white py-5"
                         disabled={disable}
                         onClick={addTrip}
                     >
                         მგზავრობის დამატება
                     </Button>
 
-                    <Button
-                        className="mt-6 w-full bg-secondary hover:bg-secondaryDark text-white"
-                        onClick={directionsServ}
-                    >
-                        Directions
-                    </Button>
+                    {/*<Button*/}
+                    {/*    className="mt-6 w-full bg-secondary hover:bg-secondaryDark text-white"*/}
+                    {/*    onClick={directionsServ}*/}
+                    {/*>*/}
+                    {/*    Directions*/}
+                    {/*</Button>*/}
                 </div>
             </section>
 
@@ -188,7 +168,7 @@ const TripConfirmForm = ({user}: { user: any }) => {
                                 type="number"
                                 name="price"
                                 id="price"
-                                className="block w-full h-12 lg:h-16 rounded-md border border-gray-300 py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 "
+                                className="block w-full h-12 lg:h-16 rounded-md focus:shadow-md outline-none py-1.5 px-14 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 "
                                 placeholder={"ფასი"}
                                 defaultValue={price ? price : 0}
                                 onChange={(e) => setNewPrice(parseFloat(e.target.value))}
@@ -219,7 +199,7 @@ const TripConfirmForm = ({user}: { user: any }) => {
                                 type="datetime-local"
                                 name="timeToLeave"
                                 id="timeToLeave"
-                                className="block w-full h-12 lg:h-16 rounded-md border border-gray-300 py-1.5 pl-10 pr-4 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 "
+                                className="block w-full h-12 lg:h-16 rounded-md focus:shadow-md outline-none py-1.5 pl-10 pr-4 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 "
                                 value={moment(new Date()).format('YYYY-MM-DDTHH:mm')}
                                 onChange={(e) => setTimeToLeave(e.target.value)}
                             />

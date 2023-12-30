@@ -26,7 +26,7 @@ const AddTripSteps = () => {
     const router = useRouter()
 
     return (
-        <div className="lg:border-b lg:border-t lg:border-gray-200 ">
+        <div className="lg:border-b lg:border-t lg:border-gray-200 bg-white">
             <nav className="max-w-full" aria-label="Progress">
                 <ol
                     role="list"

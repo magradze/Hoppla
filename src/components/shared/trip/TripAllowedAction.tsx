@@ -36,7 +36,7 @@ const TripAllowedAction = () => {
                     <li key={index}>
                         <input type="checkbox" id={`action-${action.id}`} value="" className="hidden peer" required/>
                         <label htmlFor={`action-${action.id}`}
-                               className="inline-flex items-start justify-between w-full min-h-28 p-3 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-lime-600 hover:text-gray-600 peer-checked:text-gray-600 hover:bg-gray-50">
+                               className="inline-flex items-start justify-between w-full min-h-28 p-3 text-gray-500 bg-white rounded-lg cursor-pointer peer-checked:border peer-checked:border-lime-600/20 peer-checked:bg-lime-50 hover:text-gray-600 peer-checked:text-gray-600 peer-checked:shadow-md hover:shadow-md">
                             <div className="block">
                                 <div className="w-full flex gap-2 items-center text-primary">
                                     {action.icon}

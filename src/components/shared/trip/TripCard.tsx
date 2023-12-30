@@ -5,6 +5,7 @@ import {Menu, Transition} from "@headlessui/react";
 import {IRide} from "@/interfaces/IRide";
 import {classNames} from "@/lib/className";
 import {CircleDot} from "lucide-react";
+import Tooltip from "@/components/shared/Tooltip";
 
 const TripCard = ({ride: ride}: IRide) => {
 
@@ -24,7 +25,7 @@ const TripCard = ({ride: ride}: IRide) => {
 
     return (
         <>
-            <li className="relative flex space-x-6 py-6 xl:static">
+            <li className="relative flex space-x-6 py-6 px-8 xl:static bg-white hover:shadow-xl cursor-pointer rounded-md transition duration-500 group-hover:scale-105">
                 <Image src={driver.image} alt={driver.name} className="h-14 w-14 flex-none rounded-md" width={42}
                        height={42}/>
                 <div className="flex-auto">
@@ -53,8 +54,10 @@ const TripCard = ({ride: ride}: IRide) => {
                                             key={index}
                                             className="relative flex h-6 w-6 flex-none items-center justify-center bg-white">
 
-                                            <div
-                                                className="h-1.5 w-1.5 rounded-full bg-secondary ring-1 ring-gray-300"/>
+                                            <Tooltip message={stop.name}>
+                                                <div
+                                                    className="h-1.5 w-1.5 rounded-full bg-gray-300 ring-1 ring-gray-300"/>
+                                            </Tooltip>
                                         </div>
                                     ))}
 
