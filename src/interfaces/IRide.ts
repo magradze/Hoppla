@@ -2,13 +2,17 @@ export interface IRide {
 
     ride: {
         id: number;
-        date: string;
+        startDate: string;
         time: string;
         datetime: string;
         name: string;
-        imageUrl: string;
-        leavingFrom: string;
-        goingTo: string;
+        driver: {
+            name: string;
+            email: string;
+            image: string;
+        };
+        startLocation: string;
+        endLocation: string;
         places: number;
         car: string;
         color: string;
@@ -16,6 +20,11 @@ export interface IRide {
         passengers: {
             name: string;
             imageUrl: string;
-        }[]
+        }[],
+        stops: [
+            {
+                name: string;
+            }
+        ]
     }
 }

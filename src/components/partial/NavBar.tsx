@@ -6,7 +6,7 @@ import AuthBlock from "@/components/partial/AuthBlock";
 
 import hopplaLogo from '@/assets/hoppla.png'
 import Image from "next/image";
-import NavLink from "@/components/shared/NavLink";
+import NavLink from "@/components/shared/navigation/NavLink";
 import MobileNavBar from "@/components/partial/MobileNavBar";
 import Link from "next/link";
 

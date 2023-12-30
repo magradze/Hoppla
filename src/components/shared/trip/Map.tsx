@@ -10,44 +10,11 @@ type LatLngLiteral = google.maps.LatLngLiteral;
 // type DirectionsResult = google.maps.DirectionsResult;
 type MapOptions = google.maps.MapOptions;
 
-// const defaultMapOptions = {
-//     strokeOpacity: 0.5,
-//     strokeWeight: 2,
-//     clickable: false,
-//     editable: false,
-//     draggable: false,
-//     visible: true,
-// }
-
-// const closeOptions = {
-//     ...defaultMapOptions,
-//     zIndex: 3,
-//     fillOpacity: 0.3,
-//     strokeColor: '#8BC34A',
-//     fillColor: '#8BC34A',
-// }
-//
-// const middleOptions = {
-//     ...defaultMapOptions,
-//     zIndex: 2,
-//     fillOpacity: 0.3,
-//     strokeColor: '#FBC02D',
-//     fillColor: '#FBC02D',
-// }
-//
-// const farOptions = {
-//     ...defaultMapOptions,
-//     zIndex: 1,
-//     fillOpacity: 0.3,
-//     strokeColor: '#FF5252',
-//     fillColor: '#FF5252',
-// }
-
 const Map = ({directionResponse}: {
     directionResponse: any
 }) => {
 
-    const mapRef = useRef<GoogleMap>();
+    const mapRef: React.MutableRefObject<GoogleMap | undefined> = useRef<GoogleMap>();
 
     const center = useMemo<LatLngLiteral>(() => (
         {

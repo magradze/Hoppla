@@ -3,10 +3,13 @@ import React, {RefObject} from 'react';
 export interface IAddTripForm {
     origin: RefObject<any>,
     destination: RefObject<any>,
-    calculateDistance: any,
-    distance: string,
+    calculateDistance: () => void,
+    distance: number,
     duration: string,
-    setPrice: any,
-    setPassengers: any,
-    passengers: number
+    setPrice: React.Dispatch<React.SetStateAction<number>>,
+    setPassengers: React.Dispatch<React.SetStateAction<number>>,
+    passengers: number,
+    price: number,
+    directionResponse: any,
+    google: any,
 }

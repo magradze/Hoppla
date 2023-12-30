@@ -4,32 +4,88 @@ import {CalendarIcon, EllipsisHorizontalIcon, MapPinIcon} from "@heroicons/react
 import {Menu, Transition} from "@headlessui/react";
 import {IRide} from "@/interfaces/IRide";
 import {classNames} from "@/lib/className";
+import {CircleDot} from "lucide-react";
 
-const TripCard = ({ride}: IRide) => {
+const TripCard = ({ride: ride}: IRide) => {
+
+    const {
+        name,
+        driver,
+        startDate,
+        startLocation,
+        endLocation,
+        car,
+        color,
+        price,
+        passengers,
+        places,
+        stops
+    } = ride
+
     return (
         <>
-            <li key={ride.id} className="relative flex space-x-6 py-6 xl:static">
-                <Image src={ride.imageUrl} alt="" className="h-14 w-14 flex-none rounded-full" width={42}
+            <li className="relative flex space-x-6 py-6 xl:static">
+                <Image src={driver.image} alt={driver.name} className="h-14 w-14 flex-none rounded-md" width={42}
                        height={42}/>
                 <div className="flex-auto">
-                    <div className="flex flex-col md:flex-row md:justify-between relative">
-                        <h3 className="pr-10 font-semibold text-gray-900 xl:pr-0 relative">
-                            {ride.name}
-                            <small className="ml-4 relative rounded-sm px-2 py-0.5 text-white"
-                                   style={{backgroundColor: ride.color}}>
-                                {ride.car}
-                            </small>
+                    <div className="flex flex-col md:flex-row md:justify-between">
+                        <div className="pr-10 font-semibold text-gray-900 xl:pr-0 alk-sanet">
 
-                        </h3>
+                            <ul role="list" className="space-x-6">
+
+                                <li className="relative flex flex-row gap-6">
+                                    <div
+                                        className="relative flex gap-2">
+
+                                        <div
+                                            className="relative flex h-6 w-6 flex-none items-center justify-center bg-white">
+                                            <CircleDot className="h-6 w-6 text-primary" aria-hidden="true"/>
+
+                                            {/*<div className="h-1.5 w-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300"/>*/}
+                                        </div>
+                                        <p className="flex-auto py-0.5 text-xs leading-5 text-gray-500">
+                                            <span className="font-medium text-gray-900">{startLocation}</span>
+                                        </p>
+                                    </div>
+
+                                    {stops.map((stop, index) => (
+                                        <div
+                                            key={index}
+                                            className="relative flex h-6 w-6 flex-none items-center justify-center bg-white">
+
+                                            <div
+                                                className="h-1.5 w-1.5 rounded-full bg-secondary ring-1 ring-gray-300"/>
+                                        </div>
+                                    ))}
+
+                                    <div
+                                        className="relative flex flex-row-reverse gap-2">
+
+                                        <div
+                                            className="relative flex h-6 w-6 flex-none items-center justify-center bg-white">
+                                            <CircleDot className="h-6 w-6 text-primary" aria-hidden="true"/>
+
+                                            {/*<div className="h-1.5 w-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300"/>*/}
+                                        </div>
+                                        <p className="flex-auto py-0.5 text-xs leading-5 text-gray-500">
+                                            <span className="font-medium text-gray-900">{endLocation}</span>
+                                        </p>
+                                    </div>
+
+                                </li>
+                            </ul>
+
+
+                        </div>
                         <div className="flex gap-2 ml-0">
-                                        <span
-                                            className="text-xs font-medium text-white py-1 px-2 rounded-sm alk-sanet bg-secondary">
-                                            {ride.price}₾
-                                        </span>
+                            <span
+                                className="text-xs font-medium text-white py-1 px-2 rounded-sm alk-sanet bg-secondary">
+                                {price}₾
+                            </span>
                             <span
                                 className="text-xs font-medium text-white py-1 px-2 rounded-sm bg-indigo-600 alk-sanet">
-                                            {ride.places} ადგილი
-                                        </span>
+                                {places} ადგილი
+                            </span>
                         </div>
                     </div>
                     <dl className="mt-2 flex flex-col text-gray-500 xl:flex-row">
@@ -39,26 +95,30 @@ const TripCard = ({ride}: IRide) => {
                                 <CalendarIcon className="h-5 w-5 text-gray-400" aria-hidden="true"/>
                             </dt>
                             <dd>
-                                <time dateTime={ride.datetime}>
-                                    {ride.time}
+                                <time dateTime={startDate}>
+                                    {new Date(startDate).toLocaleDateString('ka', {
+                                        year: 'numeric',
+                                        month: 'numeric',
+                                        day: 'numeric'
+                                    })}
                                 </time>
                             </dd>
                         </div>
                         <div
-                            className="mt-2 flex items-start space-x-3 xl:ml-3.5 xl:mt-0 xl:border-l xl:border-gray-400 xl:border-opacity-50 xl:pl-3.5">
+                            className="mt-2 flex items-start space-x-3 xl:ml-3.5 xl:mt-0 xl:border-l xl:border-gray-400 xl:border-opacity-50 xl:pl-3.5 alk-sanet text-[12px]">
                             <dt className="mt-0.5">
                                 <span className="sr-only">Location</span>
                                 <MapPinIcon className="h-5 w-5 text-gray-400" aria-hidden="true"/>
                             </dt>
-                            <dd>{ride.leavingFrom}</dd>
+                            <dd>{startLocation}</dd>
                         </div>
                         <div
-                            className="mt-2 flex items-start space-x-3 xl:ml-3.5 xl:mt-0 xl:border-l xl:border-gray-400 xl:border-opacity-50 xl:pl-3.5">
+                            className="mt-2 flex items-start space-x-3 xl:ml-3.5 xl:mt-0 xl:border-l xl:border-gray-400 xl:border-opacity-50 xl:pl-3.5 alk-sanet text-[12px]">
                             <dt className="mt-0.5">
                                 <span className="sr-only">Location</span>
                                 <MapPinIcon className="h-5 w-5 text-gray-400" aria-hidden="true"/>
                             </dt>
-                            <dd>{ride.goingTo}</dd>
+                            <dd>{endLocation}</dd>
                         </div>
                     </dl>
                 </div>
