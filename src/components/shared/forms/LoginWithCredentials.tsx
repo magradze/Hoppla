@@ -1,8 +1,8 @@
 "use client";
 import React, {FormEvent, useRef} from 'react';
 import {signIn} from "next-auth/react";
-import Button from "@/components/shared/buttons/Button";
 import Link from "next/link";
+import {Button} from "@/components/ui/button";
 
 const LoginWithCredentials = () => {
     const email = useRef("");
@@ -58,7 +58,12 @@ const LoginWithCredentials = () => {
                     </div>
                 </div>
                 <div>
-                    <Button className="w-full text-white bg-secondary/90 hover:bg-secondary">
+                    <Button
+                        variant="secondary"
+                        size="default"
+                        type="submit"
+                        className={"w-full"}
+                    >
                         ავტორიზაცია
                     </Button>
                 </div>

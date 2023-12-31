@@ -9,6 +9,7 @@ import Image from "next/image";
 import NavLink from "@/components/shared/navigation/NavLink";
 import MobileNavBar from "@/components/partial/MobileNavBar";
 import Link from "next/link";
+import {Button} from "@/components/ui/button";
 
 const navigation = [
     {name: 'მსუბუქი ავტომობილები', href: '/carpool'},
@@ -60,13 +61,14 @@ const Navbar = () => {
                                 </div>
                                 <div className="flex items-center alk-sanet">
                                     <div className="flex-shrink-0">
-                                        <Link href="/trip/add"
-                                              className="relative inline-flex items-center gap-x-1.5 rounded-md bg-transparent px-3 py-2 text-sm  text-secondary hover:bg-secondary/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:bg-secondary/10 sm:text-sm"
-                                        >
-                                            <PlusIcon className="-ml-0.5 h-5 w-5" aria-hidden="true"/>
-                                            <span
-                                                className="pt-0.5 hidden lg:block">მოგზაურობის გამოქვეყნება</span>
-                                        </Link>
+                                        <Button
+                                            variant="ghost">
+                                            <Link href={"/trip/add"} className={"flex gap-2 items-center"}>
+                                                <PlusIcon className="-ml-0.5 h-5 w-5" aria-hidden="true"/>
+                                                <span
+                                                    className="pt-0.5 hidden lg:block">მოგზაურობის გამოქვეყნება</span>
+                                            </Link>
+                                        </Button>
                                     </div>
 
                                     <AuthBlock/>

@@ -1,10 +1,13 @@
 import React from 'react';
 import {signIn} from "next-auth/react";
+import {Button} from "@/components/ui/button";
 
 const LoginWithGoogle = () => {
     return (
-        <button
-            className="relative flex justify-center items-center gap-x-1.5 w-full rounded-md bg-secondary/10 px-3 py-2 text-sm font-semibold text-secondary hover:bg-secondary/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 alk-sanet"
+        <Button
+            variant="white"
+            size="default"
+            className={"w-full flex items-center justify-center gap-2"}
             onClick={() => signIn("google", {callbackUrl: "/"})}
         >
             <svg className="w-5 h-5" viewBox="0 0 18 18" fill="currentColor"
@@ -23,7 +26,7 @@ const LoginWithGoogle = () => {
                     fill="#EA4335"/>
             </svg>
             Google ავტორიზაცია
-        </button>
+        </Button>
     );
 };
 

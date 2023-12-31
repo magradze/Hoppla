@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import {signIn, signOut, useSession} from "next-auth/react";
+import {signIn, signOut} from "next-auth/react";
 import {Menu, Transition} from "@headlessui/react";
 import {Fragment} from "react";
 import Image from "next/image";
@@ -10,6 +10,7 @@ import {BellIcon} from "@heroicons/react/24/outline";
 import avatarImage from '@/assets/avatar.png'
 import {useCurrentUser, useCurrentRole} from "@/hooks";
 import {ShieldCheck} from "lucide-react";
+import {Button} from "@/components/ui/button";
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -29,14 +30,12 @@ const AuthBlock = () => {
             <div className="flex flex-row">
                 <div className="flex flex-row">
                     {!user && (
-                        <>
-                            <button
-                                className="relative inline-flex items-center gap-x-1.5 rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primaryDark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                onClick={() => signIn()}
-                            >
-                                ავტორიზაცია
-                            </button>
-                        </>
+                        <Button
+                            variant="default"
+                            onClick={() => signIn()}
+                        >
+                            ავტორიზაცია
+                        </Button>
                     )}
                     {user && (
                         <>
