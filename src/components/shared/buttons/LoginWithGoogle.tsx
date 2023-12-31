@@ -6,7 +6,7 @@ const LoginWithGoogle = () => {
     return (
         <Button
             variant="white"
-            size="default"
+            size="lg"
             className={"w-full flex items-center justify-center gap-2"}
             onClick={() => signIn("google", {callbackUrl: "/"})}
         >

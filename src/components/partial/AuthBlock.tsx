@@ -11,6 +11,7 @@ import avatarImage from '@/assets/avatar.png'
 import {useCurrentUser, useCurrentRole} from "@/hooks";
 import {ShieldCheck} from "lucide-react";
 import {Button} from "@/components/ui/button";
+import LoginButton from "@/components/auth/LoginButton";
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -30,12 +31,13 @@ const AuthBlock = () => {
             <div className="flex flex-row">
                 <div className="flex flex-row">
                     {!user && (
-                        <Button
-                            variant="default"
-                            onClick={() => signIn()}
-                        >
-                            ავტორიზაცია
-                        </Button>
+                        <LoginButton mode={"modal"} redirectUrl={"/auth/signin"}>
+                            <Button
+                                variant="default"
+                            >
+                                ავტორიზაცია
+                            </Button>
+                        </LoginButton>
                     )}
                     {user && (
                         <>
@@ -50,7 +52,7 @@ const AuthBlock = () => {
                             <Menu as="div" className="relative ml-3">
                                 <div>
                                     <Menu.Button
-                                        className="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                        className="relative flex rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                         <span className="absolute -inset-1.5"/>
                                         <span className="sr-only">Open user menu</span>
                                         <Image

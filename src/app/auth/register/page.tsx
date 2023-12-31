@@ -1,13 +1,9 @@
 "use client";
 import Image from "next/image";
-import carPoolImage from "@/assets/carpool.svg";
-import Link from "next/link";
-import LoginWithGoogle from "@/components/shared/buttons/LoginWithGoogle";
-import LoginWithCredentials from "@/components/shared/forms/LoginWithCredentials";
-import OrDivider from "@/components/shared/dividers/OrDivider";
-import LoginForm from "@/components/auth/LoginForm";
+import carPoolImage from "@/assets/carpool-registration.svg";
+import RegisterForm from "@/components/auth/RegisterForm";
 
-const Login = () => {
+const Register = () => {
 
 
     return (
@@ -18,7 +14,7 @@ const Login = () => {
             <div className="w-full md:w-1/2 mt-8 md:mt-0">
                 <div className="flex flex-col justify-center items-center w-full lg:px-14">
 
-                    <LoginForm/>
+                    <RegisterForm/>
 
 
                 </div>
@@ -27,4 +23,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

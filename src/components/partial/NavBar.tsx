@@ -21,7 +21,7 @@ const Navbar = () => {
 
     return (
         <>
-            <Disclosure as="nav" className="bg-white shadow">
+            <Disclosure as="nav" className="bg-white shadow z-20">
                 {({open}: { open: boolean }) => (
                     <>
                         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
