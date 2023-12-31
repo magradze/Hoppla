@@ -1,4 +1,3 @@
-import {getServerSession} from "next-auth";
 import prisma from "@/lib/prisma";
 import {NextRequest, NextResponse} from "next/server";
 
@@ -21,7 +20,7 @@ interface iRideConfirm {
     createdAt: Date | null;
 }
 
-export async function GET(req: Request) {
+export async function GET() {
     try {
         const rides = await prisma.ride.findMany({
             include: {

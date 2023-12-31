@@ -8,6 +8,8 @@ import Image from "next/image";
 import Link from "next/link";
 import {BellIcon} from "@heroicons/react/24/outline";
 import avatarImage from '@/assets/avatar.png'
+import {useCurrentUser, useCurrentRole} from "@/hooks";
+import {ShieldCheck} from "lucide-react";
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -19,13 +21,14 @@ const userNavigation = [
 ]
 
 const AuthBlock = () => {
-    const {data: session} = useSession();
+    const user = useCurrentUser()
+    const role: string | null | undefined = useCurrentRole()
 
     return (
         <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
             <div className="flex flex-row">
                 <div className="flex flex-row">
-                    {!session && (
+                    {!user && (
                         <>
                             <button
                                 className="relative inline-flex items-center gap-x-1.5 rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primaryDark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -35,7 +38,7 @@ const AuthBlock = () => {
                             </button>
                         </>
                     )}
-                    {session && (
+                    {user && (
                         <>
                             <button
                                 type="button"
@@ -52,17 +55,17 @@ const AuthBlock = () => {
                                         <span className="absolute -inset-1.5"/>
                                         <span className="sr-only">Open user menu</span>
                                         <Image
-                                            className="h-8 w-8 rounded-full"
-                                            src={session?.user?.image || avatarImage}
-                                            alt={session?.user?.name || "User"}
+                                            className="h-8 w-8 rounded-md"
+                                            src={user.image || avatarImage}
+                                            alt={user.name || "User"}
                                             width={32}
                                             height={32}
                                         />
-                                        {session?.user?.role === "admin" && (
-                                            <span
-                                                className="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white bg-green-400"/>
-                                        )
-                                        }
+                                        {role === "admin" && (
+                                            <ShieldCheck
+                                                className="absolute bottom-0 right-0 block h-3 w-3 rounded-full ring-2 ring-white text-green-400 bg-white"/>
+
+                                        )}
 
                                     </Menu.Button>
                                 </div>
