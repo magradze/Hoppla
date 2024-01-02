@@ -3,7 +3,7 @@ import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} f
 import {Button} from "@/components/ui/button";
 import {CheckIcon} from "lucide-react";
 import OrDivider from "@/components/shared/dividers/OrDivider";
-import LoginWithGoogle from "@/components/shared/buttons/LoginWithGoogle";
+import LoginWithGoogle from "@/components/auth/SocialLoginButton";
 import SocialLogin from "@/components/auth/SocialLogin";
 import Link from "next/link";
 

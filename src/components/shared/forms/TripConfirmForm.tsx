@@ -200,7 +200,7 @@ const TripConfirmForm = ({user}: { user: any }) => {
                                 name="timeToLeave"
                                 id="timeToLeave"
                                 className="block w-full h-12 lg:h-16 rounded-md focus:shadow-md outline-none py-1.5 pl-10 pr-4 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 "
-                                value={moment(new Date()).format('YYYY-MM-DDTHH:mm')}
+                                // value={moment(new Date()).format('YYYY-MM-DDTHH:mm') || timeToLeave}
                                 onChange={(e) => setTimeToLeave(e.target.value)}
                             />
                         </div>

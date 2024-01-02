@@ -2,6 +2,7 @@
 import * as React from "react";
 import {PageHeader, TripCalendar, TripCard} from "@/components/shared";
 import carpoolBg from "@/assets/carpoolbg.svg";
+import RidesNotFound from "@/components/rides/RidesNotFound";
 
 const CarPool = () => {
 
@@ -11,9 +12,12 @@ const CarPool = () => {
         fetch('/api/rides')
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
-                setRides(data)
-            })
+                if (data) {
+                    setRides(data)
+                }
+            }).catch((err) => {
+            throw new Error(err)
+        })
     }, [])
 
     return (
@@ -27,7 +31,7 @@ const CarPool = () => {
                         <div>...</div>
                     </div>
                     <ol className="divide-y-0 divide-gray-50 text-sm leading-6 lg:col-span-7 xl:col-span-8 flex flex-col gap-4">
-                        {rides.map((ride, index) => (
+                        {rides.length === 0 ? <RidesNotFound/> : rides.map((ride, index) => (
                             <TripCard ride={ride} key={index}/>
                         ))}
                     </ol>

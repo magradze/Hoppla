@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import {PrismaAdapter} from "@auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 import login from "@/lib/auth";
+import {getUserById} from "@/lib/data/user";
 
 
 export const authOptions: AuthOptions = {
@@ -48,7 +49,29 @@ export const authOptions: AuthOptions = {
             }
         })
     ],
+    events: {
+        async signIn({user}) {
+            console.log("signIn", user);
+        },
+        async createUser({user}) {
+            console.log("createUser", user);
+        },
+        async linkAccount({user}) {
+            console.log("linkAccount", user);
+        },
+        async session({session, token}) {
+            console.log("session", session, token);
+        }
+    },
     callbacks: {
+        async signIn({user}) {
+            const existingUser = await getUserById(user.id);
+
+            // if (!existingUser || !existingUser.emailVerified) {
+            //     return "/auth/new-user";
+            // }
+            return true;
+        },
         async jwt({token, user}) {
             return {...token, ...user};
         },

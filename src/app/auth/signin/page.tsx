@@ -1,15 +1,9 @@
 "use client";
 import Image from "next/image";
 import carPoolImage from "@/assets/carpool.svg";
-import Link from "next/link";
-import LoginWithGoogle from "@/components/shared/buttons/LoginWithGoogle";
-import LoginWithCredentials from "@/components/shared/forms/LoginWithCredentials";
-import OrDivider from "@/components/shared/dividers/OrDivider";
 import LoginForm from "@/components/auth/LoginForm";
 
 const Login = () => {
-
-
     return (
         <div className="flex flex-col md:flex-row max-w-7xl mx-auto py-8 px-8">
             <div className="w-full md:w-1/2 flex justify-center items-start">
