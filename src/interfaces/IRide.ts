@@ -1,30 +1,30 @@
 export interface IRide {
 
     ride: {
-        id: number;
-        startDate: string;
-        time: string;
-        datetime: string;
+        id: string;
+        startDate: Date | string;
+        // time: string;
+        // datetime: string;
         name: string;
         driver: {
-            name: string;
-            email: string;
+            name: string | null;
+            email: string | null;
             image: string;
+            phone: string | null;
+            address: string | null;
+            birthday: Date | null;
         };
         startLocation: string;
         endLocation: string;
+        duration: number;
         places: number;
-        car: string;
-        color: string;
+        // car: string;
+        // color: string;
         price: number;
-        passengers: {
-            name: string;
-            imageUrl: string;
-        }[],
-        stops: [
-            {
-                name: string;
-            }
-        ]
+        // passengers: {
+        //     name: string;
+        //     imageUrl: string;
+        // }[],
+        stops: { name: string; }[]
     }
 }

@@ -106,9 +106,7 @@ const AddTripForm = ({
 
                     დრო: {!duration
                     ? "0 სთ 0 წთ"
-                    : duration.split(" ")[2]
-                        ? duration.split(" ")[0] + " სთ" + " " + duration.split(" ")[2] + " წთ"
-                        : duration.split(" ")[0] + " წთ"
+                    : duration < 3600 ? `${Math.floor(duration / 60)} წთ` : `${Math.floor(duration / 3600)} სთ ${Math.floor(duration / 60 % 60)} წთ`
                 }
                 </span>
 

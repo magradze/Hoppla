@@ -2,17 +2,17 @@ import React from 'react';
 import Image from "next/image";
 import {IPageHeader} from "@/interfaces/IPageHeader";
 
-const PageHeader = ({image, text}: IPageHeader) => {
+const PageHeader = ({image, title, subtitle}: IPageHeader) => {
     return (
         <div className="relative">
             <Image
                 src={image}
-                alt={text}
+                alt={title}
                 className="h-24 md:h-40 lg:h-52 inset-0 -z-10 w-full object-cover"
             />
             <div className="absolute inset-0 bg-black bg-opacity-30"/>
             <div className="absolute inset-0 flex justify-center items-center">
-                <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-white alk-sanet">{text}</h1>
+                <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-white alk-sanet">{title}</h1>
             </div>
         </div>
     );

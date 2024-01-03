@@ -7,7 +7,7 @@ interface iRideConfirm {
     startLocation: string;
     endLocation: string;
     distance: number;
-    duration: string;
+    duration: number;
     places: number;
     price: number;
     startDate: Date;

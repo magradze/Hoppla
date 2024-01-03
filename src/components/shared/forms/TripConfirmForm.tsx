@@ -50,7 +50,7 @@ const TripConfirmForm = ({user}: { user: any }) => {
         startLocation: origin,
         endLocation: destination,
         distance: parseInt(distance),
-        duration,
+        duration: parseInt(duration),
         places: parseInt(passengers),
         price: newPrice,
         startDate: new Date(timeToLeave).toISOString(),
@@ -73,8 +73,7 @@ const TripConfirmForm = ({user}: { user: any }) => {
                 'Content-Type': 'application/json'
             }
         })
-        const data = await res.json()
-        console.log(data)
+        await res.json()
         route.push('/carpool')
     }
 

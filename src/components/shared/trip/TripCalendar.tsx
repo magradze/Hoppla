@@ -1,5 +1,7 @@
+"use client"
 import React from 'react';
-import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/20/solid";
+import {ChevronLeftIcon, ChevronRightIcon} from "lucide-react";
+// import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/20/solid";
 
 const days = [
     {date: '2021-12-27'},

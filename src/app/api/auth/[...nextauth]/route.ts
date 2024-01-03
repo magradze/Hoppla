@@ -50,18 +50,18 @@ export const authOptions: AuthOptions = {
         })
     ],
     events: {
-        async signIn({user}) {
-            console.log("signIn", user);
-        },
-        async createUser({user}) {
-            console.log("createUser", user);
-        },
-        async linkAccount({user}) {
-            console.log("linkAccount", user);
-        },
-        async session({session, token}) {
-            console.log("session", session, token);
-        }
+        // async signIn({user}) {
+        //     console.log("signIn", user);
+        // },
+        // async createUser({user}) {
+        //     console.log("createUser", user);
+        // },
+        // async linkAccount({user}) {
+        //     console.log("linkAccount", user);
+        // },
+        // async session({session, token}) {
+        //     console.log("session", session, token);
+        // }
     },
     callbacks: {
         async signIn({user}) {

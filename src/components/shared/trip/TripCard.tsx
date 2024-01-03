@@ -15,6 +15,7 @@ const TripCard = ({ride: ride}: IRide) => {
         startDate,
         startLocation,
         endLocation,
+        duration,
         car,
         color,
         price,

@@ -5,7 +5,7 @@ export interface IAddTripForm {
     destination: RefObject<any>,
     calculateDistance: () => void,
     distance: number,
-    duration: string,
+    duration: number,
     setPrice: React.Dispatch<React.SetStateAction<number>>,
     setPassengers: React.Dispatch<React.SetStateAction<number>>,
     passengers: number,

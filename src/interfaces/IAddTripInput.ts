@@ -9,6 +9,6 @@ export interface IAddTripInput {
     setDisable: Dispatch<SetStateAction<boolean>>,
     setPassengers: Dispatch<SetStateAction<number>>,
     distance: number,
-    duration: string,
+    duration: number,
     calculateDistance: () => void
 }

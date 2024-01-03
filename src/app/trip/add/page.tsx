@@ -9,7 +9,7 @@ import {useJsApiLoader, Libraries} from '@react-google-maps/api';
 const AddTrip = () => {
     const [directionResponse, setDirectionResponse] = useState<null>(null)
     const [distance, setDistance] = useState(0)
-    const [duration, setDuration] = useState('')
+    const [duration, setDuration] = useState(0)
 
     const originRef: MutableRefObject<HTMLInputElement | null> = useRef(null)
 
@@ -62,7 +62,10 @@ const AddTrip = () => {
         // @ts-ignore
         setDistance(result.routes[0].legs[0].distance.value)
         // @ts-ignore
-        setDuration(result.routes[0].legs[0].duration.text)
+        setDuration(result.routes[0].legs[0].duration.value)
+
+        // console.log("add duration", result.routes[0].legs[0]?.duration?.value)
+        // console.log(Math.floor(result.routes[0].legs[0]?.duration?.value! / 3600 / 60))
 
         // setPrice(!duration && !distance ? 0 : (distance.split(" ")[0] * 0.3 * 2 / 4))
         // if (result.status !== "OK") return
@@ -70,6 +73,7 @@ const AddTrip = () => {
         // @ts-ignore
         setTotalPrice(result.routes[0].legs[0].distance.text.split(" ")[0] * 0.3 * 2 / 4)
     }
+
 
     // @ts-ignore
     return (

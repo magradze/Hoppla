@@ -31,7 +31,6 @@ const AddStopPlaces = ({
     const onSubmit = (data: any) => {
         setStopPlaceField(data.place)
         setDisable(false)
-        console.log(data)
     };
 
     useEffect(() => {

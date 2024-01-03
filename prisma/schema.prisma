@@ -76,7 +76,7 @@ model Ride {
   startLocation String     @map("start_location")
   endLocation   String     @map("end_location")
   distance      Float
-  duration      String
+  duration      Int
   places        Int
   price         Float
   startDate     DateTime   @map("start_date")
