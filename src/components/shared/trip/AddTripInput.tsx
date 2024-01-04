@@ -21,7 +21,7 @@ const AddTripInput = ({
             // setPrice(0)
             setPassengers(1)
             distance = 0
-            duration = "0"
+            duration = 0
         } else {
             if (!origin?.current?.value || !destination?.current?.value) return
 

@@ -5,8 +5,6 @@ import {Calendar} from "@/components/ui/calendar";
 const RideCalendarFilter = () => {
     const [date, setDate] = React.useState<Date | undefined>(new Date())
 
-    console.log(date)
-
     return (
         <Calendar
             mode="single"

@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
                 duration: body.duration,
                 places: body.places,
                 price: body.price,
-                startDate: body.startDate,
+                startDate: new Date(body.startDate),
                 driver: {
                     connect: {
                         id: body.driver.id

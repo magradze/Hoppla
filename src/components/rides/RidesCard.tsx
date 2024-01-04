@@ -67,7 +67,7 @@ const RideCard = ({ride: ride}: IRide) => {
                 </div>
                 <div className="p-4">
                     <span
-                        className="bg-red-700/10 text-primary text-md lg:text-xl font-bold p-2 rounded-md">{ride.price / ride.places} ₾</span>
+                        className="bg-red-700/10 text-primary text-md lg:text-xl font-bold p-2 rounded-md">{(ride.price / ride.places).toFixed(2)} ₾</span>
                 </div>
             </div>
             <div className="flex flex-row justify-between bg-white border-t border-gray-100 p-4 items-center z-10">

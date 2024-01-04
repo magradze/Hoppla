@@ -4,9 +4,8 @@ import {getRides} from "@/lib/data/rides";
 
 const RidesList = async () => {
     const rides = await getRides();
-
     return (
-        <ol className="divide-y-0 divide-gray-50 text-sm leading-6 lg:col-span-7 xl:col-span-8 flex flex-col gap-4">
+        <ol className="divide-y-0 divide-gray-50 text-sm leading-6 grid grid-cols-1 md:grid-cols-2 gap-4">
             {rides && rides.map((ride, index) => (
                 // @ts-ignore
                 <RideCard ride={ride} key={index}/>

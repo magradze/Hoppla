@@ -42,3 +42,34 @@ export const getRideById = async (id: string) => {
         return null;
     }
 }
+
+// find ride by date
+export const getRideByDate = async (date: string) => {
+    try {
+        return await prisma.ride.findMany({
+            where: {
+                startDate: date,
+            },
+            include: {
+                driver: {
+                    select: {
+                        name: true,
+                        email: true,
+                        image: true,
+                        phone: true,
+                        address: true,
+                        birthday: true,
+                    }
+                },
+                stops: {
+                    select: {
+                        name: true,
+                    }
+
+                }
+            }
+        });
+    } catch (error) {
+        return null;
+    }
+}

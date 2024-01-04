@@ -79,7 +79,7 @@ const AddTrip = () => {
     return (
         <div className="relative">
 
-            <div className="page-wrapper">
+            <div className="page-wrapper p-4 lg:p-8">
             </div>
             <div className="page-wrapper grid grid-cols-1 gap-4 lg:grid-cols-2 py-0">
                 <div className="flex flex-col justify-center bg-white p-4 lg:p-8 rounded-md">

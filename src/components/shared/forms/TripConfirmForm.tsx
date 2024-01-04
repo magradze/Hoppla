@@ -1,7 +1,6 @@
 "use client"
 import React, {useState} from 'react';
 import {MapPin} from "lucide-react";
-import Button from "@/components/shared/buttons/Button";
 import AddTripSteps from "@/components/shared/trip/AddTripSteps";
 import Image from "next/image";
 import lariSymbol from "@/assets/lari.svg";
@@ -9,6 +8,7 @@ import moment from "moment/moment";
 import TripAllowedAction from "@/components/shared/trip/TripAllowedAction";
 import AddStopPlaces from "@/components/shared/forms/AddStopPlaces";
 import {useSearchParams, useRouter} from "next/navigation";
+import {Button} from "@/components/ui/button";
 
 const TripConfirmForm = ({user}: { user: any }) => {
 
@@ -53,7 +53,14 @@ const TripConfirmForm = ({user}: { user: any }) => {
         duration: parseInt(duration),
         places: parseInt(passengers),
         price: newPrice,
-        startDate: new Date(timeToLeave).toISOString(),
+        startDate: new Date(timeToLeave).toLocaleDateString(
+            "en-US",
+            {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+            }
+        ).replace(/\//g, "-"),
         driver: {
             id: user.id,
             name: user.name,
@@ -63,8 +70,6 @@ const TripConfirmForm = ({user}: { user: any }) => {
         stops: stopPlaceField,
     }
 
-    console.log(tripObject)
-
     const addTrip = async () => {
         const res = await fetch('/api/rides', {
             method: 'POST',
@@ -73,7 +78,6 @@ const TripConfirmForm = ({user}: { user: any }) => {
                 'Content-Type': 'application/json'
             }
         })
-        await res.json()
         route.push('/carpool')
     }
 
@@ -131,7 +135,8 @@ const TripConfirmForm = ({user}: { user: any }) => {
                         </div>
                     </dl>
                     <Button
-                        className="mt-6 w-full bg-secondary hover:bg-secondaryDark text-white py-5"
+                        variant="secondary"
+                        className="mt-6 w-full"
                         disabled={disable}
                         onClick={addTrip}
                     >
@@ -195,7 +200,7 @@ const TripConfirmForm = ({user}: { user: any }) => {
                                 <Image src={lariSymbol} alt={"Lari Symbol"} width={14} height={14}/>
                             </div>
                             <input
-                                type="datetime-local"
+                                type="date"
                                 name="timeToLeave"
                                 id="timeToLeave"
                                 className="block w-full h-12 lg:h-16 rounded-md focus:shadow-md outline-none py-1.5 pl-10 pr-4 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 "

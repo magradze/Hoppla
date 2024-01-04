@@ -17,7 +17,8 @@ const AddPageConfirm = async () => {
 
     return (
         <>
-            <main className="page-wrapper flex flex-col-reverse lg:flex lg:min-h-full lg:flex-row-reverse gap-4">
+            <main
+                className="page-wrapper flex flex-col-reverse lg:flex lg:min-h-full lg:flex-row-reverse gap-4 p-4 lg:p-8">
                 <TripConfirmForm user={user}/>
             </main>
         </>
