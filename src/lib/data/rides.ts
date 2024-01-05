@@ -48,7 +48,7 @@ export const getRideByDate = async (date: string) => {
     try {
         return await prisma.ride.findMany({
             where: {
-                startDate: date,
+                startDate: date.split('T')[0],
             },
             include: {
                 driver: {

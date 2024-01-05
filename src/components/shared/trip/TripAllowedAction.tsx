@@ -27,7 +27,7 @@ const TripAllowedAction = () => {
     return (
         <div className="mb-6">
             <label htmlFor="price"
-                   className="block text-xs font-medium leading-6 mb-1 text-gray-900 alk-sanet">
+                   className="mb-3 block text-sm font-medium text-gray-900 alk-sanet">
                 მგზავრობის დაშვებული ქმედებები
             </label>
 

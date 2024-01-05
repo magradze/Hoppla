@@ -1,5 +1,3 @@
-import RideList from "@/components/rides/RideList";
-import RideCalendarFilter from "@/components/rides/RideCalendarFilter";
 import SearchBox from "@/components/partial/SearchBox";
 
 const CarPool = async () => {

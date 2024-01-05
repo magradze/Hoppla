@@ -4,13 +4,14 @@ import {NextRequest, NextResponse} from "next/server";
 interface iRideConfirm {
     name: string;
     description: string | null;
-    startLocation: string;
-    endLocation: string;
+    from: string;
+    to: string;
     distance: number;
     duration: number;
-    places: number;
+    seats: number;
     price: number;
-    startDate: Date;
+    startDate: string;
+    startTime: string;
     driver: {
         id: string | number;
     };
@@ -43,13 +44,14 @@ export async function POST(req: NextRequest) {
             data: {
                 name: body.name,
                 description: body.description,
-                startLocation: body.startLocation,
-                endLocation: body.endLocation,
+                from: body.from,
+                to: body.to,
                 distance: body.distance,
                 duration: body.duration,
-                places: body.places,
+                seats: body.seats,
                 price: body.price,
-                startDate: new Date(body.startDate),
+                startDate: body.startDate,
+                startTime: body.startTime,
                 driver: {
                     connect: {
                         id: body.driver.id

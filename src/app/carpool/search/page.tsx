@@ -10,7 +10,7 @@ const Search = async ({searchParams}: ISearchProps) => {
     const rides = await getRideByDate(searchParams.date);
 
     return (
-        <div className="page-wrapper">
+        <div className="page-wrapper mt-8">
             <SearchBox className="" type="carpool"/>
 
             <Suspense fallback={<div>Loading...</div>}>
@@ -21,9 +21,13 @@ const Search = async ({searchParams}: ISearchProps) => {
                             <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                                 <div className="lg:col-span-2 flex flex-col gap-2">
                                     <div className="flex flex-col gap-2">
-                                        {/*<span>{searchParams.from} - {searchParams.to}</span>*/}
+                                        <span>{searchParams.from} - {searchParams.to}</span>
                                         {/*<span>{searchParams.date}</span>*/}
                                         {/*<span>{searchParams.seats} ადგილი</span>*/}
+                                    </div>
+                                    <div className="flex flex-col gap-2">
+                                        <h2 className="text-2xl font-bold">Rides</h2>
+                                        <p className="text-sm text-gray-500">Showing {rides?.length} rides</p>
                                     </div>
                                     <div
                                         className="divide-y-0 divide-gray-50 text-sm leading-6 grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -30,12 +30,12 @@ const AddTripForm = ({
         if (directionResponse && directionResponse?.status === "OK") {
             setTripQuery(
                 {
-                    origin: origin?.current?.value,
-                    destination: destination?.current?.value,
+                    from: origin?.current?.value,
+                    to: destination?.current?.value,
                     distance: distance,
                     duration: duration,
-                    passengers: passengers,
                     price: price,
+                    seats: passengers,
                     google: google
                 }
             )

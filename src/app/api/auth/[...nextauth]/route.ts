@@ -44,7 +44,7 @@ export const authOptions: AuthOptions = {
                     name: profile.name,
                     email: profile.email,
                     image: profile.picture,
-                    role: profile.role ? profile.role : "user",
+                    role: profile.role ? profile.role : "USER",
                 };
             }
         })

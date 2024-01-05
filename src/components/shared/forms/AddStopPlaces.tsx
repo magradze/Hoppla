@@ -45,8 +45,8 @@ const AddStopPlaces = ({
         <>
 
             <form onSubmit={handleSubmit(onSubmit)} className="relative w-full">
-                <label htmlFor="price"
-                       className="block text-xs font-medium leading-6 mb-1 text-gray-900 alk-sanet">
+                <label htmlFor="place"
+                       className="mb-3 block text-sm font-medium text-gray-900 alk-sanet">
                     გაჩერების დამატება (არასავალდებულო)
                 </label>
 

@@ -46,7 +46,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime? @map("email_verified")
   image         String?
-  role          String?   @default("user")
+  role          Role      @default(USER)
   phone         String?
   address       String?
   birthday      DateTime? @map("birth_day")
@@ -60,6 +60,11 @@ model User {
   @@map("users")
 }
 
+enum Role {
+  ADMIN
+  USER
+}
+
 model VerificationToken {
   identifier String
   token      String   @unique
@@ -70,22 +75,24 @@ model VerificationToken {
 }
 
 model Ride {
-  id            String     @id @default(cuid())
-  name          String
-  description   String?
-  startLocation String     @map("start_location")
-  endLocation   String     @map("end_location")
-  distance      Float
-  duration      Int
-  places        Int
-  price         Float
-  startDate     DateTime   @map("start_date")
-  userId        String     @map("user_id")
-  driver        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  stops         Stop[]
-  rideRules     RideRule[]
-  Trip          Trip[]
-  createdAt     DateTime?  @map("created_at")
+  id          String     @id @default(cuid())
+  name        String
+  description String?
+  from        String     @map("start_location")
+  to          String     @map("end_location")
+  distance    Float
+  duration    Int
+  seats       Int
+  price       Float
+  startDate   String     @map("start_date")
+  startTime   String     @map("start_time")
+  userId      String     @map("user_id")
+  driver      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stops       Stop[]
+  rideRules   RideRule[]
+  status      RideStatus @default(PENDING)
+  Trip        Trip[]
+  createdAt   DateTime?  @map("created_at")
 
   @@map("rides")
 }
@@ -108,6 +115,14 @@ model RideRule {
   createdAt DateTime? @map("created_at")
 
   @@map("ride_rules")
+}
+
+enum RideStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  CANCELED
+  COMPLETED
 }
 
 model Trip {

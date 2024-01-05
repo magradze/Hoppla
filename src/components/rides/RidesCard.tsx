@@ -1,16 +1,15 @@
 import React from 'react';
 import {IRide} from "@/interfaces/IRide";
 import Image from "next/image";
-import {Diamond, Dot, SquareDot, SquareStack, Waypoints} from "lucide-react";
+import {SquareDot, Waypoints} from "lucide-react";
 import CarSeat from "@/components/shared/icons/CarSeat";
 import rideCardBg from "@/assets/ride-card-bg.svg";
 import {convertSeconds} from "@/lib/tools/convertSeconds";
+import {convertTimeToSeconds} from "@/lib/tools/convertTimeToSeconds";
 
 const RideCard = ({ride: ride}: IRide) => {
 
-    const startTime = new Date(ride.startDate).getHours() * 3600 + new Date(ride.startDate).getMinutes() * 60
-
-    const arrivalTime = startTime + ride.duration
+    const arrivalTime = convertTimeToSeconds(ride.startTime) + ride.duration
 
     const arrivalHour = convertSeconds(parseInt(String(arrivalTime)))
     const rideDuration = convertSeconds(parseInt(String(ride.duration)))
@@ -18,7 +17,7 @@ const RideCard = ({ride: ride}: IRide) => {
     return (
         <li className="relative bg-white border border-gray-100 w-full rounded-md flex flex-col overflow-hidden hover:shadow-2xl cursor-pointer group">
             <Image
-                src={rideCardBg} alt={ride.startLocation}
+                src={rideCardBg} alt={ride.from}
                 layout="fill"
                 objectFit="cover"
                 className="z-0 opacity-10"
@@ -28,14 +27,7 @@ const RideCard = ({ride: ride}: IRide) => {
                     <div className="flex flex-col justify-between space-y-4">
                         <div className="flex flex-col">
                         <span className="text-lg lg:text-xl font-semibold alk-sanet">
-                            {new Date(ride.startDate).toLocaleTimeString(
-                                'ka-GE',
-                                {
-                                    hour: 'numeric',
-                                    minute: 'numeric',
-                                    hour12: false
-                                }
-                            )}
+                            {ride.startTime}
                         </span>
                             <small className="text-gray-400 text-sm lg:text-md">
                                 {rideDuration}
@@ -47,7 +39,7 @@ const RideCard = ({ride: ride}: IRide) => {
                         <div className="flex items-center gap-2">
                             <SquareDot className="text-primary"/>
                             <h3 className="text-md lg:text-xl font-bold alk-sanet">
-                                {ride.startLocation}
+                                {ride.from}
                             </h3>
                         </div>
                         <div
@@ -60,14 +52,14 @@ const RideCard = ({ride: ride}: IRide) => {
                         <div className="flex items-center gap-2">
                             <SquareDot className="text-primary"/>
                             <h3 className="text-md lg:text-xl font-bold alk-sanet">
-                                {ride.endLocation}
+                                {ride.to}
                             </h3>
                         </div>
                     </div>
                 </div>
                 <div className="p-4">
                     <span
-                        className="bg-red-700/10 text-primary text-md lg:text-xl font-bold p-2 rounded-md">{(ride.price / ride.places).toFixed(2)} ₾</span>
+                        className="bg-red-700/10 text-primary text-md lg:text-xl font-bold p-2 rounded-md">{(ride.price / ride.seats).toFixed(2)} ₾</span>
                 </div>
             </div>
             <div className="flex flex-row justify-between bg-white border-t border-gray-100 p-4 items-center z-10">
@@ -90,7 +82,7 @@ const RideCard = ({ride: ride}: IRide) => {
                 <div className="flex flex-row items-center">
                     {
                         //draw icons based on the number of seats
-                        [...Array(ride.places)].map((e, i) => <CarSeat key={i} className="w-6 h-6 text-gray-400"/>)
+                        [...Array(ride.seats)].map((e, i) => <CarSeat key={i} className="w-6 h-6 text-gray-400"/>)
                     }
                 </div>
             </div>

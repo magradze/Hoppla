@@ -40,9 +40,9 @@ const SearchBox = ({className, type}: { className: string, type: string }) => {
         return query.toString();
     }, [searchParams]);
 
-    const handleSubmit = async (values: z.infer<typeof SearchSchema>) => {
-
-    };
+    const handleSubmit = useCallback((values: z.infer<typeof SearchSchema>) => {
+        router.push(`/${type}/search?${createQueryStr(values)}`)
+    }, [router, type, createQueryStr]);
 
     return (
         <Form {...form}>

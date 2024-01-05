@@ -3,8 +3,7 @@ export interface IRide {
     ride: {
         id: string;
         startDate: Date | string;
-        // time: string;
-        // datetime: string;
+        startTime: string;
         name: string;
         driver: {
             name: string | null;
@@ -14,10 +13,10 @@ export interface IRide {
             address: string | null;
             birthday: Date | null;
         };
-        startLocation: string;
-        endLocation: string;
+        from: string;
+        to: string;
         duration: number;
-        places: number;
+        seats: number;
         // car: string;
         // color: string;
         price: number;
