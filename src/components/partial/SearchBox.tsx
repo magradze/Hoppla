@@ -47,7 +47,7 @@ const SearchBox = ({className, type}: { className: string, type: string }) => {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)}
-                  className={cn(className, "bg-white rounded-md grid grid-cols-1 lg:grid-cols-12 lg:justify-between items-center w-full alk-sanet")}>
+                  className={cn(className, "rounded-md grid grid-cols-1 lg:grid-cols-12 lg:justify-between items-center w-full alk-sanet")}>
 
                 <FormField
                     name="startLocation"

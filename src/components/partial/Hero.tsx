@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import {CalendarDays, Locate, MapPin, UserRound} from 'lucide-react';
 
 import carpoolBg from '@/assets/carpoolbg.svg'
 import SearchBox from "@/components/partial/SearchBox";

@@ -63,7 +63,7 @@ const Navbar = () => {
                                     <div className="flex-shrink-0">
                                         <Button
                                             variant="ghost">
-                                            <Link href={"/trip/add"} className={"flex gap-2 items-center"}>
+                                            <Link href={"/ride/add"} className={"flex gap-2 items-center"}>
                                                 <PlusIcon className="-ml-0.5 h-5 w-5" aria-hidden="true"/>
                                                 <span
                                                     className="pt-0.5 hidden lg:block">მოგზაურობის გამოქვეყნება</span>
