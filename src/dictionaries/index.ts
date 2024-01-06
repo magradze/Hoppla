@@ -1,9 +1,11 @@
-import 'server-only'
+import "server-only";
+import LANGS from "./langs";
 
-const dictionaries = {
-    ka: () => import('./ka.json').then((module) => module.default),
-    en: () => import('./en.json').then((module) => module.default),
-}
+const dictionaries = LANGS.reduce((acc, lang) => {
+  acc[lang.value] = () =>
+    import(`./${lang.value}.json`).then((module) => module.default);
+  return acc;
+}, {} as any);
 
 // @ts-ignore
-export const getDictionary = async (locale: any) => dictionaries[locale]()
+export const getDictionary = async (locale: any) => dictionaries[locale]();

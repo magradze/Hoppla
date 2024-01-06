@@ -1,16 +1,18 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import prisma from "@/lib/prisma";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-type AdmnPageProps = {
+type AdminPageProps = {
   params: {};
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export default async function AdmnPage({
+export default async function AdminPage({
   params,
   searchParams,
-}: AdmnPageProps) {
+}: AdminPageProps) {
   const session = await getServerSession(authOptions);
   const user = session!.user;
 
@@ -23,6 +25,10 @@ export default async function AdmnPage({
   return (
     <div>
       <p>Welcome {user.name}!</p>
+      {/* Add new article */}
+      <Button variant="default" asChild={true}>
+        <Link href="/admin/article/add">Add new article</Link>
+      </Button>
       <p>Admins:</p>
       <ul>
         {adminUsers.map((user) => (
