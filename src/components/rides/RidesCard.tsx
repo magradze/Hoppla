@@ -18,9 +18,7 @@ const RideCard = ({ride: ride}: IRide) => {
         <li className="relative bg-white border border-gray-100 w-full rounded-md flex flex-col overflow-hidden hover:shadow-2xl cursor-pointer group">
             <Image
                 src={rideCardBg} alt={ride.from}
-                layout="fill"
-                objectFit="cover"
-                className="z-0 opacity-10"
+                className="z-0 opacity-10 bg-cover bg-center absolute top-0 left-0 w-full h-full"
             />
             <div className="flex flex-row justify-between">
                 <div className="flex flex-row space-x-6 p-4">
