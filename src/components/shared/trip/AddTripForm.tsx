@@ -82,7 +82,7 @@ const AddTripForm = ({
                     <PassangerSelector setPassengers={setPassengers} passengers={passengers} disabled={disable}/>
                     {!disable && <Link
                         href={{
-                            pathname: "/trip/add/confirm",
+                            pathname: "/ride/add/confirm",
                             query: tripQuery
                         }}
                         className={`bg-secondary hover:bg-secondaryDark h-12 lg:h-16 rounded-md border-0 px-24 py-0.5 text-white alk-sanet flex justify-center items-center`}
