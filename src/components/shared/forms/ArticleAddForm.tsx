@@ -2,6 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { Editor } from "@tinymce/tinymce-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -23,31 +24,17 @@ import {
 import { Input } from "@/components/ui/input";
 import LANGS from "@/dictionaries/langs";
 import { Textarea } from "@/components/ui/textarea";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import S3UploadForm from "./S3UploadForm";
-
-const formSchema = z.object({
-  title: z.string().min(2, {
-    message: "Title must be at least 2 characters.",
-  }),
-  content: z.string().min(10, {
-    message: "Content must be at least 10 characters.",
-  }),
-  language: z
-    .string()
-    .refine((val) => LANGS.map((l) => l.value).includes(val), {
-      message: "Language is not valid.",
-    }),
-  picture: z.string().refine((val) => val.length > 0, {
-    message: "Picture is required.",
-  }),
-});
+import s3UploadImage from "@/lib/s3UploadImage";
+import articleSchema from "@/lib/validation/ArticleSchema";
 
 type ArticleAddFormProps = {};
 
 export default function ArticleAddForm({}: ArticleAddFormProps) {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const [loading, setLoading] = useState(false);
+  const form = useForm<z.infer<typeof articleSchema>>({
+    resolver: zodResolver(articleSchema),
     defaultValues: {
       content: "",
       title: "",
@@ -56,12 +43,21 @@ export default function ArticleAddForm({}: ArticleAddFormProps) {
     },
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-    // upload here and loading scene also
+  async function onSubmit(values: z.infer<typeof articleSchema>) {
+    form.reset();
+
+    // setLoading(true);
+    // await fetch("/api/articles", {
+    //   method: "POST",
+    //   body: JSON.stringify(values),
+    // });
+    // setLoading(false);
+    localStorage.removeItem("articleAddForm");
+    // TODOS: edit page and publish page, and also single page and pagination for more articles
+    // and here it is not changed when i reset form
+    // go to article page
+    // and also error messages doesnt hide
+    form.reset();
   }
 
   useEffect(() => {
@@ -71,8 +67,7 @@ export default function ArticleAddForm({}: ArticleAddFormProps) {
     const data = localStorage.getItem("articleAddForm");
     if (data) {
       const parsedData = JSON.parse(data);
-      console.log(Object.keys(formSchema.shape), parsedData);
-      const success = Object.keys(formSchema.shape).every((key) => {
+      const success = Object.keys(articleSchema.shape).every((key) => {
         return key in parsedData;
       });
       if (success) {
@@ -107,7 +102,8 @@ export default function ArticleAddForm({}: ArticleAddFormProps) {
               <FormControl>
                 <S3UploadForm
                   onChange={(fileUrl) => {
-                    form.setValue("picture", fileUrl);
+                    // form.setValue("picture", fileUrl);
+                    field.onChange(fileUrl);
                   }}
                   value={field.value}
                 />
@@ -124,9 +120,43 @@ export default function ArticleAddForm({}: ArticleAddFormProps) {
             <FormItem>
               <FormLabel>Content</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder="Tell us a little bit about yourself"
-                  {...field}
+                <Editor
+                  apiKey={process.env.NEXT_PUBLIC_TINY_API_KEY}
+                  value={field.value}
+                  onEditorChange={(v) => field.onChange(v)}
+                  init={{
+                    height: 500,
+                    plugins: [
+                      "advlist",
+                      "autolink",
+                      "lists",
+                      "link",
+                      "image",
+                      "charmap",
+                      "preview",
+                      "anchor",
+                      "searchreplace",
+                      "visualblocks",
+                      "code",
+                      "fullscreen",
+                      "insertdatetime",
+                      "media",
+                      "table",
+                      "code",
+                      "help",
+                      "wordcount",
+                    ],
+                    toolbar:
+                      "undo redo | styles | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                    automatic_uploads: true,
+                    images_reuse_filename: true,
+                    images_upload_handler: (blobInfo, process) => {
+                      return new Promise(async (resolve, reject) => {
+                        const fileUrl = await s3UploadImage(blobInfo.blob());
+                        resolve(fileUrl);
+                      });
+                    },
+                  }}
                 />
               </FormControl>
               <FormDescription>You can write content here.</FormDescription>
@@ -140,7 +170,7 @@ export default function ArticleAddForm({}: ArticleAddFormProps) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Lanuage</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a verified language " />

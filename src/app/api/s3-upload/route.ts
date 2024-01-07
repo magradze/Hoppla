@@ -24,7 +24,7 @@ async function uploadFileToS3(
     Body: fileBuffer,
     ContentType: `${fileType}`,
   });
-  await s3Client.send(command);
+  const res = await s3Client.send(command);
   return uniqueFileName;
 }
 
@@ -47,7 +47,9 @@ export async function POST(request: Request) {
     const fileName = await uploadFileToS3(buffer, file.name, file.type);
 
     return NextResponse.json({
-      fileUrl: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileName}`,
+      fileUrl: `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${
+        process.env.AWS_REGION
+      }.amazonaws.com/${encodeURIComponent(fileName)}`, // i dunno if this is the best way to get file url, maybe s3 should have some builtin function to get file url after uploading // for this case it works fine
     });
   } catch (error) {
     return NextResponse.json({ error });
