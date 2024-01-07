@@ -1,24 +1,30 @@
 "use client";
 import {useState, useRef, useEffect, MutableRefObject} from 'react';
-import AddTripForm from "@/components/shared/trip/AddTripForm";
+import RideAddForm from "@/components/rides/forms/RideAddForm";
 
 import Map from "@/components/shared/trip/Map";
 
-import {useJsApiLoader, Libraries} from '@react-google-maps/api';
+import {useJsApiLoader} from '@react-google-maps/api';
+import {meterToKm} from "@/lib/tools/meterToKm";
+import {calculatePrice} from "@/lib/tools/calculatePrice";
 
 const AddTrip = () => {
-    const [directionResponse, setDirectionResponse] = useState<null>(null)
-    const [distance, setDistance] = useState(0)
-    const [duration, setDuration] = useState(0)
+    const [directionResponse, setDirectionResponse] = useState<google.maps.DirectionsResult>(
+        {
+            geocoded_waypoints: [],
+            routes: [],
+        }
+    )
+    const [distance, setDistance] = useState<number>(0)
+    const [duration, setDuration] = useState<number>(0)
 
     const originRef: MutableRefObject<HTMLInputElement | null> = useRef(null)
 
     const destinationRef: MutableRefObject<HTMLInputElement | null> = useRef(null)
 
-    const [totalPrice, setTotalPrice] = useState(0)
-    const [price, setPrice] = useState(totalPrice)
-    const [passengers, setPassengers] = useState(1)
-
+    const [totalPrice, setTotalPrice] = useState<number>(0)
+    const [price, setPrice] = useState<number>(totalPrice)
+    const [seats, setSeats] = useState<number>(1)
 
     const {isLoaded} = useJsApiLoader({
         id: 'google-map-script',
@@ -26,22 +32,13 @@ const AddTrip = () => {
     })
 
     useEffect(() => {
-        setPrice(totalPrice / 4)
-        switch (passengers) {
-            case 1:
-                setPrice(totalPrice)
-                break;
-            case 2:
-                setPrice(totalPrice * 2)
-                break;
-            case 3:
-                setPrice(totalPrice * 3)
-                break;
-            case 4:
-                setPrice(totalPrice * 4)
-                break;
+        if (seats === 1) {
+            setPrice(totalPrice / 4)
+        } else {
+            setPrice(totalPrice / 4 * seats)
         }
-    }, [passengers, totalPrice])
+
+    }, [seats, totalPrice])
 
     if (!isLoaded) return null;
 
@@ -50,32 +47,23 @@ const AddTrip = () => {
 
         const directionsService = new google.maps.DirectionsService();
         const result = await directionsService.route({
-            // @ts-ignore
             origin: originRef.current.value,
-            // @ts-ignore
             destination: destinationRef.current.value,
             travelMode: google.maps.TravelMode.DRIVING
         })
-
-        // @ts-ignore
-        setDirectionResponse(result)
-        // @ts-ignore
-        setDistance(result.routes[0].legs[0].distance.value)
-        // @ts-ignore
-        setDuration(result.routes[0].legs[0].duration.value)
-
-        // console.log("add duration", result.routes[0].legs[0]?.duration?.value)
-        // console.log(Math.floor(result.routes[0].legs[0]?.duration?.value! / 3600 / 60))
-
-        // setPrice(!duration && !distance ? 0 : (distance.split(" ")[0] * 0.3 * 2 / 4))
-        // if (result.status !== "OK") return
         if (!result) return
-        // @ts-ignore
-        setTotalPrice(result.routes[0].legs[0].distance.text.split(" ")[0] * 0.3 * 2 / 4)
+
+        setDirectionResponse(result)
+        const distance = meterToKm(result.routes[0].legs[0].distance?.value as number)
+
+        setDistance(distance)
+        setDuration(result.routes[0].legs[0].duration?.value as number)
+
+        const price = calculatePrice(distance)
+
+        setTotalPrice(price)
     }
 
-
-    // @ts-ignore
     return (
         <div className="relative">
 
@@ -87,9 +75,9 @@ const AddTrip = () => {
                         className="text-primary font-semibold text-xl">{price.toFixed(2)}</span> ლარამდე
                         თქვენი
                         პირველი მგზავრობისას.</h2>
-                    <AddTripForm origin={originRef} destination={destinationRef}
+                    <RideAddForm from={originRef} to={destinationRef}
                                  calculateDistance={calculateDistance} distance={distance} duration={duration}
-                                 setPrice={setPrice} setPassengers={setPassengers} passengers={passengers}
+                                 setPrice={setPrice} setSeats={setSeats} seats={seats}
                                  price={price} directionResponse={directionResponse} google={google}/>
                 </div>
                 <div className="flex flex-col justify-center">

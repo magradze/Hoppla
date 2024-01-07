@@ -26,6 +26,8 @@ const buttonVariants = cva(
                     "bg-[#5890FF] text-[#ffffff] shadow-sm hover:bg-[#5890FF] hover:opacity-90",
                 github:
                     "bg-[#333333] text-[#ffffff] shadow-sm hover:bg-[#444444]",
+                rideAddFormClear:
+                    "bg-red-500 w-12 h-12 lg:w-16 lg:h-16 rounded-md border-0 text-white absolute flex justify-center items-center top-8 lg:top-10 right-4 z-10",
             },
             size: {
                 default: "h-9 px-4 py-2",

@@ -7,7 +7,9 @@ import rideCardBg from "@/assets/ride-card-bg.svg";
 import {convertSeconds} from "@/lib/tools/convertSeconds";
 import {convertTimeToSeconds} from "@/lib/tools/convertTimeToSeconds";
 
-const RideCard = ({ride: ride}: IRide) => {
+const RideCard = ({
+                      ...ride
+                  }: IRide) => {
 
     const arrivalTime = convertTimeToSeconds(ride.startTime) + ride.duration
 

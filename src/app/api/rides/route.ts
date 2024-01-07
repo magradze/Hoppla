@@ -1,25 +1,6 @@
 import prisma from "@/lib/prisma";
 import {NextRequest, NextResponse} from "next/server";
-
-interface iRideConfirm {
-    name: string;
-    description: string | null;
-    from: string;
-    to: string;
-    distance: number;
-    duration: number;
-    seats: number;
-    price: number;
-    startDate: string;
-    startTime: string;
-    driver: {
-        id: string | number;
-    };
-    stops: {
-        name: string;
-    }[];
-    createdAt: Date | null;
-}
+import {iRideAdd} from "@/interfaces/IRideAdd";
 
 export async function GET() {
     try {
@@ -40,7 +21,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     try {
-        const ride: iRideConfirm = await prisma.ride.create({
+        const ride: iRideAdd = await prisma.ride.create({
             data: {
                 name: body.name,
                 description: body.description,
@@ -59,8 +40,7 @@ export async function POST(req: NextRequest) {
                 },
                 stops: {
                     create: body.stops
-                },
-                createdAt: new Date(),
+                }
             },
             include: {
                 driver: true,

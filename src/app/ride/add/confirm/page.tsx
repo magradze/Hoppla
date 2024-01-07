@@ -1,5 +1,5 @@
 import * as React from "react";
-import TripConfirmForm from "@/components/shared/forms/TripConfirmForm";
+import RideConfirmForm from "@/components/rides/forms/RideConfirmForm";
 import prisma from "@/lib/prisma";
 import {getServerSession} from "next-auth";
 
@@ -28,7 +28,7 @@ const AddPageConfirm = async ({searchParams}: {
         <>
             <main
                 className="page-wrapper flex flex-col-reverse lg:flex lg:min-h-full lg:flex-row-reverse gap-4 p-4 lg:p-8">
-                <TripConfirmForm user={user} searchParams={searchParams}/>
+                <RideConfirmForm user={user} searchParams={searchParams}/>
             </main>
         </>
     );

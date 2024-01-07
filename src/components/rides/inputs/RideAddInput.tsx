@@ -1,34 +1,31 @@
 import {MapPin} from "lucide-react";
-import {IAddTripInput} from "@/interfaces/IAddTripInput";
+import {IRideAddInput} from "@/interfaces/IRideAddInput";
+import {Input} from "@/components/ui/input";
 
-
-const AddTripInput = ({
+const RideAddInput = ({
                           inputRef,
-                          origin,
-                          destination,
+                          from,
+                          to,
                           placeholder,
                           name,
                           setDisable,
-                          setPassengers,
+                          setSeats,
                           distance,
                           duration,
                           calculateDistance
-                      }: IAddTripInput) => {
+                      }: IRideAddInput) => {
 
     const handleChange = (event: any) => {
         if (event.target.value === "") {
             setDisable(true)
             // setPrice(0)
-            setPassengers(1)
+            setSeats(1)
             distance = 0
             duration = 0
         } else {
-            if (!origin?.current?.value || !destination?.current?.value) return
+            if (!from?.current?.value || !to?.current?.value) return
 
-            console.log(origin?.current?.value)
-            console.log(destination?.current?.value)
-
-            destination?.current?.value && calculateDistance()
+            to?.current?.value && calculateDistance()
             setDisable(false)
         }
     };
@@ -48,11 +45,11 @@ const AddTripInput = ({
             {/*        destination.current.value && calculateDistance()*/}
             {/*    }}*/}
             {/*>*/}
-            <input
+            <Input
                 type="text"
                 name={name}
                 id={name}
-                className="block w-full h-12 lg:h-16 rounded-md border border-gray-300 py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 alk-sanet"
+                className="h-12 lg:h-16 py-1.5 pl-10"
                 placeholder={placeholder}
                 ref={inputRef}
                 onChange={handleChange}
@@ -62,4 +59,4 @@ const AddTripInput = ({
     );
 };
 
-export default AddTripInput;
+export default RideAddInput;

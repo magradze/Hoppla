@@ -4,23 +4,15 @@ import {MapPin} from "lucide-react";
 import AddTripSteps from "@/components/shared/trip/AddTripSteps";
 import Image from "next/image";
 import lariSymbol from "@/assets/lari.svg";
-import moment from "moment/moment";
 import TripAllowedAction from "@/components/shared/trip/TripAllowedAction";
 import AddStopPlaces from "@/components/shared/forms/AddStopPlaces";
 import {useRouter} from "next/navigation";
 import {Button} from "@/components/ui/button";
 import {convertSeconds} from "@/lib/tools/convertSeconds";
+import {IRideConfirm} from "@/interfaces/IRideConfirm";
+import {iRideAdd} from "@/interfaces/IRideAdd";
 
-const TripConfirmForm = ({user, searchParams}: {
-    user: any, searchParams: {
-        from: string,
-        to: string,
-        distance: number,
-        duration: number,
-        price: string,
-        seats: number,
-    }
-}) => {
+const RideConfirmForm = ({user, searchParams}: IRideConfirm) => {
 
     const route = useRouter()
 
@@ -51,23 +43,20 @@ const TripConfirmForm = ({user, searchParams}: {
         description: "",
         from: searchParams.from,
         to: searchParams.to,
-        distance: parseFloat((searchParams.distance / 1000).toFixed(1)),
-        duration: parseInt(searchParams.duration.toString()),
-        seats: parseInt(searchParams.seats.toString()),
+        distance: parseFloat(String(searchParams.distance)),
+        duration: parseInt(String(searchParams.duration)),
+        seats: parseInt(String(searchParams.seats)),
         price: newPrice,
         startDate: dateToLeave,
         startTime: timeToLeave,
         driver: {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            image: user.image
+            id: user.id
         },
         stops: stopPlaceField[0].name === "" ? [] : stopPlaceField,
     }
 
 
-    const addTrip = async () => {
+    const addRide = async () => {
         const res = await fetch('/api/rides', {
             method: 'POST',
             body: JSON.stringify(tripObject),
@@ -76,7 +65,10 @@ const TripConfirmForm = ({user, searchParams}: {
             },
             redirect: 'follow'
         })
-        route.push('/carpool')
+
+        const data = await res.json()
+        console.log(data)
+        // route.push('/carpool')
     }
 
     return (
@@ -116,7 +108,7 @@ const TripConfirmForm = ({user, searchParams}: {
                     <dl className=" space-y-6 text-sm font-medium text-gray-500 alk-sanet">
                         <div className="flex justify-between items-center">
                             <dt>მანძილი</dt>
-                            <dd className="text-gray-900">{(searchParams.distance / 1000).toFixed(1) + " კმ"}</dd>
+                            <dd className="text-gray-900">{searchParams.distance + " კმ"}</dd>
                         </div>
                         <div className="flex justify-between items-center">
                             <dt className="flex items-center">
@@ -136,7 +128,7 @@ const TripConfirmForm = ({user, searchParams}: {
                         variant="secondary"
                         className="mt-6 w-full"
                         disabled={disable}
-                        onClick={addTrip}
+                        onClick={addRide}
                     >
                         მგზავრობის დამატება
                     </Button>
@@ -172,7 +164,7 @@ const TripConfirmForm = ({user, searchParams}: {
                                 id="price"
                                 className="block w-full h-12 lg:h-16 rounded-md focus:shadow-md outline-none py-1.5 px-14 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 "
                                 placeholder={"ფასი"}
-                                defaultValue={searchParams.price ? searchParams.price : 0}
+                                defaultValue={searchParams.price ? parseFloat(searchParams.price).toFixed(2) : 0}
                                 onChange={(e) => setNewPrice(parseFloat(e.target.value))}
                             />
                             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -250,4 +242,4 @@ const TripConfirmForm = ({user, searchParams}: {
     );
 };
 
-export default TripConfirmForm;
+export default RideConfirmForm;

@@ -1,25 +1,25 @@
 "use client"
 import {useEffect, useState} from 'react';
 import {Clock, Route} from "lucide-react";
-import PassangerSelector from "@/components/shared/PassangerSelector";
-import {IAddTripForm} from "@/interfaces/IAddTripForm";
+import SeatSelector from "@/components/rides/buttons/SeatSelector";
+import {IRideAddForm} from "@/interfaces/IRideAddForm";
 import Link from "next/link";
-import AddTripInput from "@/components/shared/trip/AddTripInput";
-import TripFormClear from "@/components/shared/buttons/TripFormClear";
+import RideAddInput from "@/components/rides/inputs/RideAddInput";
+import AddRideFormClear from "@/components/rides/buttons/AddRideFormClear";
+import {convertSeconds} from "@/lib/tools/convertSeconds";
 
-const AddTripForm = ({
-                         origin,
-                         destination,
+const RideAddForm = ({
+                         from,
+                         to,
                          calculateDistance,
                          distance,
                          duration,
                          setPrice,
-                         setPassengers,
-                         passengers,
+                         setSeats,
+                         seats,
                          price,
-                         directionResponse,
-                         google
-                     }: IAddTripForm
+                         directionResponse
+                     }: IRideAddForm
 ) => {
 
     const [disable, setDisable] = useState(true)
@@ -27,59 +27,56 @@ const AddTripForm = ({
 
 
     useEffect(() => {
-        if (directionResponse && directionResponse?.status === "OK") {
+        if (directionResponse && from?.current?.value && to?.current?.value) {
             setTripQuery(
                 {
-                    from: origin?.current?.value,
-                    to: destination?.current?.value,
+                    from: from?.current?.value,
+                    to: to?.current?.value,
                     distance: distance,
                     duration: duration,
                     price: price,
-                    seats: passengers,
-                    google: google
+                    seats: seats
                 }
             )
         }
-    }, [destination, directionResponse, distance, duration, origin, passengers, price])
-
-    // @ts-ignore
+    }, [to, directionResponse, distance, duration, from, seats, price])
     return (
         <>
             <dl className="flex flex-col gap-4 relative">
 
-                <AddTripInput
-                    inputRef={origin}
-                    origin={origin}
-                    destination={destination}
+                <RideAddInput
+                    inputRef={from}
+                    from={from}
+                    to={to}
                     placeholder="საიდან"
                     name="origin"
                     setDisable={setDisable}
                     calculateDistance={calculateDistance}
-                    setPassengers={setPassengers}
+                    setSeats={setSeats}
                     distance={distance}
                     duration={duration}
                 />
 
 
-                <TripFormClear origin={origin} destination={destination} disable={disable} setDisable={setDisable}
-                               setPrice={setPrice}/>
+                <AddRideFormClear origin={from} destination={to} disable={disable} setDisable={setDisable}
+                                  setPrice={setPrice} distance={distance} duration={duration} setSeats={setSeats}/>
 
-                <AddTripInput
-                    inputRef={destination}
-                    origin={origin}
-                    destination={destination}
+                <RideAddInput
+                    inputRef={to}
+                    from={from}
+                    to={to}
                     placeholder="სად"
                     name="destination"
                     setDisable={setDisable}
                     calculateDistance={calculateDistance}
-                    setPassengers={setPassengers}
+                    setSeats={setSeats}
                     distance={distance}
                     duration={duration}
                 />
 
 
                 <div className=" w-full rounded-md flex flex-col lg:flex-row gap-4">
-                    <PassangerSelector setPassengers={setPassengers} passengers={passengers} disabled={disable}/>
+                    <SeatSelector setSeats={setSeats} seats={seats} disabled={disable}/>
                     {!disable && <Link
                         href={{
                             pathname: "/ride/add/confirm",
@@ -99,15 +96,12 @@ const AddTripForm = ({
                 <span className="flex items-center gap-2">
                     <Route width={18} height={18}/>
 
-                    მანძილი: {!distance ? "0 კმ" : `${(distance / 1000).toFixed(1)} კმ`}
+                    მანძილი: {!distance ? "0 კმ" : `${distance} კმ`}
                 </span>
                 <span className="flex items-center gap-2">
                     <Clock width={18} height={18}/>
 
-                    დრო: {!duration
-                    ? "0 სთ 0 წთ"
-                    : duration < 3600 ? `${Math.floor(duration / 60)} წთ` : `${Math.floor(duration / 3600)} სთ ${Math.floor(duration / 60 % 60)} წთ`
-                }
+                    დრო: {!duration ? "0:00" : convertSeconds(duration)} სთ
                 </span>
 
             </div>
@@ -115,4 +109,4 @@ const AddTripForm = ({
     );
 };
 
-export default AddTripForm;
+export default RideAddForm;
