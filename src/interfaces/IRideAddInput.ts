@@ -10,5 +10,5 @@ export interface IRideAddInput {
     setSeats: Dispatch<SetStateAction<number>>,
     distance: number,
     duration: number,
-    calculateDistance: () => void
+    // calculateDistance: () => void
 }

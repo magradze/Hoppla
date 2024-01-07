@@ -5,21 +5,25 @@ import {Button} from "@/components/ui/button";
 
 const AddRideFormClear = (
     {
-        origin,
-        destination,
+        from,
+        to,
         disable,
         setDisable,
         setPrice,
-        setSeats
+        setSeats,
+        setDistanceQuery,
+        setDurationQuery
     }: IRideFormClear
 ) => {
 
     const clearInputs = () => {
-        origin.current.value = ""
-        destination.current.value = ""
+        from.current.value = ""
+        to.current.value = ""
         setDisable(true)
         setPrice(0)
         setSeats(1)
+        setDistanceQuery(0)
+        setDurationQuery(0)
     }
 
     return (

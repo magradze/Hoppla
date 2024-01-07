@@ -3,7 +3,7 @@ import {withAuth} from "next-auth/middleware"
 export default withAuth(
     // `withAuth` augments your `Request` with the user's token.
     function middleware(req) {
-        console.log("user token", req.nextauth.token)
+        // console.log("user token", req.nextauth.token)
     },
     {
         callbacks: {
@@ -20,5 +20,5 @@ export const config = {
     api: {
         bodyParser: false,
     },
-    matcher: ['/ride/add']
+    matcher: []
 }

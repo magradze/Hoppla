@@ -7,6 +7,7 @@ import Link from "next/link";
 import RideAddInput from "@/components/rides/inputs/RideAddInput";
 import AddRideFormClear from "@/components/rides/buttons/AddRideFormClear";
 import {convertSeconds} from "@/lib/tools/convertSeconds";
+import {Button} from "@/components/ui/button";
 
 const RideAddForm = ({
                          from,
@@ -24,6 +25,8 @@ const RideAddForm = ({
 
     const [disable, setDisable] = useState(true)
     const [tripQuery, setTripQuery] = useState({})
+    const [distanceQuery, setDistanceQuery] = useState<number>(0)
+    const [durationQuery, setDurationQuery] = useState<number>(0)
 
 
     useEffect(() => {
@@ -38,11 +41,31 @@ const RideAddForm = ({
                     seats: seats
                 }
             )
+            setDistanceQuery(distance)
+            setDurationQuery(duration)
         }
     }, [to, directionResponse, distance, duration, from, seats, price])
+
+    console.log(disable)
+
     return (
         <>
             <dl className="flex flex-col gap-4 relative">
+
+                <div
+                    className="flex lg:hidden items-center gap-6 alk-sanet w-full text-gray-600 text-xs lg:text-base">
+                        <span className="flex items-center gap-2">
+                            <Route width={18} height={18}/>
+
+                            მანძილი: {!distanceQuery ? "0 კმ" : `${distanceQuery} კმ`}
+                        </span>
+                    <span className="flex items-center gap-2">
+                            <Clock width={18} height={18}/>
+
+                            დრო: {!durationQuery ? "0:00" : convertSeconds(durationQuery)} სთ
+                        </span>
+
+                </div>
 
                 <RideAddInput
                     inputRef={from}
@@ -51,15 +74,16 @@ const RideAddForm = ({
                     placeholder="საიდან"
                     name="origin"
                     setDisable={setDisable}
-                    calculateDistance={calculateDistance}
                     setSeats={setSeats}
                     distance={distance}
                     duration={duration}
                 />
 
 
-                <AddRideFormClear origin={from} destination={to} disable={disable} setDisable={setDisable}
-                                  setPrice={setPrice} distance={distance} duration={duration} setSeats={setSeats}/>
+                <AddRideFormClear from={from} to={to} disable={disable} setDisable={setDisable}
+                                  setPrice={setPrice} setDistanceQuery={setDistanceQuery}
+                                  setDurationQuery={setDurationQuery}
+                                  setSeats={setSeats}/>
 
                 <RideAddInput
                     inputRef={to}
@@ -68,7 +92,6 @@ const RideAddForm = ({
                     placeholder="სად"
                     name="destination"
                     setDisable={setDisable}
-                    calculateDistance={calculateDistance}
                     setSeats={setSeats}
                     distance={distance}
                     duration={duration}
@@ -76,8 +99,19 @@ const RideAddForm = ({
 
 
                 <div className=" w-full rounded-md flex flex-col lg:flex-row gap-4">
-                    <SeatSelector setSeats={setSeats} seats={seats} disabled={disable}/>
-                    {!disable && <Link
+                    {distanceQuery !== 0 && <SeatSelector setSeats={setSeats} seats={seats} disabled={disable}/>}
+
+                    {!distanceQuery && <Button
+                        className={`bg-primary hover:bg-primaryDark h-12 lg:h-16 rounded-md border-0 px-24 py-0.5 text-white alk-sanet flex justify-center items-center`}
+                        disabled={disable}
+                        onClick={() => {
+                            if (!from?.current?.value || !to?.current?.value) return
+                            to?.current?.value && calculateDistance()
+                        }}>
+                        მარშრუტის გამოთვლა
+                    </Button>}
+
+                    {distanceQuery !== 0 && <Link
                         href={{
                             pathname: "/ride/add/confirm",
                             query: tripQuery
@@ -92,7 +126,7 @@ const RideAddForm = ({
 
             </dl>
 
-            <div className="mt-6 flex items-center gap-6 alk-sanet w-full text-gray-600 text-xs lg:text-base">
+            <div className="hidden mt-6 lg:flex items-center gap-6 alk-sanet w-full text-gray-600 text-xs lg:text-base">
                 <span className="flex items-center gap-2">
                     <Route width={18} height={18}/>
 

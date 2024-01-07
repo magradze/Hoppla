@@ -1,12 +1,12 @@
 import React from "react";
 
 export interface IRideFormClear {
-    origin: React.MutableRefObject<HTMLInputElement>
-    destination: React.MutableRefObject<HTMLInputElement>
+    from: React.MutableRefObject<HTMLInputElement>
+    to: React.MutableRefObject<HTMLInputElement>
     disable: boolean
     setDisable: React.Dispatch<React.SetStateAction<boolean>>
     setPrice: React.Dispatch<React.SetStateAction<number>>
-    distance: number
-    duration: number
+    setDistanceQuery: React.Dispatch<React.SetStateAction<number>>
+    setDurationQuery: React.Dispatch<React.SetStateAction<number>>
     setSeats: React.Dispatch<React.SetStateAction<number>>
 }

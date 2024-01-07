@@ -12,7 +12,6 @@ const RideAddInput = ({
                           setSeats,
                           distance,
                           duration,
-                          calculateDistance
                       }: IRideAddInput) => {
 
     const handleChange = (event: any) => {
@@ -23,9 +22,10 @@ const RideAddInput = ({
             distance = 0
             duration = 0
         } else {
-            if (!from?.current?.value || !to?.current?.value) return
+            // if (!from?.current?.value || !to?.current?.value) return
 
-            to?.current?.value && calculateDistance()
+            // to?.current?.value && calculateDistance()
+
             setDisable(false)
         }
     };

@@ -1,6 +1,6 @@
 "use server"
 import prisma from "@/lib/prisma";
-import {IRide} from "@/interfaces/IRide";
+import {redirect} from 'next/navigation'
 
 // find all rides
 export const getRides = async () => {
@@ -106,40 +106,15 @@ export const getRideByDriverId = async (id: string) => {
 }
 
 // create ride
-export const createRide = async (ride: IRide): Promise<any> => {
-    try {
-        const res = await prisma.ride.create({
-            data: {
-                name: ride.name,
-                description: ride.description,
-                from: ride.from,
-                to: ride.to,
-                distance: ride.distance,
-                duration: ride.duration,
-                seats: ride.seats,
-                price: ride.price,
-                startDate: ride.startDate,
-                startTime: ride.startTime,
-                driver: {
-                    connect: {
-                        id: ride.driver.id
-                    }
-                },
-                stops: {
-                    create: ride.stops
-                },
-                createdAt: new Date(),
-            },
-            include: {
-                driver: true,
-                stops: true
-            }
-        });
+export const addRide = async (data: any) => {
+    await fetch(`${process.env.API_URL}/rides`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        redirect: 'follow'
+    })
 
-        console.log(res);
-
-        return res;
-    } catch (error) {
-        return null;
-    }
+    redirect('/carpool')
 }

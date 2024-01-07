@@ -1,7 +1,7 @@
 import {User} from "@prisma/client";
 
 export interface IRideConfirm {
-    user: User,
+    user: User | null,
     searchParams: {
         from: string,
         to: string,
