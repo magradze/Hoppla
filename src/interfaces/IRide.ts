@@ -12,10 +12,9 @@ export interface IRide {
     startDate: string;
     startTime: string;
     driver: {
-        id: string;
-        name: string | null;
         email: string | null;
         image: string | StaticImport;
+        name: string | null;
         phone: string | null;
         address: string | null;
         birthday: Date | null;
