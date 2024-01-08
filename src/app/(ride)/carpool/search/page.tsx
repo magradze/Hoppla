@@ -5,6 +5,7 @@ import {getRideByDate} from "@/lib/data/rides";
 import RideCard from "@/components/rides/RidesCard";
 import RidesNotFound from "@/components/rides/RidesNotFound";
 import {Filter} from "lucide-react";
+import FilterForm from "@/components/rides/forms/FilterForm";
 
 const Search = async ({searchParams}: ISearchProps) => {
 
@@ -45,6 +46,9 @@ const Search = async ({searchParams}: ISearchProps) => {
                                     <div className="flex flex-col gap-2 alk-sanet">
                                         <h2 className="font-bold text-xl text-secondary">მგზავრობა</h2>
                                         <p className="text-sm text-gray-500">ხელმისაწვდომია {rides?.length} ავტომობილი</p>
+                                    </div>
+                                    <div className="flex flex-col gap-2 alk-sanet">
+                                        <FilterForm/>
                                     </div>
                                 </div>
                             </div>
