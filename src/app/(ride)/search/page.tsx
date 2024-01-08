@@ -1,10 +1,10 @@
-import React, {Suspense} from 'react';
+import React, {FC, Suspense} from 'react';
 import SearchBox from "@/components/partial/SearchBox";
 import {ISearchProps} from "@/interfaces/ISearchProps";
 
-const Search = ({searchParams}: ISearchProps) => {
+const page: FC<ISearchProps> = ({searchParams}: ISearchProps) => {
     return (
-        <div className="page-wrapper">
+        <div className="page-wrapper pt-8">
             <SearchBox className="" type=""/>
 
             <Suspense fallback={<div>Loading...</div>}>
@@ -51,4 +51,4 @@ const Search = ({searchParams}: ISearchProps) => {
     );
 };
 
-export default Search;
+export default page;

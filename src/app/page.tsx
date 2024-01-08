@@ -4,7 +4,7 @@ import {getDictionary} from "@/dictionaries";
 export default async function Home() {
     const dict = await getDictionary('ka')
     return (
-        <main className="flex flex-col">
+        <main className="flex flex-col pt-16">
             <Hero
                 // dict={dict}
             />

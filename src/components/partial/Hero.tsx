@@ -27,8 +27,8 @@ const Hero = (
                         <h1 className="text-2xl font-bold tracking-tight text-white sm:text-5xl alk-sanet">
                             გაემგზავრე HOPPLA-ს დახმარებით სასურველ ადგილას
                         </h1>
-                        <div className="-mt-28 flex flex-col gap-x-6">
-                            <SearchBox className="translate-y-32 lg:translate-y-8" type="carpool"/>
+                        <div className="-mt-28 translate-y-32 lg:translate-y-8">
+                            <SearchBox type="carpool"/>
                         </div>
                     </div>
                 </div>

@@ -15,7 +15,7 @@ import {Calendar} from "@/components/ui/calendar";
 import NumberSelector from "@/components/ui/number-selector";
 import {useRouter, useSearchParams} from "next/navigation";
 
-const SearchBox = ({className, type}: { className: string, type: string }) => {
+const SearchBox = ({className, type}: { className?: string, type: string }) => {
 
     const searchParams = useSearchParams();
 
