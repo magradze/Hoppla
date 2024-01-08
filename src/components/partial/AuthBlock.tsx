@@ -1,21 +1,21 @@
 "use client"
 
 import * as React from "react"
-import {signIn, signOut} from "next-auth/react";
+import {signOut} from "next-auth/react";
 import {Menu, Transition} from "@headlessui/react";
 import {Fragment} from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {BellIcon} from "@heroicons/react/24/outline";
 import avatarImage from '@/assets/avatar.png'
 import {useCurrentUser, useCurrentRole} from "@/hooks";
-import {ShieldCheck} from "lucide-react";
+import {CheckIcon} from "lucide-react";
 import {Button} from "@/components/ui/button";
+import {Button as NextUIButton} from "@nextui-org/react";
 import LoginButton from "@/components/auth/LoginButton";
-
-function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ')
-}
+import {Badge} from "@nextui-org/react";
+import {Avatar} from "@nextui-org/avatar";
+import {cn} from "@/lib/utils";
+import {User} from "@nextui-org/react";
 
 const userNavigation = [
     {name: 'პირადი კაბინეტი', href: '#'},
@@ -40,33 +40,43 @@ const AuthBlock = () => {
                         </LoginButton>
                     )}
                     {user && (
-                        <>
-                            <button
-                                type="button"
-                                className="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            >
-                                <span className="absolute -inset-1.5"/>
-                                <span className="sr-only">View notifications</span>
-                                <BellIcon className="h-6 w-6" aria-hidden="true"/>
-                            </button>
-                            <Menu as="div" className="relative ml-3">
+                        <div className="flex items-center">
+
+                            <Badge content="99+" shape="circle" color="danger" size="sm">
+                                <NextUIButton
+                                    radius="sm"
+                                    isIconOnly
+                                    aria-label="more than 99 notifications"
+                                    variant="light"
+                                >
+                                    <BellIcon width={24}/>
+                                </NextUIButton>
+                            </Badge>
+                            <Menu as="div" className="relative ml-6">
                                 <div>
                                     <Menu.Button
-                                        className="relative flex rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                        className="relative flex rounded-md bg-white text-sm">
                                         <span className="absolute -inset-1.5"/>
                                         <span className="sr-only">Open user menu</span>
-                                        <Image
-                                            className="h-8 w-8 rounded-md"
-                                            src={user.image || avatarImage}
-                                            alt={user.name || "User"}
-                                            width={32}
-                                            height={32}
-                                        />
-                                        {role === "admin" && (
-                                            <ShieldCheck
-                                                className="absolute bottom-0 right-0 block h-3 w-3 rounded-full ring-2 ring-white text-green-400 bg-white"/>
 
-                                        )}
+                                        <Badge
+                                            isOneChar
+                                            content={<CheckIcon size={16}/>}
+                                            size="sm"
+                                            color="success"
+                                            placement="bottom-right"
+                                            variant="solid"
+                                            shape="circle"
+                                        >
+                                            <Avatar
+                                                isBordered={role === "USER" && true}
+                                                color="success"
+                                                radius="sm"
+                                                // @ts-ignore
+                                                src={user?.image || avatarImage}
+                                                size="sm"
+                                            />
+                                        </Badge>
 
                                     </Menu.Button>
                                 </div>
@@ -86,7 +96,7 @@ const AuthBlock = () => {
                                                 {({active}: { active: boolean }) => (
                                                     <Link
                                                         href={item.href}
-                                                        className={classNames(
+                                                        className={cn(
                                                             active ? 'bg-gray-100' : '',
                                                             'block px-4 py-2 text-sm text-gray-700'
                                                         )}
@@ -100,7 +110,7 @@ const AuthBlock = () => {
                                             {({active}: { active: boolean }) => (
                                                 <button
                                                     onClick={() => signOut()}
-                                                    className={classNames(
+                                                    className={cn(
                                                         active ? 'bg-gray-100' : '',
                                                         'block px-4 py-2 text-sm text-gray-700 w-full text-left'
                                                     )}
@@ -112,7 +122,7 @@ const AuthBlock = () => {
                                     </Menu.Items>
                                 </Transition>
                             </Menu>
-                        </>
+                        </div>
                     )}
                 </div>
             </div>
