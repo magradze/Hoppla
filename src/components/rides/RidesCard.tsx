@@ -6,6 +6,7 @@ import CarSeat from "@/components/shared/icons/CarSeat";
 import rideCardBg from "@/assets/ride-card-bg.svg";
 import {convertSeconds} from "@/lib/tools/convertSeconds";
 import {convertTimeToSeconds} from "@/lib/tools/convertTimeToSeconds";
+import {Popover, PopoverContent, PopoverTrigger} from "@nextui-org/react";
 
 const RideCard = ({...ride}: IRide) => {
 
@@ -43,9 +44,29 @@ const RideCard = ({...ride}: IRide) => {
                         <div
                             className="flex items-center gap-2 text-gray-300 group-hover:text-primary transform transition-all duration-300">
                             <Waypoints/>
-                            <h3 className="text-sm alk-sanet">
-                                {ride.stops.length} <small> გაჩერება</small>
-                            </h3>
+                            <Popover showArrow placement="right" backdrop="opaque">
+                                <PopoverTrigger>
+                                    <h3 className="text-sm alk-sanet">
+                                        {ride.stops.length} <small> გაჩერება</small>
+                                    </h3>
+                                </PopoverTrigger>
+                                {ride.stops.length > 0 && (
+                                    <PopoverContent className="p-1 rounded-md">
+                                        <div className="flex flex-col space-y-2">
+                                            {
+                                                ride.stops.map((stop, index) => (
+                                                    <div key={index} className="flex flex-row items-center gap-2 p-4">
+                                                        <SquareDot className="text-primary"/>
+                                                        <h3 className="text-sm alk-sanet">
+                                                            {stop.name}
+                                                        </h3>
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                    </PopoverContent>
+                                )}
+                            </Popover>
                         </div>
                         <div className="flex items-center gap-2">
                             <SquareDot className="text-primary"/>
