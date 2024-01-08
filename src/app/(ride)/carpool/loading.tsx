@@ -9,7 +9,7 @@ const Loading = async () => {
     const rides = await getRides();
     return (
         <div className="relative isolate z-10">
-            
+
             <div className="relative z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6">
                     <div className="py-10 sm:py-16 lg:py-20">

@@ -3,9 +3,9 @@ import SearchBox from "@/components/partial/SearchBox";
 
 const Minibus = () => {
     return (
-        <div className="page-wrapper relative isolate z-10">
-            <SearchBox className="page-wrapper mt-8" type="minibus"/>
-            <div className="max-w-full py-10 sm:py-8">
+        <div className="relative isolate z-10">
+            <SearchBox className="page-wrapper my-8" type="minibus"/>
+            <div className="page-wrapper">
                 <h2 className="text-base font-semibold leading-6 text-gray-900 alk-sanet">მინიბუსები</h2>
                 <div className="lg:grid lg:grid-cols-12 lg:gap-x-16">
                     <div

@@ -66,13 +66,10 @@ const AddRide = () => {
     }
 
     return (
-        <div className="relative h-screen lg:h-auto">
+        <div className="relative h-full pt-8">
 
-            <div className="page-wrapper  p-4 lg:p-8">
-
-            </div>
             <div
-                className="px-0 lg:px-8 page-wrapper absolute bottom-0 lg:relative w-full  grid grid-cols-1 gap-4 lg:grid-cols-2 py-0 mt-10 z-20">
+                className="px-0 lg:px-8 page-wrapper absolute bottom-0 lg:relative w-full  grid grid-cols-1 gap-4 lg:grid-cols-2 py-0 z-20">
                 <div className="flex flex-col justify-center bg-white p-4 lg:p-8 rounded-t-md lg:rounded-md">
                     <h2 className="text-sm lg:text-lg font-semibold text-gray-900 mb-6 alk-sanet">დაზოგეთ <span
                         className="text-primary font-semibold text-xl">{price.toFixed(2)}</span> ლარამდე
@@ -85,7 +82,7 @@ const AddRide = () => {
                 </div>
             </div>
             <div
-                className="absolute h-3/5 sm:h-4/5 lg:h-screen inset-0 -z-10 w-full object-cover bg-blend-screen">
+                className="absolute h-3/5 sm:h-4/5 lg:h-full inset-0 -z-10 w-full object-cover bg-blend-screen">
                 <Map directionResponse={directionResponse}/>
             </div>
         </div>

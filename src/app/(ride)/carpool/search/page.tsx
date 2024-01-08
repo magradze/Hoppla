@@ -11,7 +11,7 @@ const Search = async ({searchParams}: ISearchProps) => {
     const rides = await getRideByDate(searchParams.date);
 
     return (
-        <div className="page-wrapper mt-8">
+        <div className="page-wrapper pt-8">
             <SearchBox className="" type="carpool"/>
 
             <Suspense fallback={<div>Loading...</div>}>
