@@ -7,8 +7,7 @@ import Map from "@/components/shared/trip/Map";
 import {useJsApiLoader} from '@react-google-maps/api';
 import {meterToKm} from "@/lib/tools/meterToKm";
 import {calculatePrice} from "@/lib/tools/calculatePrice";
-import {RideAddMobileForm} from "@/components/rides/forms/RideAddMobileForm";
-import {RideAddDesktopForm} from "@/components/rides/forms/RideAddDesktopForm";
+import * as React from "react";
 
 const AddRide = () => {
     const [directionResponse, setDirectionResponse] = useState<google.maps.DirectionsResult>(
@@ -67,31 +66,26 @@ const AddRide = () => {
     }
 
     return (
-        <div className="relative h-screen">
+        <div className="relative h-screen lg:h-auto">
 
             <div className="page-wrapper  p-4 lg:p-8">
 
             </div>
-            <div className="page-wrapper grid grid-cols-1 gap-4 lg:grid-cols-2 py-0 z-20">
-                <div className="hidden lg:flex flex-col justify-center bg-white p-4 lg:p-8 rounded-md">
+            <div
+                className="px-0 lg:px-8 page-wrapper absolute bottom-0 lg:relative w-full  grid grid-cols-1 gap-4 lg:grid-cols-2 py-0 mt-10 z-20">
+                <div className="flex flex-col justify-center bg-white p-4 lg:p-8 rounded-t-md lg:rounded-md">
                     <h2 className="text-sm lg:text-lg font-semibold text-gray-900 mb-6 alk-sanet">დაზოგეთ <span
                         className="text-primary font-semibold text-xl">{price.toFixed(2)}</span> ლარამდე
                         თქვენი
                         პირველი მგზავრობისას.</h2>
-                    <RideAddDesktopForm from={originRef} to={destinationRef}
-                                        calculateDistance={calculateDistance} distance={distance} duration={duration}
-                                        setPrice={setPrice} setSeats={setSeats} seats={seats}
-                                        price={price} directionResponse={directionResponse}/>
-                </div>
-                <div className="lg:hidden">
-                    <RideAddMobileForm from={originRef} to={destinationRef}
-                                       calculateDistance={calculateDistance} distance={distance} duration={duration}
-                                       setPrice={setPrice} setSeats={setSeats} seats={seats}
-                                       price={price} directionResponse={directionResponse}/>
+                    <RideAddForm from={originRef} to={destinationRef}
+                                 calculateDistance={calculateDistance} distance={distance} duration={duration}
+                                 setPrice={setPrice} setSeats={setSeats} seats={seats}
+                                 price={price} directionResponse={directionResponse}/>
                 </div>
             </div>
             <div
-                className="absolute h-4/5 lg:h-screen inset-0  -translate-y-16 -z-10 w-full object-cover bg-blend-screen">
+                className="absolute h-screen inset-0 -z-10 w-full object-cover bg-blend-screen">
                 <Map directionResponse={directionResponse}/>
             </div>
         </div>
