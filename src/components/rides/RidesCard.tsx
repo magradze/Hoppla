@@ -7,9 +7,7 @@ import rideCardBg from "@/assets/ride-card-bg.svg";
 import {convertSeconds} from "@/lib/tools/convertSeconds";
 import {convertTimeToSeconds} from "@/lib/tools/convertTimeToSeconds";
 
-const RideCard = ({
-                      ...ride
-                  }: IRide) => {
+const RideCard = ({...ride}: IRide) => {
 
     const arrivalTime = convertTimeToSeconds(ride.startTime) + ride.duration
 
@@ -26,24 +24,24 @@ const RideCard = ({
                 <div className="flex flex-row space-x-6 p-4">
                     <div className="flex flex-col justify-between space-y-4">
                         <div className="flex flex-col">
-                        <span className="text-lg lg:text-xl font-semibold alk-sanet">
+                        <span className="text-lg lg:text-lg font-semibold alk-sanet text-primary">
                             {ride.startTime}
                         </span>
                             <small className="text-gray-400 text-sm lg:text-md">
                                 {rideDuration}
                             </small>
                         </div>
-                        <div className="text-lg lg:text-xl font-semibold alk-sanet">{arrivalHour}</div>
+                        <div className="text-lg lg:text-lg font-semibold alk-sanet text-primary">{arrivalHour}</div>
                     </div>
                     <div className="flex flex-col justify-between">
                         <div className="flex items-center gap-2">
                             <SquareDot className="text-primary"/>
-                            <h3 className="text-md lg:text-xl font-bold alk-sanet">
+                            <h3 className="text-md lg:text-md font-normal alk-sanet text-gray-600">
                                 {ride.from}
                             </h3>
                         </div>
                         <div
-                            className="flex items-center gap-2 text-gray-400 group-hover:text-red-600 transform transition-all duration-300">
+                            className="flex items-center gap-2 text-gray-300 group-hover:text-primary transform transition-all duration-300">
                             <Waypoints/>
                             <h3 className="text-sm alk-sanet">
                                 {ride.stops.length} <small> გაჩერება</small>
@@ -51,7 +49,7 @@ const RideCard = ({
                         </div>
                         <div className="flex items-center gap-2">
                             <SquareDot className="text-primary"/>
-                            <h3 className="text-md lg:text-xl font-bold alk-sanet">
+                            <h3 className="text-md lg:text-md font-normal alk-sanet text-gray-600">
                                 {ride.to}
                             </h3>
                         </div>
@@ -59,7 +57,7 @@ const RideCard = ({
                 </div>
                 <div className="p-4">
                     <span
-                        className="bg-red-700/10 text-primary text-md lg:text-xl font-bold p-2 rounded-md">{(ride.price / ride.seats).toFixed(2)} ₾</span>
+                        className="bg-red-700/10 text-primary text-md lg:text-lg font-bold p-2 rounded-md">{(ride.price / ride.seats).toFixed(2)} ₾</span>
                 </div>
             </div>
             <div className="flex flex-row justify-between bg-white border-t border-gray-100 p-4 items-center z-10">
