@@ -15,10 +15,9 @@ import LoginButton from "@/components/auth/LoginButton";
 import {Badge} from "@nextui-org/react";
 import {Avatar} from "@nextui-org/avatar";
 import {cn} from "@/lib/utils";
-import {User} from "@nextui-org/react";
 
 const userNavigation = [
-    {name: 'პირადი კაბინეტი', href: '#'},
+    {name: 'პირადი კაბინეტი', href: '/profile'},
     {name: 'პარამეტრები', href: '#'},
 ]
 
