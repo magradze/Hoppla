@@ -85,7 +85,7 @@ const AddRide = () => {
                 </div>
             </div>
             <div
-                className="absolute h-screen inset-0 -z-10 w-full object-cover bg-blend-screen">
+                className="absolute h-3/5 sm:h-4/5 lg:h-screen inset-0 -z-10 w-full object-cover bg-blend-screen">
                 <Map directionResponse={directionResponse}/>
             </div>
         </div>

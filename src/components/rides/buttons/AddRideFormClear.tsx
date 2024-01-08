@@ -16,6 +16,7 @@ const AddRideFormClear = (
     }: IRideFormClear
 ) => {
 
+    console.log("from.current.value", from?.current?.value)
     const clearInputs = () => {
         from.current.value = ""
         to.current.value = ""
@@ -29,7 +30,7 @@ const AddRideFormClear = (
     return (
         <Button
             variant="rideAddFormClear"
-            className={` ${disable ? "opacity-50 cursor-not-allowed invisible" : "hover:bg-red-600 visible"}`}
+            className={`py-6 ${disable ? "opacity-50 cursor-not-allowed invisible" : "hover:bg-red-600 visible"}`}
             onClick={clearInputs}
             disabled={disable}
         >

@@ -45,13 +45,10 @@ const RideAddForm = ({
             setDurationQuery(duration)
         }
     }, [to, directionResponse, distance, duration, from, seats, price])
-
-    console.log(disable)
-
+    
     return (
         <>
             <dl className="flex flex-col gap-4 relative">
-
                 <div
                     className="flex lg:hidden items-center gap-6 alk-sanet w-full text-gray-600 text-xs lg:text-base">
                         <span className="flex items-center gap-2">
@@ -67,35 +64,37 @@ const RideAddForm = ({
 
                 </div>
 
-                <RideAddInput
-                    inputRef={from}
-                    from={from}
-                    to={to}
-                    placeholder="საიდან"
-                    name="origin"
-                    setDisable={setDisable}
-                    setSeats={setSeats}
-                    distance={distance}
-                    duration={duration}
-                />
+                <div className="flex flex-col gap-4 relative">
+                    <RideAddInput
+                        inputRef={from}
+                        from={from}
+                        to={to}
+                        placeholder="საიდან"
+                        name="origin"
+                        setDisable={setDisable}
+                        setSeats={setSeats}
+                        distance={distance}
+                        duration={duration}
+                    />
 
 
-                <AddRideFormClear from={from} to={to} disable={disable} setDisable={setDisable}
-                                  setPrice={setPrice} setDistanceQuery={setDistanceQuery}
-                                  setDurationQuery={setDurationQuery}
-                                  setSeats={setSeats}/>
+                    <AddRideFormClear from={from} to={to} disable={disable} setDisable={setDisable}
+                                      setPrice={setPrice} setDistanceQuery={setDistanceQuery}
+                                      setDurationQuery={setDurationQuery}
+                                      setSeats={setSeats}/>
 
-                <RideAddInput
-                    inputRef={to}
-                    from={from}
-                    to={to}
-                    placeholder="სად"
-                    name="destination"
-                    setDisable={setDisable}
-                    setSeats={setSeats}
-                    distance={distance}
-                    duration={duration}
-                />
+                    <RideAddInput
+                        inputRef={to}
+                        from={from}
+                        to={to}
+                        placeholder="სად"
+                        name="destination"
+                        setDisable={setDisable}
+                        setSeats={setSeats}
+                        distance={distance}
+                        duration={duration}
+                    />
+                </div>
 
 
                 <div className=" w-full rounded-md flex flex-col lg:flex-row gap-4">
@@ -130,12 +129,12 @@ const RideAddForm = ({
                 <span className="flex items-center gap-2">
                     <Route width={18} height={18}/>
 
-                    მანძილი: {!distance ? "0 კმ" : `${distance} კმ`}
+                    მანძილი: {!distanceQuery ? "0 კმ" : `${distanceQuery} კმ`}
                 </span>
                 <span className="flex items-center gap-2">
                     <Clock width={18} height={18}/>
 
-                    დრო: {!duration ? "0:00" : convertSeconds(duration)} სთ
+                    დრო: {!durationQuery ? "0:00" : convertSeconds(durationQuery)} სთ
                 </span>
 
             </div>
