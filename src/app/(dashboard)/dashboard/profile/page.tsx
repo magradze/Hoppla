@@ -2,7 +2,6 @@ import {FC} from "react";
 import {getServerSession} from "next-auth";
 import {getUserByEmail} from "@/lib/data/user";
 import SidebarMenu from "@/components/dashboard/SidebarMenu";
-import EditableInput from "@/components/dashboard/inputs/EditableInput";
 import EditProfileForm from "@/components/dashboard/forms/EditProfileForm";
 
 interface pageProps {

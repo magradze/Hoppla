@@ -6,7 +6,6 @@ import {UserSchema} from "@/lib/validation";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import EditableInput from "@/components/dashboard/inputs/EditableInput";
-import {Button} from "@/components/ui/button";
 import {updateUser} from "@/lib/data/user";
 
 const EditProfileForm = ({user}: { user: any }) => {
