@@ -17,7 +17,7 @@ import {Avatar} from "@nextui-org/avatar";
 import {cn} from "@/lib/utils";
 
 const userNavigation = [
-    {name: 'პირადი კაბინეტი', href: '/profile'},
+    {name: 'პირადი კაბინეტი', href: '/dashboard'},
     {name: 'პარამეტრები', href: '#'},
 ]
 
