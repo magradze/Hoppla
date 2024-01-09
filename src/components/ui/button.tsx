@@ -19,6 +19,8 @@ const buttonVariants = cva(
                     "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary-hover",
                 ghost: "hover:bg-accent hover:text-accent-foreground",
                 link: "text-primary underline-offset-4 hover:underline",
+                success:
+                    "bg-success text-success-foreground shadow-sm hover:bg-success-hover",
                 white: "bg-white text-muted-foreground hover:shadow-sm",
                 google:
                     "bg-[#f2f2f2] text-[#1f1f1f] shadow-sm hover:bg-[#f0f0f0]",
