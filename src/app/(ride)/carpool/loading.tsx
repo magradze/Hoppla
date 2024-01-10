@@ -1,6 +1,4 @@
 import React from 'react';
-import PageHeader from "@/components/shared/PageHeader";
-import carpoolBg from "@/assets/carpoolbg.svg";
 import TripCalendar from "@/components/shared/trip/TripCalendar";
 import {getRides} from "@/lib/data/rides";
 import RidesLoadingCard from "@/components/rides/RidesLoadingCard";

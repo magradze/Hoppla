@@ -10,6 +10,7 @@ import NavLink from "@/components/shared/navigation/NavLink";
 import MobileNavBar from "@/components/partial/MobileNavBar";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
+import {usePathname} from "next/navigation";
 
 const navigation = [
     {name: 'მსუბუქი ავტომობილები', href: '/carpool'},
@@ -18,6 +19,7 @@ const navigation = [
 ]
 
 const Navbar = () => {
+    const pathname = usePathname()
 
     return (
         <>
@@ -55,7 +57,8 @@ const Navbar = () => {
                                     </div>
                                     <div className="hidden md:ml-6 lg:flex md:space-x-8 alk-sanet">
                                         {navigation.map((item, index) => (
-                                            <NavLink key={index} name={item.name} href={item.href}/>
+                                            <NavLink key={index} name={item.name} href={item.href}
+                                                     current={pathname === item.href}/>
                                         ))}
                                     </div>
                                 </div>

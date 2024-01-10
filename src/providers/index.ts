@@ -1,1 +1,2 @@
-export {default as SessionProviderWrapper} from "./SessionProvider";
+export {default as SessionProvider} from "./SessionProvider";
+export {default as NextUIProvider} from "./NextUIProvider";

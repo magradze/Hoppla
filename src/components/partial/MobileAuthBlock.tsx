@@ -5,7 +5,7 @@ import Image from "next/image";
 import * as React from "react";
 
 const userNavigation = [
-    {name: 'Your Profile', href: '#'},
+    {name: 'Your Profile', href: '/profile'},
     {name: 'Settings', href: '#'},
 ]
 

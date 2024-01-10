@@ -15,8 +15,6 @@ const AddRideFormClear = (
         setDurationQuery
     }: IRideFormClear
 ) => {
-
-    console.log("from.current.value", from?.current?.value)
     const clearInputs = () => {
         from.current.value = ""
         to.current.value = ""

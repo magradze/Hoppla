@@ -1,5 +1,4 @@
 import React, {Suspense} from 'react';
-import {useSearchParams} from "next/navigation";
 import SearchBox from "@/components/partial/SearchBox";
 
 interface ISearchProps {

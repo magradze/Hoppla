@@ -31,7 +31,7 @@ const RegisterConfirmForm = () => {
         const res = await confirmRegistration(values)
 
         if (res) {
-            router.push('/profile')
+            router.push('/dashboard')
         }
     };
 
