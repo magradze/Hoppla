@@ -20,5 +20,9 @@ export const config = {
     api: {
         bodyParser: false,
     },
-    matcher: ['/ride/add']
+    matcher: [
+        '/ride/add',
+        '/dashboard',
+        '/dashboard/profile'
+    ]
 }
