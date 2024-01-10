@@ -5,6 +5,7 @@ const UserSchema = z.object({
     email: z.string().optional(),
     phone: z.string().optional(),
     address: z.string().optional(),
+    birthday: z.string().optional(),
 });
 
 export default UserSchema;

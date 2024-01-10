@@ -31,6 +31,9 @@ const EditableInput = React.forwardRef<HTMLInputElement, InputProps>(({label, ty
                         className="flex gap-x-1 items-center disabled:invisible"
                         onClick={() => setEditing(false)}
                         disabled={!editing}
+                        //clear form
+                        // @ts-ignore
+                        onClickCapture={() => props.onChange({target: {value: props.defaultValue}})}
                     >
                         <X size={16}/>
                     </Button>

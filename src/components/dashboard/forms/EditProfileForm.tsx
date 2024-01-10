@@ -27,7 +27,7 @@ const EditProfileForm = ({user}: { user: any }) => {
 
     return (
         <div>
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto mt-6 lg:mt-0">
                 <div className="flex items-center space-x-5">
                     <div className="flex-shrink-0">
                         <div className="relative">

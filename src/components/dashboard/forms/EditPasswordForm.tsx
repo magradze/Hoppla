@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Form, FormControl, FormField, FormItem, FormMessage, FormLabel} from "@/components/ui/form";
 import {useForm} from "react-hook-form";
 import * as z from "zod";
@@ -40,6 +40,20 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
     });
 
     const [editing, setEditing] = React.useState(false);
+    const [passwordsMatch, setPasswordsMatch] = React.useState(false);
+
+
+    useEffect(() => {
+        console.log(form.getValues().newPassword)
+        console.log(form.getValues().confirmPassword)
+        if (form.getValues().newPassword === form.getValues().confirmPassword && form.getValues().newPassword !== "" && form.getValues().confirmPassword !== "") {
+            console.log("პაროლები ემთხვევა")
+            setPasswordsMatch(true)
+        }
+    }, [
+        form.getValues().newPassword,
+        form.getValues().confirmPassword
+    ])
 
     const handleSubmit = async (values: z.infer<typeof ChangePasswordScheme>) => {
         await updateUserPassword(user?.id as string, values)
@@ -55,11 +69,11 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(handleSubmit)}
                               className="text-sm leading-6 flex flex-col md:flex-row items-center mt-6">
-                            <div className="flex flex-col md:flex-row items-center flex-grow gap-4">
+                            <div className="flex flex-col md:flex-row items-center flex-grow gap-4 w-full">
                                 <FormField
                                     name="newPassword"
                                     render={({field}) => (
-                                        <FormItem className="flex-grow">
+                                        <FormItem className="flex-grow w-full">
                                             <div className="h-6"><FormLabel>პაროლი:</FormLabel></div>
                                             <FormControl>
                                                 <PasswordChangeInputGroup
@@ -77,7 +91,7 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
                                     <FormField
                                         name="confirmPassword"
                                         render={({field}) => (
-                                            <FormItem className="flex-grow">
+                                            <FormItem className="flex-grow w-full">
                                                 <div className="h-6"><FormLabel>დაადასტურე პაროლი:</FormLabel></div>
                                                 <FormControl>
                                                     <PasswordChangeInputGroup
@@ -93,7 +107,8 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
                                 )}
                             </div>
 
-                            <div className="pt-6 flex flex-shrink items-center gap-x-2 w-1/3 justify-end">
+                            <div
+                                className="pt-6 flex flex-shrink items-end lg:items-center gap-x-2 w-full lg:w-1/3 justify-end">
                                 <Button
                                     variant="ghost"
                                     size="sm"
@@ -101,6 +116,8 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
                                     className="flex gap-x-1 items-center disabled:invisible"
                                     onClick={() => setEditing(false)}
                                     disabled={!editing}
+                                    //clear form
+                                    onClickCapture={() => form.reset()}
                                 >
                                     <X size={16}/>
                                 </Button>
@@ -111,7 +128,7 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
                                         type="submit"
                                         className="flex gap-x-1 items-center"
                                         // make disabled if confirmPassword is not equal to newPassword or if newPassword is empty
-                                        disabled={form.formState.isSubmitting || !form.formState.isValid}
+                                        disabled={!passwordsMatch}
                                     >
                                         <Check size={16}/>
                                         <span>შენახვა</span>
