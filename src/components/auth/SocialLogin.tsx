@@ -28,7 +28,7 @@ const providers = [
 
 const SocialLogin = () => {
     return (
-        <div className="flex flex-col gap-2 items-center justify-center mt-6">
+        <div className="flex flex-col md:flex-row gap-2 items-center justify-center mt-6">
             {providers.map((provider) => (
                 <SocialLoginButton
                     key={provider.provider}
