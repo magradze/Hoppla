@@ -1,5 +1,7 @@
 import NextAuth, {AuthOptions} from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
+import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
 import {PrismaAdapter} from "@auth/prisma-adapter";
 import prisma from "@/lib/prisma";
@@ -47,7 +49,33 @@ export const authOptions: AuthOptions = {
                     role: profile.role ? profile.role : "USER",
                 };
             }
-        })
+        }),
+        GithubProvider({
+            clientId: process.env.GITHUB_CLIENT_ID!,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+            profile(profile) {
+                return {
+                    id: profile.id.toString(),
+                    name: profile.name,
+                    email: profile.email,
+                    image: profile.avatar_url,
+                    role: profile.role ? profile.role : "USER",
+                };
+            }
+        }),
+        FacebookProvider({
+            clientId: process.env.FACEBOOK_CLIENT_ID!,
+            clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
+            profile(profile) {
+                return {
+                    id: profile.id.toString(),
+                    name: profile.name,
+                    email: profile.email,
+                    image: profile.picture.data.url,
+                    role: profile.role ? profile.role : "USER",
+                };
+            }
+        }),
     ],
     events: {
         // async signIn({user}) {
