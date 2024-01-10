@@ -5,6 +5,8 @@ import {RegisterConfirmSchema, UserSchema} from "@/lib/validation";
 import {Prisma} from ".prisma/client";
 import EnumRoleFilter = Prisma.EnumRoleFilter;
 
+import * as bcrypt from "bcrypt";
+
 // find user by id
 export const getUserById = async (id: string) => {
     try {
@@ -44,6 +46,20 @@ export const getUsersWithRole = async (role: EnumRoleFilter) => {
     }
 }
 
+// get user auth provider
+export const getUserAuthProvider = async (id: string) => {
+    try {
+        return await prisma.account.findFirst({
+            where: {
+                userId: id,
+            }
+        });
+    } catch (error) {
+        return null
+    }
+}
+
+// Confirm registration
 export const confirmRegistration = async (values: z.infer<typeof RegisterConfirmSchema>) => {
     try {
         return await prisma.user.update({
@@ -62,6 +78,7 @@ export const confirmRegistration = async (values: z.infer<typeof RegisterConfirm
     }
 }
 
+// Update user
 export const updateUser = async (id: string, data: z.infer<typeof UserSchema>) => {
     try {
         return await prisma.user.update({
@@ -69,6 +86,34 @@ export const updateUser = async (id: string, data: z.infer<typeof UserSchema>) =
                 id,
             },
             data,
+        });
+    } catch (error) {
+        console.log("ERROR", error);
+    }
+}
+
+// Update user password
+export const updateUserPassword = async (id: string, data: {
+    newPassword: string,
+    confirmPassword: string,
+}) => {
+
+    const {newPassword, confirmPassword} = data;
+
+    if (newPassword !== confirmPassword) {
+        return null;
+    }
+
+    const password = await bcrypt.hash(newPassword, 10);
+
+    try {
+        return await prisma.user.update({
+            where: {
+                id,
+            },
+            data: {
+                password,
+            },
         });
     } catch (error) {
         console.log("ERROR", error);
