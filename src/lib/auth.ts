@@ -14,8 +14,7 @@ const login: LoginType = async (email, password) => {
 
     if (!user) return null;
 
-    // @ts-ignore
-    const isValid = compare(password, user?.password);
+    const isValid = await compare(password, user?.password!);
 
     if (!isValid) return null;
 
