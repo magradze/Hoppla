@@ -1,5 +1,5 @@
 "use client"
-import React, {ChangeEvent, useRef} from 'react';
+import React from 'react';
 import {Button} from "@/components/ui/button";
 import {Minus, Plus} from "lucide-react";
 import {InputProps} from "@/components/ui/input";
@@ -69,5 +69,7 @@ const NumberSelector = React.forwardRef<HTMLInputElement, InputProps>(
             </div>
         );
     });
+
+NumberSelector.displayName = 'NumberSelector';
 
 export default NumberSelector;

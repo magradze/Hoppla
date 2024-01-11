@@ -44,14 +44,15 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
 
 
     useEffect(() => {
-        console.log(form.getValues().newPassword)
-        console.log(form.getValues().confirmPassword)
         if (form.getValues().newPassword === form.getValues().confirmPassword && form.getValues().newPassword !== "" && form.getValues().confirmPassword !== "") {
-            console.log("პაროლები ემთხვევა")
             setPasswordsMatch(true)
+        } else {
+            setPasswordsMatch(false)
         }
-    }, [
+    }, [ // eslint-disable-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         form.getValues().newPassword,
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         form.getValues().confirmPassword
     ])
 
