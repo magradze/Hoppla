@@ -40,21 +40,6 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
     });
 
     const [editing, setEditing] = React.useState(false);
-    const [passwordsMatch, setPasswordsMatch] = React.useState(false);
-
-
-    useEffect(() => {
-        if (form.getValues().newPassword === form.getValues().confirmPassword && form.getValues().newPassword !== "" && form.getValues().confirmPassword !== "") {
-            setPasswordsMatch(true)
-        } else {
-            setPasswordsMatch(false)
-        }
-    }, [ // eslint-disable-line react-hooks/exhaustive-deps
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        form.getValues().newPassword,
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        form.getValues().confirmPassword
-    ])
 
     const handleSubmit = async (values: z.infer<typeof ChangePasswordScheme>) => {
         await updateUserPassword(user?.id as string, values)
@@ -128,8 +113,11 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
                                         size="sm"
                                         type="submit"
                                         className="flex gap-x-1 items-center"
-                                        // make disabled if confirmPassword is not equal to newPassword or if newPassword is empty
-                                        disabled={!passwordsMatch}
+                                        onClick={() => {
+                                            form.handleSubmit(handleSubmit)
+                                            setEditing(false)
+                                            form.reset()
+                                        }}
                                     >
                                         <Check size={16}/>
                                         <span>შენახვა</span>
