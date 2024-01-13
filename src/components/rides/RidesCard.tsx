@@ -5,8 +5,9 @@ import {SquareDot, Waypoints} from "lucide-react";
 import CarSeat from "@/components/shared/icons/CarSeat";
 import rideCardBg from "@/assets/ride-card-bg.svg";
 import {convertSeconds} from "@/lib/tools/convertSeconds";
-import {convertTimeToSeconds} from "@/lib/tools/convertTimeToSeconds";
+import {convertSecondsToTime, convertTimeToSeconds} from "@/lib/tools/convertTimeToSeconds";
 import {Popover, PopoverContent, PopoverTrigger} from "@nextui-org/react";
+import moment from "moment";
 
 const RideCard = ({...ride}: IRide) => {
 
@@ -14,6 +15,9 @@ const RideCard = ({...ride}: IRide) => {
 
     const arrivalHour = convertSeconds(parseInt(String(arrivalTime)))
     const rideDuration = convertSeconds(parseInt(String(ride.duration)))
+
+
+    const arrivalTimeWithMoment = moment(ride.startTime, "HH:mm").add(ride.duration, 'seconds').format("HH:mm")
 
     return (
         <li className="relative bg-white border border-gray-100 w-full rounded-md flex flex-col overflow-hidden hover:shadow-2xl cursor-pointer group">
@@ -32,7 +36,8 @@ const RideCard = ({...ride}: IRide) => {
                                 {rideDuration}
                             </small>
                         </div>
-                        <div className="text-lg lg:text-lg font-semibold alk-sanet text-primary">{arrivalHour}</div>
+                        <div
+                            className="text-lg lg:text-lg font-semibold alk-sanet text-primary">{arrivalTimeWithMoment}</div>
                     </div>
                     <div className="flex flex-col justify-between">
                         <div className="flex items-center gap-2">

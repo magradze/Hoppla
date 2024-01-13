@@ -1,6 +1,7 @@
 import React from 'react';
 import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
+import moment from "moment";
 
 interface IDateTimeInput {
     setDateToLeave: (date: string) => void,
@@ -38,6 +39,7 @@ const DateTimeInput = ({
                         type="time"
                         name="time"
                         id="time"
+                        defaultValue={moment().format("HH:mm")}
                         className="h-12 lg:h-16 py-1.5 px-4"
                         onChange={(e) => setTimeToLeave(e.target.value)}
                     />

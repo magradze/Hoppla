@@ -10,6 +10,7 @@ import PriceInput from "@/components/rides/inputs/PriceInput";
 import DirectionsInfo from "@/components/rides/DirectionsInfo";
 import AdditionalInfo from "@/components/rides/AdditionalInfo";
 import DateTimeInput from "@/components/rides/inputs/DateTimeInput";
+import moment from "moment/moment";
 
 const RideConfirmForm = ({user, searchParams}: IRideConfirm) => {
 
@@ -18,7 +19,7 @@ const RideConfirmForm = ({user, searchParams}: IRideConfirm) => {
 
 
     const [dateToLeave, setDateToLeave] = useState(new Date().toISOString().split('T')[0])
-    const [timeToLeave, setTimeToLeave] = useState(new Date().getHours() + ":" + new Date().getMinutes())
+    const [timeToLeave, setTimeToLeave] = useState(moment().format("HH:mm"))
     const [newPrice, setNewPrice] = useState(parseFloat(searchParams.price as string))
 
 
@@ -33,13 +34,15 @@ const RideConfirmForm = ({user, searchParams}: IRideConfirm) => {
         duration: parseInt(String(searchParams.duration)),
         seats: parseInt(String(searchParams.seats)),
         price: newPrice,
-        startDate: dateToLeave,
+        startDate: moment(dateToLeave).format("YYYY-MM-DD"),
         startTime: timeToLeave,
         driver: {
             id: user?.id
         },
         stops: stopPlaceField[0].name === "" ? [] : stopPlaceField,
     }
+
+    console.log("leave time", timeToLeave)
 
     return (
         <>
