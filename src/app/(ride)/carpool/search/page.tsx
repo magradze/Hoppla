@@ -1,7 +1,7 @@
 import React, {Suspense} from 'react';
 import SearchBox from "@/components/partial/SearchBox";
 import {ISearchProps} from "@/interfaces/ISearchProps";
-import {getRideByDate} from "@/lib/data/rides";
+import {getRideByFromAndToAndDateAndSeats} from "@/lib/data/rides";
 import RideCard from "@/components/rides/RidesCard";
 import RidesNotFound from "@/components/rides/RidesNotFound";
 import {Filter} from "lucide-react";
@@ -9,7 +9,8 @@ import FilterForm from "@/components/rides/forms/FilterForm";
 
 const Search = async ({searchParams}: ISearchProps) => {
 
-    const rides = await getRideByDate(searchParams.date);
+    const rides = await getRideByFromAndToAndDateAndSeats(searchParams.from, searchParams.to, searchParams.date, Number(searchParams.seats), searchParams.sort);
+
 
     return (
         <div className="page-wrapper pt-8">
@@ -45,7 +46,7 @@ const Search = async ({searchParams}: ISearchProps) => {
                                 <div className="lg:col-span-1">
                                     <div className="flex flex-col gap-2 alk-sanet">
                                         <h2 className="font-bold text-xl text-secondary">მგზავრობა</h2>
-                                        <p className="text-sm text-gray-500">ხელმისაწვდომია {rides?.length} ავტომობილი</p>
+                                        {/*<p className="text-sm text-gray-500">ხელმისაწვდომია {rides?.length} ავტომობილი</p>*/}
                                     </div>
                                     <div className="flex flex-col gap-2 alk-sanet">
                                         <FilterForm/>

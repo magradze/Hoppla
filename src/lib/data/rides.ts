@@ -1,6 +1,7 @@
 "use server"
 import prisma from "@/lib/prisma";
 import {redirect} from 'next/navigation'
+import {ISearchProps} from "@/interfaces/ISearchProps";
 
 // find all rides
 export const getRides = async () => {
@@ -80,6 +81,79 @@ export const getRideByDriverId = async (id: string) => {
         return await prisma.ride.findMany({
             where: {
                 userId: id,
+            },
+            include: {
+                driver: {
+                    select: {
+                        name: true,
+                        email: true,
+                        image: true,
+                        phone: true,
+                        address: true,
+                        birthday: true,
+                    }
+                },
+                stops: {
+                    select: {
+                        name: true,
+                    }
+
+                }
+            }
+        });
+    } catch (error) {
+        return null;
+    }
+}
+
+// find ride by from and to
+export const getRideByFromAndTo = async (from: string | undefined, to: string) => {
+    try {
+        return await prisma.ride.findMany({
+            where: {
+                from,
+                to
+            },
+            include: {
+                driver: {
+                    select: {
+                        name: true,
+                        email: true,
+                        image: true,
+                        phone: true,
+                        address: true,
+                        birthday: true,
+                    }
+                },
+                stops: {
+                    select: {
+                        name: true,
+                    }
+
+                }
+            }
+        });
+    } catch (error) {
+        return null;
+    }
+}
+
+// find ride by from and to and date and seats
+export const getRideByFromAndToAndDateAndSeats = async (from: string | undefined, to: string, date: string, seatsNumber: number, sort?: string, filter?: string) => {
+
+    try {
+        return await prisma.ride.findMany({
+            orderBy: {
+                price: sort === 'price-asc' ? 'asc' : undefined,
+                startTime: sort === 'time-asc' ? 'asc' : undefined,
+            },
+            where: {
+                from,
+                to,
+                startDate: date.split('T')[0],
+                seats: {
+                    gte: seatsNumber
+                }
             },
             include: {
                 driver: {

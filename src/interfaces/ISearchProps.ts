@@ -4,5 +4,7 @@ export interface ISearchProps {
         to: string;
         date: string;
         seats: number;
+        sort?: string;
+        filter?: string;
     }
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import {useForm} from "react-hook-form";
 import * as z from "zod";
@@ -14,8 +14,11 @@ import {format} from "date-fns";
 import {Calendar} from "@/components/ui/calendar";
 import NumberSelector from "@/components/ui/number-selector";
 import {useRouter, useSearchParams} from "next/navigation";
+import moment from "moment";
 
 const SearchBox = ({className, type}: { className?: string, type: string }) => {
+
+    const [disabled, setDisabled] = React.useState<boolean>(true);
 
     const searchParams = useSearchParams();
 
@@ -24,9 +27,9 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
     const form = useForm<z.infer<typeof SearchSchema>>({
         resolver: zodResolver(SearchSchema),
         defaultValues: {
-            startLocation: searchParams.get("from") || "",
-            endLocation: searchParams.get("to") || "",
-            startDate: searchParams.get("date") ? new Date(searchParams.get("date") as string) : new Date(),
+            startLocation: searchParams.get("from") || "თბილისი",
+            endLocation: searchParams.get("to") || "ბათუმი",
+            startDate: searchParams.get("date") ? new Date(moment(searchParams.get("date")).format("YYYY-MM-DD")) : new Date(),
             seats: searchParams.get("seats") ? parseInt(searchParams.get("seats") as string) : 1,
         }
     });
@@ -35,7 +38,7 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
         const query = new URLSearchParams(searchParams);
         query.set("from", values.startLocation);
         query.set("to", values.endLocation);
-        query.set("date", values.startDate.toISOString());
+        query.set("date", moment(values.startDate).format("YYYY-MM-DD"));
         query.set("seats", values.seats.toString());
         return query.toString();
     }, [searchParams]);
@@ -43,6 +46,15 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
     const handleSubmit = useCallback((values: z.infer<typeof SearchSchema>) => {
         router.push(`/${type}/search?${createQueryStr(values)}`)
     }, [router, type, createQueryStr]);
+
+    useEffect(() => {
+
+        if (!form.getValues().endLocation) {
+            setDisabled(true);
+        } else {
+            setDisabled(false);
+        }
+    }, [form]);
 
     return (
         <Form {...form}>
@@ -81,6 +93,14 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                                 <Input
                                     {...field}
                                     placeholder={"სად..."}
+                                    onChange={(e) => {
+                                        field.onChange(e);
+                                        if (!e.target.value) {
+                                            setDisabled(true);
+                                        } else {
+                                            setDisabled(false);
+                                        }
+                                    }}
                                     type="text"
                                     className="block w-full h-full rounded-none border border-gray-100 md:border-l-0 border-b-0 md:border-b py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                 />
@@ -173,11 +193,11 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                     variant="secondary"
                     size="lg"
                     type="submit"
-                    className="col-span-12 lg:col-span-3 rounded-t-none lg:rounded-l-none lg:rounded-r-md disabled:opacity-80 py-8"
-                    // disabled={!form.getFieldState("startLocation").isDirty || form.getFieldState("endLocation").invalid}
+                    className="col-span-12 lg:col-span-3 rounded-t-none lg:rounded-l-none lg:rounded-r-md py-8 disabled:cursor-not-allowed disabled:opacity-85"
                     onClick={() => {
                         router.push(`/${type}/search?${createQueryStr(form.getValues())}`)
                     }}
+                    disabled={disabled}
                 >
 
                     ძებნა

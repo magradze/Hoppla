@@ -5,6 +5,7 @@ const SearchSchema = z.object({
     endLocation: z.string(),
     startDate: z.date(),
     seats: z.number(),
+    sort: z.string().optional(),
 });
 
 export default SearchSchema;
