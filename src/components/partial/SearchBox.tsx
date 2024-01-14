@@ -15,6 +15,7 @@ import {Calendar} from "@/components/ui/calendar";
 import NumberSelector from "@/components/ui/number-selector";
 import {useRouter, useSearchParams} from "next/navigation";
 import moment from "moment";
+import 'moment/locale/ka';
 
 const SearchBox = ({className, type}: { className?: string, type: string }) => {
 
@@ -131,7 +132,7 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                                                 <CalendarDays/>
                                             </div>
                                             {field.value ? (
-                                                format(field.value, "PPP")
+                                                moment(field.value).locale('ka').format('LL')
                                             ) : (
                                                 <span>Pick a date</span>
                                             )}

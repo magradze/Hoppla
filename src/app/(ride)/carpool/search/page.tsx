@@ -4,12 +4,15 @@ import {ISearchProps} from "@/interfaces/ISearchProps";
 import {getRideByFromAndToAndDateAndSeats} from "@/lib/data/rides";
 import RideCard from "@/components/rides/RidesCard";
 import RidesNotFound from "@/components/rides/RidesNotFound";
-import {Filter} from "lucide-react";
 import FilterForm from "@/components/rides/forms/FilterForm";
+import moment from 'moment';
+import 'moment/locale/ka';
 
 const Search = async ({searchParams}: ISearchProps) => {
 
     const rides = await getRideByFromAndToAndDateAndSeats(searchParams.from, searchParams.to, searchParams.date, Number(searchParams.seats), searchParams.sort);
+
+    const date = moment(new Date(searchParams.date)).locale('ka').format('LL');
 
 
     return (
@@ -23,14 +26,16 @@ const Search = async ({searchParams}: ISearchProps) => {
                             <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                                 <div className="lg:col-span-2 flex flex-col gap-2">
                                     <div
-                                        className="flex flex-col gap-2 px-4 alk-sanet">
+                                        className="flex flex-col gap-2 px-4 alk-sanet mb-6">
 
-                                        <h3 className="font-bold text-xl text-secondary">{searchParams.from} - {searchParams.to}</h3>
+                                        <h3 className="font-bold text-xl text-secondary">{searchParams.from} → {searchParams.to}</h3>
 
                                         <div className="flex flex-row justify-between items-center">
-                                            <span>{searchParams.date.split("T")[0]}</span>
-                                            {/*<span>{searchParams.seats} ადგილი</span>*/}
-                                            <Filter width={20} height={20} className="text-gray-400"/>
+                                            <div className="flex flex-col gap-2">
+                                                <span>{date}</span>
+                                                <span
+                                                    className="text-xs">ხელმისაწვდომია {rides?.length} მგზავრობა</span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div
@@ -45,8 +50,7 @@ const Search = async ({searchParams}: ISearchProps) => {
                                 </div>
                                 <div className="lg:col-span-1">
                                     <div className="flex flex-col gap-2 alk-sanet">
-                                        <h2 className="font-bold text-xl text-secondary">მგზავრობა</h2>
-                                        {/*<p className="text-sm text-gray-500">ხელმისაწვდომია {rides?.length} ავტომობილი</p>*/}
+                                        <h2 className="font-bold text-xl text-secondary">დაალაგე</h2>
                                     </div>
                                     <div className="flex flex-col gap-2 alk-sanet">
                                         <FilterForm/>
