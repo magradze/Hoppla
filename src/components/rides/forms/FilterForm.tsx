@@ -1,10 +1,7 @@
 "use client"
-import React, {useCallback, useEffect, useState} from 'react';
 import {Radio, RadioGroup} from "@nextui-org/radio";
 import {cn} from "@/lib/utils";
-import {useQueryState} from "nuqs";
-import {useRouter, useSearchParams} from "next/navigation";
-import {Checkbox, CheckboxGroup} from "@nextui-org/react";
+import useSort from "@/hooks/useSort";
 
 
 const sortData = [
@@ -43,31 +40,7 @@ export const RadioItem = (props: any) => {
 
 const FilterForm = () => {
 
-    const router = useRouter();
-    const searchParams = useSearchParams()
-    const createQueryString = useCallback(
-        (name: string, value: string) => {
-            const params = new URLSearchParams(searchParams.toString())
-            params.set(name, value)
-
-            return params.toString()
-        },
-        [searchParams]
-    )
-    const onChangeHandler = async (name: string, value: any) => {
-        router.push(`/carpool/search?${createQueryString(name, value)}`)
-    }
-
-    const [sort, setSort] = useQueryState("sort", {
-        defaultValue: "price-asc",
-        parse: (value) => {
-            return value;
-        },
-        serialize: (value) => {
-            onChangeHandler("sort", value).then((res) => res);
-            return value;
-        },
-    });
+    const {sort, setSort} = useSort();
 
     return (
         <>
