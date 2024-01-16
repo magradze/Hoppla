@@ -1,15 +1,16 @@
 import React from 'react';
 import {IRide} from "@/interfaces/IRide";
 import Image from "next/image";
-import {SquareDot, Waypoints} from "lucide-react";
+import {Cigarette, Dog, Luggage, SquareDot, Waypoints} from "lucide-react";
 import CarSeat from "@/components/shared/icons/CarSeat";
 import rideCardBg from "@/assets/ride-card-bg.svg";
 import {convertSeconds} from "@/lib/tools/convertSeconds";
-import {convertSecondsToTime, convertTimeToSeconds} from "@/lib/tools/convertTimeToSeconds";
+import {convertTimeToSeconds} from "@/lib/tools/convertTimeToSeconds";
 import {Popover, PopoverContent, PopoverTrigger} from "@nextui-org/react";
 import moment from "moment";
+import {getCarById} from "@/lib/actions/cars";
 
-const RideCard = ({...ride}: IRide) => {
+const RideCard = async ({...ride}: IRide) => {
 
     const arrivalTime = convertTimeToSeconds(ride.startTime) + ride.duration
 
@@ -18,6 +19,8 @@ const RideCard = ({...ride}: IRide) => {
 
 
     const arrivalTimeWithMoment = moment(ride.startTime, "HH:mm").add(ride.duration, 'seconds').format("HH:mm")
+
+    const car = await getCarById(ride.carId)
 
     return (
         <li className="relative bg-white border border-gray-100 w-full rounded-md flex flex-col overflow-hidden hover:shadow-2xl cursor-pointer group">
@@ -81,9 +84,14 @@ const RideCard = ({...ride}: IRide) => {
                         </div>
                     </div>
                 </div>
-                <div className="p-4">
+                <div className="p-4 flex flex-col gap-2">
                     <span
                         className="bg-red-700/10 text-primary text-md lg:text-lg font-bold p-2 rounded-md">{(ride.price / ride.seats).toFixed(2)} ₾</span>
+                    <div className="flex flex-row items-center justify-center gap-2 text-gray-300">
+                        <Cigarette width={18}/>
+                        <Dog width={18}/>
+                        <Luggage width={18}/>
+                    </div>
                 </div>
             </div>
             <div className="flex flex-row justify-between bg-white border-t border-gray-100 p-4 items-center z-10">
@@ -100,7 +108,7 @@ const RideCard = ({...ride}: IRide) => {
                     <div className="flex flex-col -space-y-2 lg:space-y-0">
                         <div
                             className="text-sm lg:text-md font-medium text-gray-600 alk-sanet">{ride.driver.name}</div>
-                        <div className="text-[10px] lg:text-xs text-gray-400">{"BMW X5"}</div>
+                        <div className="text-[10px] lg:text-xs text-gray-400">{car?.brand} {car?.model}</div>
                     </div>
                 </div>
                 <div className="flex flex-row items-center">

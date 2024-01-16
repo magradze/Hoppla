@@ -181,14 +181,23 @@ export const getRideByFromAndToAndDateAndSeats = async (from: string | undefined
 
 // create ride
 export const addRide = async (data: any) => {
-    await fetch(`${process.env.API_URL}/rides`, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
+    await prisma.ride.create({
+        data: {
+            ...data,
+            driver: {
+                connect: {
+                    id: data.driver.id
+                }
+            },
+            stops: {
+                create: data.stops
+            }
         },
-        redirect: 'follow'
-    })
+        include: {
+            driver: true,
+            stops: true
+        }
+    });
 
     redirect('/carpool')
 }

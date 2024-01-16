@@ -6,7 +6,7 @@ import login from "@/lib/auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import FacebookProvider from "next-auth/providers/facebook";
-import {getUserById} from "@/lib/data/user";
+import {getUserById} from "@/lib/actions/user";
 
 export const authOptions: NextAuthOptions = {
     session: {

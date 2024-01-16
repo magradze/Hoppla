@@ -44,8 +44,9 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
     }, [searchParams]);
 
     const handleSubmit = useCallback((values: z.infer<typeof SearchSchema>) => {
-        router.push(`/${type}/search?${createQueryStr(values)}`)
-    }, [router, type, createQueryStr]);
+        //${type}/search?${createQueryStr(values)}
+        router.push(`/search?${createQueryStr(values)}`)
+    }, [router, createQueryStr]);
 
     useEffect(() => {
 
@@ -195,7 +196,7 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                     type="submit"
                     className="col-span-12 lg:col-span-3 rounded-t-none lg:rounded-l-none lg:rounded-r-md py-8 disabled:cursor-not-allowed disabled:opacity-85"
                     onClick={() => {
-                        router.push(`/${type}/search?${createQueryStr(form.getValues())}`)
+                        router.push(`/search?${createQueryStr(form.getValues())}`)
                     }}
                     disabled={disabled}
                 >

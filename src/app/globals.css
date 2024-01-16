@@ -4,11 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-    height: 100%;
-}
-
 @layer base {
     :root {
         --background: 210, 20%, 98%;
@@ -76,6 +71,12 @@ body {
 }
 
 @layer base {
+
+    html,
+    body {
+        @apply h-auto lg:h-screen;
+    }
+
     * {
         @apply border-border;
     }
@@ -90,5 +91,44 @@ body {
 
     .page-wrapper {
         @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+
+    .car-plate-ui {
+        background: #fff;
+        padding: .25em 0.8em .25em 2em;
+        font-weight: bold;
+        font-size: 1.2em;
+        border-radius: 5px;
+        text-transform: uppercase;
+        border: 1px solid #000;
+        box-shadow: 1px 1px 1px #ddd;
+        position: relative;
+        font-family: helvetica, ariel, sans-serif;
+    }
+
+    .car-plate-ui:before {
+        content: 'GE';
+        display: block;
+        width: 20px;
+        height: 100%;
+        background: #063298;
+        position: absolute;
+        top: 0;
+        border-radius: 5px 0 0 5px;
+        color: #fff;
+        font-size: .5em;
+        line-height: 40px;
+        padding-left: 5px;
+    }
+
+    .car-plate-ui:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 7px;
+        left: 5px;
+        width: 20px;
+        height: 20px;
     }
 }

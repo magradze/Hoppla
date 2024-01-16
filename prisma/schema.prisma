@@ -56,6 +56,7 @@ model User {
   rides         Ride[]
   createdAt     DateTime? @map("created_at")
   trips         Trip[]
+  cars          Car[]
 
   @@map("users")
 }
@@ -89,6 +90,7 @@ model Ride {
   userId      String     @map("user_id")
   driver      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   stops       Stop[]
+  carId       String?    @map("car_id")
   rideRules   RideRule[]
   status      RideStatus @default(PENDING)
   Trip        Trip[]
@@ -132,6 +134,20 @@ model Trip {
   passangers User[]
 
   @@map("trips")
+}
+
+model Car {
+  id          String   @id @default(cuid())
+  userId      String   @map("user_id")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  brand       String
+  model       String
+  year        Int
+  color       String
+  plateNumber String   @map("plate_number")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("cars")
 }
 
 // model TripRequest {

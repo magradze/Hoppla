@@ -1,6 +1,6 @@
 import React from 'react';
 import TripCalendar from "@/components/shared/trip/TripCalendar";
-import {getRides} from "@/lib/data/rides";
+import {getRides} from "@/lib/actions/rides";
 import RidesLoadingCard from "@/components/rides/RidesLoadingCard";
 
 const Loading = async () => {

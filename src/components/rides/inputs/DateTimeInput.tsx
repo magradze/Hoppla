@@ -23,6 +23,7 @@ const DateTimeInput = ({
                         type="date"
                         name="dateToLeave"
                         id="dateToLeave"
+                        defaultValue={moment().format("YYYY-MM-DD")}
                         className="h-12 lg:h-16 py-1.5 px-4"
                         onChange={(e) => {
                             setDateToLeave(e.target.value);

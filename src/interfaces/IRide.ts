@@ -11,6 +11,7 @@ export interface IRide {
     price: number;
     startDate: string;
     startTime: string;
+    carId: string;
     driver: {
         email: string | null;
         image: string | StaticImport;

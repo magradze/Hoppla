@@ -45,7 +45,7 @@ const RideAddForm = ({
             setDurationQuery(duration)
         }
     }, [to, directionResponse, distance, duration, from, seats, price])
-    
+
     return (
         <>
             <dl className="flex flex-col gap-4 relative">
@@ -59,7 +59,7 @@ const RideAddForm = ({
                     <span className="flex items-center gap-2">
                             <Clock width={18} height={18}/>
 
-                            დრო: {!durationQuery ? "0:00" : convertSeconds(durationQuery)} სთ
+                            დრო: {!durationQuery ? "0:00" : convertSeconds(durationQuery)}
                         </span>
 
                 </div>
@@ -134,7 +134,7 @@ const RideAddForm = ({
                 <span className="flex items-center gap-2">
                     <Clock width={18} height={18}/>
 
-                    დრო: {!durationQuery ? "0:00" : convertSeconds(durationQuery)} სთ
+                    დრო: {!durationQuery ? "00:00" : convertSeconds(durationQuery)} სთ
                 </span>
 
             </div>

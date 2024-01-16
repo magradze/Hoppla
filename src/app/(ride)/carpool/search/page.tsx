@@ -1,7 +1,7 @@
 import React, {Suspense} from 'react';
 import SearchBox from "@/components/partial/SearchBox";
 import {ISearchProps} from "@/interfaces/ISearchProps";
-import {getRideByFromAndToAndDateAndSeats} from "@/lib/data/rides";
+import {getRideByFromAndToAndDateAndSeats} from "@/lib/actions/rides";
 import RideCard from "@/components/rides/RidesCard";
 import RidesNotFound from "@/components/rides/RidesNotFound";
 import FilterForm from "@/components/rides/forms/FilterForm";

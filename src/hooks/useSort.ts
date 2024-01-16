@@ -15,7 +15,7 @@ const useSort = () => {
         [searchParams]
     )
     const onChangeHandler = async (name: string, value: any) => {
-        router.push(`/carpool/search?${createQueryString(name, value)}`)
+        router.push(`/search?${createQueryString(name, value)}`)
     }
 
     const [sort, setSort] = useQueryState("sort", {
