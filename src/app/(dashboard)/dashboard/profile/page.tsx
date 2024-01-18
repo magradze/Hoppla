@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {getServerSession} from "next-auth";
-import {getUserAuthProvider, getUserByEmail} from "@/lib/data/user";
+import {getUserAuthProvider, getUserByEmail} from "@/lib/actions/user";
 import SidebarMenu from "@/components/dashboard/SidebarMenu";
 import EditProfileForm from "@/components/dashboard/forms/EditProfileForm";
 import EditPasswordForm from "@/components/dashboard/forms/EditPasswordForm";

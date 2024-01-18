@@ -9,7 +9,7 @@ import {Input} from "@/components/ui/input";
 import FormError from "@/components/shared/forms/FormError";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
-import {confirmRegistration} from "@/lib/data/user";
+import {confirmRegistration} from "@/lib/actions/user";
 
 const RegisterConfirmForm = () => {
 

@@ -5,7 +5,7 @@ import {getServerSession} from "next-auth";
 
 import prisma from "@/lib/prisma";
 
-import {getUserByEmail} from "@/lib/data/user";
+import {getUserByEmail} from "@/lib/actions/user";
 
 const NewUser = async () => {
 
