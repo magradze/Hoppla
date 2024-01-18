@@ -9,19 +9,7 @@ import Link from "next/link";
 import RideLink from "@/components/rides/RideLink";
 
 const navigation = {
-    solutions: [
-        {name: 'Marketing', href: '#'},
-        {name: 'Analytics', href: '#'},
-        {name: 'Commerce', href: '#'},
-        {name: 'Insights', href: '#'},
-    ],
-    support: [
-        {name: 'Pricing', href: '#'},
-        {name: 'Documentation', href: '#'},
-        {name: 'Guides', href: '#'},
-        {name: 'API Status', href: '#'},
-    ],
-    company: [
+    blog: [
         {name: 'About', href: '#'},
         {name: 'Blog', href: '#'},
         {name: 'Jobs', href: '#'},
@@ -140,14 +128,14 @@ const Footer = async () => {
                     <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
                         <div className="md:grid md:grid-cols-2 md:gap-8">
                             <div>
-                                <h3 className="text-sm font-semibold leading-6 text-gray-900 fira-go">დღის
+                                <h3 className="text-lg font-semibold leading-6 text-gray-900 fira-go">დღის
                                     მარშრუტები</h3>
                                 <ul role="list" className="mt-6 space-y-4">
                                     <RideLink/>
                                 </ul>
                             </div>
                             <div className="mt-10 md:mt-0">
-                                <h3 className="text-sm font-semibold leading-6 text-gray-900 fira-go">Hoppla Bus</h3>
+                                <h3 className="text-lg font-semibold leading-6 text-gray-900 fira-go">Hoppla Bus</h3>
                                 <ul role="list" className="mt-6 space-y-4">
                                     {ridesArrayUnique.map((ride: string, index: number) => (
                                         <li key={index}>
@@ -162,9 +150,9 @@ const Footer = async () => {
                         </div>
                         <div className="md:grid md:grid-cols-2 md:gap-8">
                             <div>
-                                <h3 className="text-sm font-semibold leading-6 text-gray-900 fira-go">ბლოგი</h3>
+                                <h3 className="text-lg font-semibold leading-6 text-gray-900 fira-go">ბლოგი</h3>
                                 <ul role="list" className="mt-6 space-y-4">
-                                    {navigation.company.map((item) => (
+                                    {navigation.blog.map((item) => (
                                         <li key={item.name}>
                                             <Link href={item.href}
                                                   className="text-sm leading-6 text-gray-600 hover:text-gray-900">
@@ -175,12 +163,12 @@ const Footer = async () => {
                                 </ul>
                             </div>
                             <div className="mt-10 md:mt-0">
-                                <h3 className="text-sm font-semibold leading-6 text-gray-900 fira-go">გაიგე მეტი</h3>
+                                <h3 className="text-lg font-semibold leading-6 text-gray-900 fira-go">გაიგე მეტი</h3>
                                 <ul role="list" className="mt-6 space-y-4">
                                     {navigation.legal.map((item) => (
                                         <li key={item.name}>
                                             <Link href={item.href}
-                                                  className="text-sm leading-6 text-gray-600 hover:text-gray-900">
+                                                  className="text-sm leading-6 text-gray-600 hover:text-gray-900 fira-go">
                                                 {item.name}
                                             </Link>
                                         </li>

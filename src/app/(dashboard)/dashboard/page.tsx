@@ -30,7 +30,7 @@ const page: FC<pageProps> = async () => {
             <SidebarMenu/>
             <main className="px-4 sm:px-6 lg:flex-auto lg:px-0 space-y-8">
 
-                <DashboardStats/>
+                <DashboardStats userId={currentUser.id}/>
 
                 <MyCars cars={cars}/>
 
