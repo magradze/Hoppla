@@ -6,7 +6,7 @@ import {Bus, BusFront, Car} from "lucide-react";
 const CarTypesTab = () => {
     return (
         <div className="w-full flex justify-center mb-4">
-            <Tabs defaultValue="carpool" className="w-full alk-sanet">
+            <Tabs defaultValue="carpool" className="w-full fira-go">
                 <TabsList className="w-full">
                     <TabsTrigger type="button" defaultValue="test" value="all" className="flex flex-col">
                         ყველა

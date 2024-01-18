@@ -10,7 +10,7 @@ const RideLink = async () => {
             {rideLinks?.slice(0, 6).map((ride: any, index: number) => (
                 <li key={index}>
                     <Link href={`/search?from=${ride.rideFrom}&to=${ride.rideTo}&date=${ride.rideDate}&seats=1`}
-                          className="text-sm leading-6 text-gray-600 hover:text-gray-900 alk-sanet">
+                          className="text-sm leading-6 text-gray-600 hover:text-gray-900 fira-go">
                         {ride.rideName}
                     </Link>
                 </li>

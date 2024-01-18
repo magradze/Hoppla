@@ -13,7 +13,7 @@ const CarsInput = ({
         <>
             {cars.length > 0 ? (
                 <div className="flex flex-col gap-2 mb-6">
-                    <label htmlFor="car" className="text-sm text-secondary alk-sanet">აირჩიეთ მანქანა</label>
+                    <label htmlFor="car" className="text-sm text-secondary fira-go">აირჩიეთ მანქანა</label>
                     <ul className="grid w-full gap-6 md:grid-cols-4">
                         {cars.map((car: any, index: number) => (
                             <li key={index} onClick={() => setCarId(car.id)}>
@@ -27,7 +27,7 @@ const CarsInput = ({
                                             <Image src={`/cars/${car.brand.toLowerCase()}.svg`} alt={"car"} width={32}
                                                    height={32}/>
                                             <div
-                                                className="w-full text-sm font-semibold alk-sanet text-secondary">{car.brand}</div>
+                                                className="w-full text-sm font-semibold fira-go text-secondary">{car.brand}</div>
                                         </div>
                                         <div className="w-full text-xs mt-2">{car.model}
                                         </div>
@@ -39,7 +39,7 @@ const CarsInput = ({
                 </div>
             ) : (
                 <div className="flex flex-col gap-2 mb-6">
-                    <label htmlFor="car" className="font-bold text-sm text-secondary alk-sanet">დაამატე მანქანა</label>
+                    <label htmlFor="car" className="font-bold text-sm text-secondary fira-go">დაამატე მანქანა</label>
                     <AddCarModal/>
                 </div>
             )}

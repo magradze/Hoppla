@@ -26,7 +26,7 @@ const Search = async ({searchParams}: ISearchProps) => {
                             <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                                 <div className="lg:col-span-2 flex flex-col gap-2">
                                     <div
-                                        className="flex flex-col gap-2 px-4 alk-sanet mb-6">
+                                        className="flex flex-col gap-2 px-4 fira-go mb-6">
 
                                         <h3 className="font-bold text-xl text-secondary">{searchParams.from} → {searchParams.to}</h3>
 
@@ -49,10 +49,10 @@ const Search = async ({searchParams}: ISearchProps) => {
                                     </div>
                                 </div>
                                 <div className="lg:col-span-1">
-                                    <div className="flex flex-col gap-2 alk-sanet">
+                                    <div className="flex flex-col gap-2 fira-go">
                                         <h2 className="font-bold text-xl text-secondary">დაალაგე</h2>
                                     </div>
-                                    <div className="flex flex-col gap-2 alk-sanet">
+                                    <div className="flex flex-col gap-2 fira-go">
                                         <FilterForm/>
                                     </div>
                                 </div>

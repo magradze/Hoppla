@@ -17,8 +17,8 @@ const InfoBlock = ({image, title, subtitle}: IInfoBlock) => {
 
             <div className="page-wrapper h-full grid grid-cols-1 lg:grid-cols-4 gap-4 items-center">
                 <div className="col-span-1 lg:col-span-2 flex flex-col py-8 sm:items-center lg:items-start space-y-4">
-                    <h1 className="text-white text-xl lg:text-4xl font-bold alk-sanet text-left sm:text-center lg:text-left">{title}</h1>
-                    <p className="text-white text-xs md:text-sm lg:text-lg alk-sanet text-left sm:text-center lg:text-left">{subtitle}</p>
+                    <h1 className="text-white text-xl lg:text-4xl font-bold fira-go text-left sm:text-center lg:text-left">{title}</h1>
+                    <p className="text-white text-xs md:text-sm lg:text-lg fira-go text-left sm:text-center lg:text-left">{subtitle}</p>
                     <div className="flex flex-row gap-4">
                         <Button size="lg"
                                 className="flex items-center">

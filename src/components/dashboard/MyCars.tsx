@@ -19,7 +19,7 @@ const MyCars = ({cars}: IMyCars) => {
 
     return (
         <div>
-            <div className="flex flex-col gap-2 alk-sanet my-4">
+            <div className="flex flex-col gap-2 fira-go my-4">
                 <h2 className="font-bold text-xl text-secondary">ჩემი ავტომობილები</h2>
             </div>
 
@@ -38,7 +38,7 @@ const MyCars = ({cars}: IMyCars) => {
                             <PopoverContent className="p-1 w-64">
                                 <li
                                     key={index}
-                                    className="w-full flex flex-col gap-2 px-4 py-2 items-start cursor-pointer alk-sanet">
+                                    className="w-full flex flex-col gap-2 px-4 py-2 items-start cursor-pointer fira-go">
 
                                     <div className="flex justify-between items-center w-full">
                                         <div className="flex flex-col w-full">

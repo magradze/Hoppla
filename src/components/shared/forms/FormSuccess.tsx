@@ -10,7 +10,7 @@ const FormSuccess = ({message}: FormSuccessProps) => {
     if (!message) return null;
 
     return (
-        <Alert variant="success" className="alk-sanet">
+        <Alert variant="success" className="fira-go">
             <CheckSquare className="h-4 w-4"/>
             <AlertTitle/>
             <AlertDescription>

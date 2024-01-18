@@ -55,14 +55,14 @@ const Navbar = () => {
                                             </>
                                         </Link>
                                     </div>
-                                    <div className="hidden md:ml-6 lg:flex md:space-x-8 alk-sanet">
+                                    <div className="hidden md:ml-6 lg:flex md:space-x-8 fira-go">
                                         {navigation.map((item, index) => (
                                             <NavLink key={index} name={item.name} href={item.href}
                                                      current={pathname === item.href}/>
                                         ))}
                                     </div>
                                 </div>
-                                <div className="flex items-center alk-sanet">
+                                <div className="flex items-center fira-go">
                                     <div className="flex-shrink-0">
                                         <Button
                                             variant="ghost">

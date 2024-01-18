@@ -41,7 +41,7 @@ const NumberSelector = React.forwardRef<HTMLInputElement, InputProps>(
         return (
             <div
                 className="absolute lg:relative lg:flex flex-row justify-between items-center p-4 bg-white lg:rounded-md">
-                <div className="flex flex-grow alk-sanet text-gray-400 text-sm">მგზავრი</div>
+                <div className="flex flex-grow fira-go text-gray-400 text-sm">მგზავრი</div>
                 <div className="flex flex-grow-o justify-between items-center">
                     <Button variant="secondary" size="sm"
                             onClick={decrement}

@@ -43,7 +43,7 @@ const LoginFormWrapper = ({
                             <div className="flex items-center">
                                 <div className="text-sm">
                                     <Link href={buttonHref}
-                                          className="font-medium text-secondary hover:text-secondary alk-sanet">
+                                          className="font-medium text-secondary hover:text-secondary fira-go">
                                         {buttonText}
                                     </Link>
                                 </div>

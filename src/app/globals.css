@@ -92,7 +92,7 @@
         @apply bg-background text-foreground;
     }
 
-    .alk-sanet {
+    .fira-go {
         @apply font-FiraGO;
         font-feature-settings: "case" 1;
     }

@@ -24,9 +24,9 @@ const page: FC<pageProps> = async () => {
     const rides = await getRideByDriverId(currentUser.id) || []
 
     const cars = await getCarByOwner(currentUser.id) || []
-    
+
     return (
-        <div className="page-wrapper pt-8 lg:flex lg:gap-x-2 lg:px-8 alk-sanet">
+        <div className="page-wrapper pt-8 lg:flex lg:gap-x-2 lg:px-8 fira-go">
             <SidebarMenu/>
             <main className="px-4 sm:px-6 lg:flex-auto lg:px-0 space-y-8">
 

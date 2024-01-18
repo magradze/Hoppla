@@ -20,7 +20,7 @@ const page: FC<pageProps> = async () => {
     const {...data} = await getUserAuthProvider(user?.id as string)
 
     return (
-        <div className="page-wrapper h-auto pt-8 lg:flex lg:gap-x-16 lg:px-8 alk-sanet">
+        <div className="page-wrapper h-auto pt-8 lg:flex lg:gap-x-16 lg:px-8 fira-go">
             <SidebarMenu/>
             <main className="px-4 sm:px-6 lg:flex-auto lg:px-0">
                 <div className="mx-auto max-w-2xl space-y-16 sm:space-y-20 lg:mx-0 lg:max-w-none">

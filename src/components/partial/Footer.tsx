@@ -140,19 +140,19 @@ const Footer = async () => {
                     <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
                         <div className="md:grid md:grid-cols-2 md:gap-8">
                             <div>
-                                <h3 className="text-sm font-semibold leading-6 text-gray-900 alk-sanet">დღის
+                                <h3 className="text-sm font-semibold leading-6 text-gray-900 fira-go">დღის
                                     მარშრუტები</h3>
                                 <ul role="list" className="mt-6 space-y-4">
                                     <RideLink/>
                                 </ul>
                             </div>
                             <div className="mt-10 md:mt-0">
-                                <h3 className="text-sm font-semibold leading-6 text-gray-900 alk-sanet">Hoppla Bus</h3>
+                                <h3 className="text-sm font-semibold leading-6 text-gray-900 fira-go">Hoppla Bus</h3>
                                 <ul role="list" className="mt-6 space-y-4">
                                     {ridesArrayUnique.map((ride: string, index: number) => (
                                         <li key={index}>
                                             <Link href="#"
-                                                  className="text-sm leading-6 text-gray-600 hover:text-gray-900 alk-sanet">
+                                                  className="text-sm leading-6 text-gray-600 hover:text-gray-900 fira-go">
                                                 {ride}
                                             </Link>
                                         </li>
@@ -162,7 +162,7 @@ const Footer = async () => {
                         </div>
                         <div className="md:grid md:grid-cols-2 md:gap-8">
                             <div>
-                                <h3 className="text-sm font-semibold leading-6 text-gray-900 alk-sanet">ბლოგი</h3>
+                                <h3 className="text-sm font-semibold leading-6 text-gray-900 fira-go">ბლოგი</h3>
                                 <ul role="list" className="mt-6 space-y-4">
                                     {navigation.company.map((item) => (
                                         <li key={item.name}>
@@ -175,7 +175,7 @@ const Footer = async () => {
                                 </ul>
                             </div>
                             <div className="mt-10 md:mt-0">
-                                <h3 className="text-sm font-semibold leading-6 text-gray-900 alk-sanet">გაიგე მეტი</h3>
+                                <h3 className="text-sm font-semibold leading-6 text-gray-900 fira-go">გაიგე მეტი</h3>
                                 <ul role="list" className="mt-6 space-y-4">
                                     {navigation.legal.map((item) => (
                                         <li key={item.name}>

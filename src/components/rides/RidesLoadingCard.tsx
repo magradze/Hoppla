@@ -15,21 +15,21 @@ const RideCard = () => {
                                 <Skeleton className="w-8 h-4"/>
                             </small>
                         </div>
-                        <div className="text-lg lg:text-2xl font-semibold alk-sanet">
+                        <div className="text-lg lg:text-2xl font-semibold fira-go">
                             <Skeleton className="w-12 h-4"/>
                         </div>
                     </div>
                     <div className="flex flex-col justify-between">
                         <div className="flex items-center gap-2">
                             <Skeleton className="w-4 h-4"/>
-                            <h3 className="text-md lg:text-xl font-bold alk-sanet">
+                            <h3 className="text-md lg:text-xl font-bold fira-go">
                                 <Skeleton className="w-32 h-4"/>
                             </h3>
                         </div>
 
                         <div className="flex items-center gap-2">
                             <Skeleton className="w-4 h-4"/>
-                            <h3 className="text-md lg:text-xl font-bold alk-sanet">
+                            <h3 className="text-md lg:text-xl font-bold fira-go">
                                 <Skeleton className="w-32 h-4"/>
                             </h3>
                         </div>
@@ -46,7 +46,7 @@ const RideCard = () => {
                     </div>
                     <div className="flex flex-col gap-2">
                         <div
-                            className="text-sm lg:text-lg font-semibold text-gray-600 alk-sanet">
+                            className="text-sm lg:text-lg font-semibold text-gray-600 fira-go">
                             <Skeleton className="w-32 h-4"/>
                         </div>
                         <div className="text-[10px] lg:text-xs text-gray-400">

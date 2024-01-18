@@ -37,7 +37,7 @@ const AddCarModal = () => {
                     {(onClose) => (
                         <>
                             <ModalHeader className="flex flex-col gap-1">
-                                <h2 className="font-bold text-xl text-secondary alk-sanet">ავტომობილის დამატება</h2>
+                                <h2 className="font-bold text-xl text-secondary fira-go">ავტომობილის დამატება</h2>
                             </ModalHeader>
                             <ModalBody>
                                 <AddCarForm onClose={onClose}/>

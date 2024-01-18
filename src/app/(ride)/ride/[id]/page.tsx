@@ -82,23 +82,23 @@ const page: FC<pageProps> = async ({params}) => {
 
     return (
         <div className="page-wrapper py-8 flex flex-col items-center">
-            <h3 className="text-xl lg:text-3xl alk-sanet text-primary">{moment(ride?.startDate).format("LL")}</h3>
-            <h1 className="text-3xl lg:text-6xl alk-sanet">{ride?.name}</h1>
+            <h3 className="text-xl lg:text-3xl fira-go text-primary">{moment(ride?.startDate).format("LL")}</h3>
+            <h1 className="text-3xl lg:text-6xl fira-go">{ride?.name}</h1>
 
             <RideDetailMap from={ride?.from} to={ride?.to}/>
 
             <div className="flex flex-row justify-between w-full bg-gray-100 px-4 py-2 rounded-xl">
                 <div className="flex flex-col items-center lg:items-start">
-                    <span className="text-xs alk-sanet">გამგზავრება</span>
-                    <span className="text-xl alk-sanet">{ride?.startTime} სთ</span>
+                    <span className="text-xs fira-go">გამგზავრება</span>
+                    <span className="text-xl fira-go">{ride?.startTime} სთ</span>
                 </div>
                 <div className="flex flex-col items-center">
-                    <span className="text-xs alk-sanet">მგზავრობა</span>
-                    <span className="text-xl alk-sanet">{duration} სთ</span>
+                    <span className="text-xs fira-go">მგზავრობა</span>
+                    <span className="text-xl fira-go">{duration} სთ</span>
                 </div>
                 <div className="flex flex-col items-center lg:items-end">
-                    <span className="text-xs alk-sanet">ჩასვლა</span>
-                    <span className="text-xl alk-sanet">{arrivalTimeWithMoment} სთ</span>
+                    <span className="text-xs fira-go">ჩასვლა</span>
+                    <span className="text-xl fira-go">{arrivalTimeWithMoment} სთ</span>
                 </div>
             </div>
 
@@ -106,7 +106,7 @@ const page: FC<pageProps> = async ({params}) => {
                 <div className="flex flex-col items-start space-y-6">
                     <div className="flex items-start">
                         <User
-                            className="alk-sanet"
+                            className="fira-go"
                             name={user?.name}
                             description={(
                                 <Link href="#" size="sm">
@@ -145,13 +145,13 @@ const page: FC<pageProps> = async ({params}) => {
                         />
 
                     </div>
-                    <div className="alk-sanet">
+                    <div className="fira-go">
                         <span className="text-lg">ავტომობილი:</span>
                         <div className="text-gray-400">
                             {car?.color} {car?.brand} {car?.model} {car?.year}
                         </div>
                     </div>
-                    <div className="text-xs alk-sanet">
+                    <div className="text-xs fira-go">
                         <span className="text-lg">წესები:</span>
                         <RideRules rules={rules}/>
                     </div>
@@ -159,8 +159,8 @@ const page: FC<pageProps> = async ({params}) => {
                 <div className="flex flex-col items-start space-y-2">
 
                     <div className="lg:self-end flex flex-col gap-2">
-                        <span className="lg:self-end alk-sanet">ფასი</span>
-                        <span className="text-5xl alk-sanet">{
+                        <span className="lg:self-end fira-go">ფასი</span>
+                        <span className="text-5xl fira-go">{
                             // @ts-ignore
                             ride?.price as number / ride?.seats as number
                         }₾</span>

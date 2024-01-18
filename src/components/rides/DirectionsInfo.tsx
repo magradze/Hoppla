@@ -16,7 +16,7 @@ const DirectionsInfo = ({
                             stopPlaceField
                         }: IDirectionsInfo) => {
     return (
-        <ul role="list" className="overflow-y-auto px-6 alk-sanet text-sm bg-gray-100 rounded-t-md">
+        <ul role="list" className="overflow-y-auto px-6 fira-go text-sm bg-gray-100 rounded-t-md">
             <li className="flex space-x-6 py-6">
                 <div className="flex flex-row gap-4 justify-center items-center">
                     <MapPin color={"#e84e3e"}/>

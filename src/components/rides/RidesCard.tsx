@@ -35,7 +35,7 @@ const RideCard = async ({...ride}: IRide) => {
                     <div className="flex flex-row space-x-6 p-4">
                         <div className="flex flex-col justify-between space-y-4">
                             <div className="flex flex-col">
-                        <span className="text-lg lg:text-lg font-semibold alk-sanet text-primary">
+                        <span className="text-lg lg:text-lg font-semibold fira-go text-primary">
                             {ride.startTime}
                         </span>
                                 <small className="text-gray-400 text-sm lg:text-md">
@@ -43,12 +43,12 @@ const RideCard = async ({...ride}: IRide) => {
                                 </small>
                             </div>
                             <div
-                                className="text-lg lg:text-lg font-semibold alk-sanet text-primary">{arrivalTimeWithMoment}</div>
+                                className="text-lg lg:text-lg font-semibold fira-go text-primary">{arrivalTimeWithMoment}</div>
                         </div>
                         <div className="flex flex-col justify-between">
                             <div className="flex items-center gap-2">
                                 <SquareDot className="text-primary"/>
-                                <h3 className="text-md lg:text-md font-normal alk-sanet text-gray-600">
+                                <h3 className="text-md lg:text-md font-normal fira-go text-gray-600">
                                     {ride.from}
                                 </h3>
                             </div>
@@ -57,7 +57,7 @@ const RideCard = async ({...ride}: IRide) => {
                                 <Waypoints/>
                                 <Popover showArrow placement="right" backdrop="opaque">
                                     <PopoverTrigger>
-                                        <h3 className="text-sm alk-sanet">
+                                        <h3 className="text-sm fira-go">
                                             {ride.stops.length} <small> გაჩერება</small>
                                         </h3>
                                     </PopoverTrigger>
@@ -69,7 +69,7 @@ const RideCard = async ({...ride}: IRide) => {
                                                         <div key={index}
                                                              className="flex flex-row items-center gap-2 p-4">
                                                             <SquareDot className="text-primary"/>
-                                                            <h3 className="text-sm alk-sanet">
+                                                            <h3 className="text-sm fira-go">
                                                                 {stop.name}
                                                             </h3>
                                                         </div>
@@ -82,7 +82,7 @@ const RideCard = async ({...ride}: IRide) => {
                             </div>
                             <div className="flex items-center gap-2">
                                 <SquareDot className="text-primary"/>
-                                <h3 className="text-md lg:text-md font-normal alk-sanet text-gray-600">
+                                <h3 className="text-md lg:text-md font-normal fira-go text-gray-600">
                                     {ride.to}
                                 </h3>
                             </div>
@@ -106,7 +106,7 @@ const RideCard = async ({...ride}: IRide) => {
                         </div>
                         <div className="flex flex-col -space-y-2 lg:space-y-0">
                             <div
-                                className="text-sm lg:text-md font-medium text-gray-600 alk-sanet">{ride.driver.name}</div>
+                                className="text-sm lg:text-md font-medium text-gray-600 fira-go">{ride.driver.name}</div>
                             <div className="text-[10px] lg:text-xs text-gray-400">{car?.brand} {car?.model}</div>
                         </div>
                     </div>

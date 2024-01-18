@@ -211,7 +211,7 @@ const AddCarForm = ({...props}: {
                                     <Autocomplete
                                         label="მარკა"
                                         placeholder="აირჩიეთ მარკა"
-                                        className="max-w-full alk-sanet"
+                                        className="max-w-full fira-go"
                                         defaultItems={cars.map((car) => ({label: car.brand, value: car.brand}))}
                                         onSelectionChange={(item) => {
                                             setSelectedBrand(item ? item.toString() : null);
@@ -221,7 +221,7 @@ const AddCarForm = ({...props}: {
                                         {(item) => <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>}
                                     </Autocomplete>
                                 </FormControl>
-                                <FormMessage className="alk-sanet text-[10px]"/>
+                                <FormMessage className="fira-go text-[10px]"/>
                             </FormItem>
                         )}
                     />
@@ -234,7 +234,7 @@ const AddCarForm = ({...props}: {
                                     <Autocomplete
                                         label="მოდელი"
                                         placeholder="აირჩიეთ მოდელი"
-                                        className="max-w-full alk-sanet"
+                                        className="max-w-full fira-go"
                                         defaultItems={selectedBrand ? cars.find((car) => car.brand === selectedBrand)?.models.map((model) => ({
                                             label: model,
                                             value: model
@@ -246,7 +246,7 @@ const AddCarForm = ({...props}: {
                                     </Autocomplete>
 
                                 </FormControl>
-                                <FormMessage className="alk-sanet text-[10px]"/>
+                                <FormMessage className="fira-go text-[10px]"/>
                             </FormItem>
                         )}
                     />
@@ -256,10 +256,10 @@ const AddCarForm = ({...props}: {
                         render={({field}) => (
                             <FormItem>
                                 <FormControl>
-                                    <Input className="max-w-full alk-sanet" type="number" label="წელი"
+                                    <Input className="max-w-full fira-go" type="number" label="წელი"
                                            placeholder="2024" {...field}/>
                                 </FormControl>
-                                <FormMessage className="alk-sanet text-[10px]"/>
+                                <FormMessage className="fira-go text-[10px]"/>
                             </FormItem>
                         )}
                     />
@@ -269,16 +269,16 @@ const AddCarForm = ({...props}: {
                         render={({field}) => (
                             <FormItem>
                                 <FormControl>
-                                    <Input className="max-w-full alk-sanet" type="text" label="არეგისტრაციო ნომერი"
+                                    <Input className="max-w-full fira-go" type="text" label="არეგისტრაციო ნომერი"
                                            placeholder="TE-001-ST" {...field}/>
                                 </FormControl>
-                                <FormMessage className="alk-sanet text-[10px]"/>
+                                <FormMessage className="fira-go text-[10px]"/>
                             </FormItem>
                         )}
                     />
 
                     <div>
-                        <h2 className="text-sm font-medium text-gray-900 alk-sanet">ფერი</h2>
+                        <h2 className="text-sm font-medium text-gray-900 fira-go">ფერი</h2>
                         <FormField
                             name="color"
                             render={({field: {value, onChange}}) => (
@@ -315,17 +315,17 @@ const AddCarForm = ({...props}: {
                                             </div>
                                         </RadioGroup>
                                     </FormControl>
-                                    <FormMessage className="alk-sanet text-[10px]"/>
+                                    <FormMessage className="fira-go text-[10px]"/>
                                 </FormItem>
                             )}
                         />
                     </div>
 
                     <ModalFooter>
-                        <Button color="danger" variant="light" onPress={props.onClose} className="alk-sanet">
+                        <Button color="danger" variant="light" onPress={props.onClose} className="fira-go">
                             გაუქმება
                         </Button>
-                        <Button color="primary" variant="solid" className="alk-sanet" type="submit">
+                        <Button color="primary" variant="solid" className="fira-go" type="submit">
                             დამატება
                         </Button>
                     </ModalFooter>

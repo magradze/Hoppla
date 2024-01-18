@@ -6,7 +6,7 @@ const RidesNotFound = () => {
     return (
         <div className="flex flex-col-reverse lg:flex-col items-center justify-center px-8 mt-0 col-span-2">
             <div className="w-full">
-                <h1 className="text-xl lg:text-2xl font-semibold text-gray-800 alk-sanet">მსუბუქი
+                <h1 className="text-xl lg:text-2xl font-semibold text-gray-800 fira-go">მსუბუქი
                     ავტომობილები ამ
                     თარიღისთვის ვერ
                     მოიძებნა</h1>

@@ -12,7 +12,7 @@ const PageHeader = ({image, title, subtitle}: IPageHeader) => {
             />
             <div className="absolute inset-0 bg-black bg-opacity-30"/>
             <div className="absolute inset-0 flex justify-center items-center">
-                <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-white alk-sanet">{title}</h1>
+                <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-white fira-go">{title}</h1>
             </div>
         </div>
     );

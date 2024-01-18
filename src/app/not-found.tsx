@@ -53,7 +53,7 @@ const social = [
 export default function NotFound() {
     return (
         <div className=" pt-24">
-            <main className=" page-wrapper px-6 pb-16 pt-10 sm:pb-24 lg:px-8 alk-sanet">
+            <main className=" page-wrapper px-6 pb-16 pt-10 sm:pb-24 lg:px-8 fira-go">
                 <div className="mx-auto max-w-2xl text-center">
                     <p className="text-6xl font-semibold leading-8 text-primary">404</p>
                     <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">ეს გვერდი არ

@@ -71,7 +71,7 @@ const AddRide = () => {
             <div
                 className="px-0 lg:px-8 page-wrapper absolute bottom-0 lg:relative w-full  grid grid-cols-1 gap-4 lg:grid-cols-2 py-0 z-20">
                 <div className="flex flex-col justify-center bg-white p-4 lg:p-8 rounded-t-md lg:rounded-md">
-                    <h2 className="text-sm lg:text-lg font-semibold text-gray-900 mb-6 alk-sanet">დაზოგეთ <span
+                    <h2 className="text-sm lg:text-lg font-semibold text-gray-900 mb-6 fira-go">დაზოგეთ <span
                         className="text-primary font-semibold text-xl">{price.toFixed(2)}</span> ლარამდე
                         თქვენი
                         პირველი მგზავრობისას.</h2>

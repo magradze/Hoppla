@@ -60,7 +60,7 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)}
-                  className={cn(className, "rounded-md grid grid-cols-1 lg:grid-cols-12 lg:justify-between items-center w-full alk-sanet")}>
+                  className={cn(className, "rounded-md grid grid-cols-1 lg:grid-cols-12 lg:justify-between items-center w-full fira-go")}>
 
                 <FormField
                     name="startLocation"
@@ -78,7 +78,7 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                                     className="block w-full h-full rounded-t-md rounded-b-none md:rounded-l-md md:rounded-r-none border border-gray-100 border-b-0 md:border-b py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 space-y-0"
                                 />
                             </FormControl>
-                            <FormMessage className="alk-sanet text-[10px]"/>
+                            <FormMessage className="fira-go text-[10px]"/>
                         </FormItem>
                     )}
                 />
@@ -106,7 +106,7 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                                     className="block w-full h-full rounded-none border border-gray-100 md:border-l-0 border-b-0 md:border-b py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                 />
                             </FormControl>
-                            <FormMessage className="alk-sanet text-[10px]"/>
+                            <FormMessage className="fira-go text-[10px]"/>
                         </FormItem>
                     )}
                 />

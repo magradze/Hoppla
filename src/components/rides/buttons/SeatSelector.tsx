@@ -27,11 +27,11 @@ const SeatSelector = ({setSeats, seats, disabled}: ISeatSelector) => {
                 </button>
                 <input type="text" id="bedrooms-input" data-input-counter-min="1" data-input-counter-max="5"
                        aria-describedby="helper-text-explanation"
-                       className="bg-transparent h-11 font-medium text-center text-secondary text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pb-6 rounded-none alk-sanet"
+                       className="bg-transparent h-11 font-medium text-center text-secondary text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pb-6 rounded-none fira-go"
                        placeholder="" value={seats} required disabled/>
                 <div
                     className="absolute bottom-1 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 flex items-center text-xs text-secondary space-x-1 rtl:space-x-reverse">
-                    <span className="alk-sanet">მგზავრი</span>
+                    <span className="fira-go">მგზავრი</span>
                 </div>
                 <button type="button" id="increment-button" data-input-counter-increment="bedrooms-input"
                         className="bg-secondary hover:bg-secondary-hover text-white rounded-md py-3 px-4 h-11 focus:ring-gray-100 focus:outline-none disabled:opacity-50"

@@ -14,7 +14,7 @@ const PriceInput = ({
                         setNewPrice
                     }: PriceInputProps) => {
     return (
-        <div className="mb-6 alk-sanet">
+        <div className="mb-6 fira-go">
             <Label htmlFor="price">
                 ფასი
             </Label>
@@ -33,12 +33,12 @@ const PriceInput = ({
                     onChange={(e) => setNewPrice(parseFloat(e.target.value))}
                 />
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                  <span className="text-gray-500 sm:text-sm alk-sanet" id="price-currency">
+                                  <span className="text-gray-500 sm:text-sm fira-go" id="price-currency">
                                     ლარი
                                   </span>
                 </div>
             </div>
-            <p className="mt-1 ml-2 text-[9px] text-gray-400 alk-sanet" id="price-description">
+            <p className="mt-1 ml-2 text-[9px] text-gray-400 fira-go" id="price-description">
                 თუ შემოთავაზებული მგზავრობის ღირებულება არ შეესაბამება თქვენს მოთხოვნებს, შეცვალეთ
                 სასურველი რაოდენობით.
             </p>

@@ -67,7 +67,7 @@ const EditProfileForm = ({user}: { user: any }) => {
                                         type="text"
                                     />
                                 </FormControl>
-                                <FormMessage className="alk-sanet text-[10px]"/>
+                                <FormMessage className="fira-go text-[10px]"/>
                             </FormItem>
                         )}
                     />
@@ -84,7 +84,7 @@ const EditProfileForm = ({user}: { user: any }) => {
                                         type="email"
                                     />
                                 </FormControl>
-                                <FormMessage className="alk-sanet text-[10px]"/>
+                                <FormMessage className="fira-go text-[10px]"/>
                             </FormItem>
                         )}
                     />
@@ -101,7 +101,7 @@ const EditProfileForm = ({user}: { user: any }) => {
                                         type="tel"
                                     />
                                 </FormControl>
-                                <FormMessage className="alk-sanet text-[10px]"/>
+                                <FormMessage className="fira-go text-[10px]"/>
                             </FormItem>
                         )}
                     />
@@ -118,7 +118,7 @@ const EditProfileForm = ({user}: { user: any }) => {
                                         type="text"
                                     />
                                 </FormControl>
-                                <FormMessage className="alk-sanet text-[10px]"/>
+                                <FormMessage className="fira-go text-[10px]"/>
                             </FormItem>
                         )}
                     />

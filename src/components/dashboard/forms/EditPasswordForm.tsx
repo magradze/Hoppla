@@ -68,7 +68,7 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
                                                     disabled={!editing}
                                                 />
                                             </FormControl>
-                                            <FormMessage className="alk-sanet text-[10px]"/>
+                                            <FormMessage className="fira-go text-[10px]"/>
                                         </FormItem>
                                     )}
                                 />
@@ -86,7 +86,7 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
                                                         disabled={!editing}
                                                     />
                                                 </FormControl>
-                                                <FormMessage className="alk-sanet text-[10px]"/>
+                                                <FormMessage className="fira-go text-[10px]"/>
                                             </FormItem>
                                         )}
                                     />

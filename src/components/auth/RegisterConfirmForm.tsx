@@ -42,7 +42,7 @@ const RegisterConfirmForm = () => {
                     name="name"
                     render={({field}) => (
                         <FormItem>
-                            <FormLabel className="alk-sanet">
+                            <FormLabel className="fira-go">
                                 სახელი
                             </FormLabel>
                             <FormControl>
@@ -53,7 +53,7 @@ const RegisterConfirmForm = () => {
                                     value={form.getValues("name")}
                                 />
                             </FormControl>
-                            <FormMessage className="alk-sanet text-[10px]"/>
+                            <FormMessage className="fira-go text-[10px]"/>
                         </FormItem>
                     )}
                 />
@@ -62,7 +62,7 @@ const RegisterConfirmForm = () => {
                     name="email"
                     render={({field}) => (
                         <FormItem>
-                            <FormLabel className="alk-sanet">
+                            <FormLabel className="fira-go">
                                 ელ.ფოსტა
                             </FormLabel>
                             <FormControl>
@@ -73,7 +73,7 @@ const RegisterConfirmForm = () => {
                                     disabled
                                 />
                             </FormControl>
-                            <FormMessage className="alk-sanet text-[10px]"/>
+                            <FormMessage className="fira-go text-[10px]"/>
                         </FormItem>
                     )}
                 />
@@ -82,7 +82,7 @@ const RegisterConfirmForm = () => {
                     name="phone"
                     render={({field}) => (
                         <FormItem>
-                            <FormLabel className="alk-sanet">
+                            <FormLabel className="fira-go">
                                 ტელეფონი
                             </FormLabel>
                             <FormControl>
@@ -95,7 +95,7 @@ const RegisterConfirmForm = () => {
                                             id="country"
                                             name="country"
                                             autoComplete="country"
-                                            className="h-full rounded-md border-0 bg-transparent py-0 pl-3 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm alk-sanet"
+                                            className="h-full rounded-md border-0 bg-transparent py-0 pl-3 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm fira-go"
                                         >
                                             <option>საქ</option>
                                         </select>
@@ -108,7 +108,7 @@ const RegisterConfirmForm = () => {
                                     />
                                 </div>
                             </FormControl>
-                            <FormMessage className="alk-sanet text-[10px]"/>
+                            <FormMessage className="fira-go text-[10px]"/>
                         </FormItem>
                     )}
                 />
@@ -117,7 +117,7 @@ const RegisterConfirmForm = () => {
                     name="address"
                     render={({field}) => (
                         <FormItem>
-                            <FormLabel className="alk-sanet">
+                            <FormLabel className="fira-go">
                                 მისამართი
                             </FormLabel>
                             <FormControl>
@@ -127,7 +127,7 @@ const RegisterConfirmForm = () => {
                                     type="text"
                                 />
                             </FormControl>
-                            <FormMessage className="alk-sanet text-[10px]"/>
+                            <FormMessage className="fira-go text-[10px]"/>
                         </FormItem>
                     )}
                 />
@@ -136,7 +136,7 @@ const RegisterConfirmForm = () => {
                     name="birthday"
                     render={({field}) => (
                         <FormItem>
-                            <FormLabel className="alk-sanet">
+                            <FormLabel className="fira-go">
                                 დაბადების თარიღი
                             </FormLabel>
                             <FormControl>
@@ -146,7 +146,7 @@ const RegisterConfirmForm = () => {
                                     type="date"
                                 />
                             </FormControl>
-                            <FormMessage className="alk-sanet text-[10px]"/>
+                            <FormMessage className="fira-go text-[10px]"/>
                         </FormItem>
                     )}
                 />

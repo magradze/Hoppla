@@ -15,7 +15,7 @@ const DateTimeInput = ({
     return (
         <div className="-mx-3 flex flex-wrap">
             <div className="w-full px-3 sm:w-1/2">
-                <div className="mb-5 alk-sanet">
+                <div className="mb-5 fira-go">
                     <Label htmlFor="dateToLeave">
                         გასვლის დღე
                     </Label>
@@ -32,7 +32,7 @@ const DateTimeInput = ({
                 </div>
             </div>
             <div className="w-full px-3 sm:w-1/2">
-                <div className="mb-5 alk-sanet">
+                <div className="mb-5 fira-go">
                     <Label htmlFor="time">
                         გასვლის დრო
                     </Label>
