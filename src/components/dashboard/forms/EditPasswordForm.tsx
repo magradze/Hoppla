@@ -1,5 +1,5 @@
 "use client"
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Form, FormControl, FormField, FormItem, FormMessage, FormLabel} from "@/components/ui/form";
 import {useForm} from "react-hook-form";
 import * as z from "zod";
@@ -12,7 +12,7 @@ import Image from "next/image";
 import PasswordChangeInputGroup from "@/components/dashboard/inputs/PasswordChangeInputGroup";
 import {Button} from "@/components/ui/button";
 import {Check, Edit, X} from "lucide-react";
-import {updateUserPassword} from "@/lib/data/user";
+import {updateUserPassword} from "@/lib/actions/user";
 
 const providers = [
     {
@@ -140,7 +140,7 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
                 )
                 :
                 (
-                    <div className="mt-4 space-y-4 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">
+                    <div className="mt-4 space-y-4 divide-y divide-gray-100 text-sm leading-6">
                         <p className="text-gray-500 py-4 flex items-center">
                             თქვენ ავტორიზბული ხართ
                             {providers.map((item) => (

@@ -1,6 +1,7 @@
 import {StaticImport} from "next/dist/shared/lib/get-img-props";
 
 export interface IRide {
+    id: string;
     name: string;
     description: string | null;
     from: string;
@@ -22,6 +23,9 @@ export interface IRide {
     };
     stops: {
         name: string;
+    }[];
+    rules: {
+        id: string;
     }[];
 }
 
