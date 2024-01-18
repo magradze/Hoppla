@@ -112,7 +112,7 @@ model RideRule {
   id        String    @id @default(cuid())
   rideId    String    @map("ride_id")
   ride      Ride      @relation(fields: [rideId], references: [id], onDelete: Cascade)
-  rule      String
+  title     String
   value     String
   createdAt DateTime? @map("created_at")
 
