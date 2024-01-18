@@ -1,7 +1,6 @@
 "use server"
 import prisma from "@/lib/prisma";
 import {redirect} from 'next/navigation'
-import {ISearchProps} from "@/interfaces/ISearchProps";
 import moment from "moment";
 import {sortUnique} from "@/lib/tools/sortUnique";
 
@@ -141,7 +140,7 @@ export const getRideByFromAndTo = async (from: string | undefined, to: string) =
 }
 
 // find ride by from and to and date and seats
-export const getRideByFromAndToAndDateAndSeats = async (from: string | undefined, to: string, date: string, seatsNumber: number, sort?: string, filter?: string) => {
+export const getRideByFromAndToAndDateAndSeats = async (from: string | undefined, to: string, date: string, seatsNumber: number, sort?: string,) => {
 
     try {
         return await prisma.ride.findMany({
@@ -209,7 +208,7 @@ export const getRideLinks = async () => {
 
     const ridesArray = rides?.map((ride) => ride?.name)
 
-    return sortUnique(ridesArray)?.map((ride: any, index: number) => (
+    return sortUnique(ridesArray)?.map((ride: any) => (
         {
             rideName: ride,
             rideCount: ridesArray?.filter((rideName) => rideName === ride).length,
