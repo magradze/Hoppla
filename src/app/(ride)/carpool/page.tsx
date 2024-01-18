@@ -1,6 +1,7 @@
 import SearchBox from "@/components/partial/SearchBox";
 import InfoBlock from "@/components/shared/InfoBlock";
 import phoneFrame from '@/assets/phone-frame.svg'
+import DailyRides from "@/components/rides/DailyRides";
 
 const CarPool = async () => {
     return (
@@ -9,7 +10,7 @@ const CarPool = async () => {
             <InfoBlock image={phoneFrame} title={"ისიამოვნე მოგზაურობის უკეთესი გამოცდილებით, Hoopla-სთან ერთად."}
                        subtitle="იმოგზაურეთ საქართველოს ნებისმიერი მიმართულებით, მიიღეთ უახლესი ინფორმაცია და დაჯავშნეთ ბილეთები სმარტფონით."/>
             <div className="page-wrapper">
-                test
+                <DailyRides/>
             </div>
         </div>
     );

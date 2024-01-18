@@ -2,6 +2,8 @@
 import prisma from "@/lib/prisma";
 import {redirect} from 'next/navigation'
 import {ISearchProps} from "@/interfaces/ISearchProps";
+import moment from "moment";
+import {sortUnique} from "@/lib/tools/sortUnique";
 
 // find all rides
 export const getRides = async () => {
@@ -200,4 +202,19 @@ export const addRide = async (data: any) => {
     });
 
     redirect('/carpool')
+}
+
+export const getRideLinks = async () => {
+    const rides = await getRideByDate(moment(new Date()).format("YYYY-MM-DD"))
+
+    const ridesArray = rides?.map((ride) => ride?.name)
+
+    return sortUnique(ridesArray)?.map((ride: any, index: number) => (
+        {
+            rideName: ride,
+            rideCount: ridesArray?.filter((rideName) => rideName === ride).length,
+            rideFrom: ride.split(' -')[0],
+            rideTo: ride.split('- ')[1],
+        }
+    ))
 }
