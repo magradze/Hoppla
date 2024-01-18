@@ -70,7 +70,14 @@
     }
 }
 
+@font-face {
+    font-family: "FiraGO";
+    src: url("/fonts/firago/FiraGO-Regular.woff2") format("woff2"),
+    url("/fonts/firago/FiraGO-Regular.woff") format("woff");
+}
+
 @layer base {
+
 
     html,
     body {
@@ -86,7 +93,8 @@
     }
 
     .alk-sanet {
-        font-family: "ALK Sanet", sans-serif;
+        @apply font-FiraGO;
+        font-feature-settings: "case" 1;
     }
 
     .page-wrapper {
