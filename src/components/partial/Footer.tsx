@@ -92,19 +92,13 @@ const navigation = {
 
 const Footer = async () => {
 
-    const rides = await getRideByDate(moment(new Date()).format("YYYY-MM-DD"))
-
-    const ridesArray = rides?.map((ride) => ride?.name)
-
-    const ridesArrayUnique = sortUnique(ridesArray)
-
     return (
         <footer className="bg-white" aria-labelledby="footer-heading">
             <h2 id="footer-heading" className="sr-only">
                 Footer
             </h2>
             <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-24">
-                <div className="xl:grid xl:grid-cols-3 xl:gap-8">
+                <div className="lg:grid lg:grid-cols-3 lg:gap-8">
                     <div className="space-y-8">
                         <Image
                             src={hopplaLogo as any}
@@ -125,56 +119,39 @@ const Footer = async () => {
                             ))}
                         </div>
                     </div>
-                    <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-                        <div className="md:grid md:grid-cols-2 md:gap-8">
-                            <div>
-                                <h3 className="text-lg font-semibold leading-6 text-gray-900 fira-go">დღის
-                                    მარშრუტები</h3>
-                                <ul role="list" className="mt-6 space-y-4">
-                                    <RideLink/>
-                                </ul>
-                            </div>
-                            <div className="mt-10 md:mt-0">
-                                <h3 className="text-lg font-semibold leading-6 text-gray-900 fira-go">Hoppla Bus</h3>
-                                <ul role="list" className="mt-6 space-y-4">
-                                    {ridesArrayUnique.map((ride: string, index: number) => (
-                                        <li key={index}>
-                                            <Link href="#"
-                                                  className="text-sm leading-6 text-gray-600 hover:text-gray-900 fira-go">
-                                                {ride}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                    <div className="mt-16 grid md:grid-cols-3 col-span-2 gap-8 lg:mt-0">
+                        <div>
+                            <h3 className="text-lg font-semibold leading-6 text-gray-900 fira-go">დღის
+                                მარშრუტები</h3>
+                            <ul role="list" className="mt-6 space-y-4">
+                                <RideLink/>
+                            </ul>
                         </div>
-                        <div className="md:grid md:grid-cols-2 md:gap-8">
-                            <div>
-                                <h3 className="text-lg font-semibold leading-6 text-gray-900 fira-go">ბლოგი</h3>
-                                <ul role="list" className="mt-6 space-y-4">
-                                    {navigation.blog.map((item) => (
-                                        <li key={item.name}>
-                                            <Link href={item.href}
-                                                  className="text-sm leading-6 text-gray-600 hover:text-gray-900">
-                                                {item.name}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div className="mt-10 md:mt-0">
-                                <h3 className="text-lg font-semibold leading-6 text-gray-900 fira-go">გაიგე მეტი</h3>
-                                <ul role="list" className="mt-6 space-y-4">
-                                    {navigation.legal.map((item) => (
-                                        <li key={item.name}>
-                                            <Link href={item.href}
-                                                  className="text-sm leading-6 text-gray-600 hover:text-gray-900 fira-go">
-                                                {item.name}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                        <div>
+                            <h3 className="text-lg font-semibold leading-6 text-gray-900 fira-go">ბლოგი</h3>
+                            <ul role="list" className="mt-6 space-y-4">
+                                {navigation.blog.map((item) => (
+                                    <li key={item.name}>
+                                        <Link href={item.href}
+                                              className="text-sm leading-6 text-gray-600 hover:text-gray-900">
+                                            {item.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="mt-10 md:mt-0">
+                            <h3 className="text-lg font-semibold leading-6 text-gray-900 fira-go">გაიგე მეტი</h3>
+                            <ul role="list" className="mt-6 space-y-4">
+                                {navigation.legal.map((item) => (
+                                    <li key={item.name}>
+                                        <Link href={item.href}
+                                              className="text-sm leading-6 text-gray-600 hover:text-gray-900 fira-go">
+                                            {item.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                 </div>
