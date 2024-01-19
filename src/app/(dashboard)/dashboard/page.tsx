@@ -10,7 +10,7 @@ import MyRides from "@/components/dashboard/MyRides";
 import {getCarByOwner} from "@/lib/actions/cars";
 
 import type {Metadata, ResolvingMetadata} from 'next'
-import {getSettings, getSettingsByKey} from "@/lib/actions/settings";
+import {getSettingsByKey} from "@/lib/actions/settings";
 
 type Props = {
     params: { id: string }
@@ -18,8 +18,8 @@ type Props = {
 }
 
 export async function generateMetadata(
-    {params, searchParams}: Props,
-    parent: ResolvingMetadata
+    // {params, searchParams}: Props,
+    // parent: ResolvingMetadata
 ): Promise<Metadata> {
 
     const settings = await getSettingsByKey(['site_name', 'site_description'])
