@@ -141,7 +141,7 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
                 :
                 (
                     <div className="mt-4 space-y-4 divide-y divide-gray-100 text-sm leading-6">
-                        <p className="text-gray-500 py-4 flex items-center">
+                        <p className="text-gray-500 py-4 flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-0">
                             თქვენ ავტორიზბული ხართ
                             {providers.map((item) => (
                                 <span key={item.provider}>
