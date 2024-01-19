@@ -18,11 +18,6 @@ interface pageProps {
     }
 }
 
-const reviews = {
-    average: 3.9,
-    totalCount: 512
-}
-
 const rules = [
     {
         title: "მოწევა",
@@ -79,6 +74,14 @@ const page: FC<pageProps> = async ({params}) => {
     const user = await getUserById(ride?.userId as string)
 
     const car = await getCarById(ride?.carId as string)
+
+    // @ts-ignore
+    const ratings = user?.ratings.map(rating => rating.rating) as number[]
+
+    const reviews = {
+        average: ratings.reduce((a, b) => a + b, 0) / ratings.length || 0,
+        count: ratings.length
+    }
 
     return (
         <div className="page-wrapper py-8 flex flex-col items-center">
