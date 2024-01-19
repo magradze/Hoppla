@@ -15,6 +15,7 @@ import NumberSelector from "@/components/ui/number-selector";
 import {useRouter, useSearchParams} from "next/navigation";
 import moment from "moment";
 import 'moment/locale/ka';
+import {ka} from "date-fns/locale/ka";
 
 const SearchBox = ({className, type}: { className?: string, type: string }) => {
 
@@ -132,19 +133,32 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                                                 <CalendarDays/>
                                             </div>
                                             {field.value ? (
-                                                moment(field.value).locale('ka').format('LL')
+                                                moment(field.value).locale('ka').calendar(
+                                                    null,
+                                                    {
+                                                        sameDay: '[დღეს]',
+                                                        nextDay: '[ხვალ]',
+                                                        nextWeek: 'LL',
+                                                        lastDay: '[გუშინ]',
+                                                        lastWeek: 'LL',
+                                                        sameElse: 'LL'
+                                                    }
+                                                )
                                             ) : (
                                                 <span>Pick a date</span>
                                             )}
                                         </Button>
                                     </FormControl>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-[240px] p-0" align="start">
+                                <PopoverContent className="w-[240px] fira-go p-0" align="start">
                                     <Calendar
+                                        locale={ka}
                                         mode="single"
                                         selected={field.value}
                                         onSelect={field.onChange}
-
+                                        disabled={(date) => {
+                                            return moment(date).isBefore(moment().subtract(0, 'day'), 'day')
+                                        }}
                                         initialFocus
                                     />
                                 </PopoverContent>
