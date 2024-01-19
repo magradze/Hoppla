@@ -10,7 +10,6 @@ import {Popover, PopoverContent, PopoverTrigger} from "@nextui-org/react";
 import moment from "moment";
 import {getCarById} from "@/lib/actions/cars";
 import Link from "next/link";
-import RideRules from "@/components/rides/RideRules";
 
 const RideCard = async ({...ride}: IRide) => {
 
@@ -25,12 +24,8 @@ const RideCard = async ({...ride}: IRide) => {
     const car = await getCarById(ride.carId)
 
     return (
-        <li className="relative bg-white border border-gray-100 w-full rounded-md flex flex-col overflow-hidden hover:shadow-2xl cursor-pointer group">
+        <li className="relative bg-white border border-gray-100 w-full rounded-xl flex flex-col overflow-hidden hover:shadow-2xl cursor-pointer group">
             <Link href={`/ride/${ride.id}`}>
-                <Image
-                    src={rideCardBg} alt={ride.from}
-                    className="z-0 opacity-10 bg-cover bg-center absolute top-0 left-0 w-full h-full"
-                />
                 <div className="flex flex-row justify-between">
                     <div className="flex flex-row space-x-6 p-4">
                         <div className="flex flex-col justify-between space-y-4">
