@@ -59,29 +59,27 @@ export async function getStats(userId: string) {
         return {percent, status};
     }
 
-
     //TODO: Rating and earnings statistics are to be added
-
     return [
         {
             title: "მგზავრობა",
             value: rides.length,
             compare: {
-                percent: compareLastMonthRides(rides).status === "increase" ? `+${compareLastMonthRides(rides).percent}` : `-${compareLastMonthRides(rides).percent}`,
+                percent: compareLastMonthRides(rides).status === "increase" ? `+${compareLastMonthRides(rides).percent}` : `-${compareLastMonthRides(rides).percent}` ? `0%` : `0%`,
                 status: compareLastMonthRides(rides).status
             }
-        },
-        {
-            title: "ავტომობილები",
-            value: cars
         },
         {
             title: "შემოსავალი",
             value: `${earnings.reduce((a, b) => a + b.price, 0).toFixed(2)} ₾`,
             compare: {
-                percent: compareLastMonthEarnings(earnings).status === "increase" ? `+${compareLastMonthEarnings(earnings).percent}` : `-${compareLastMonthEarnings(earnings).percent}`,
+                percent: compareLastMonthEarnings(earnings).status === "increase" ? `+${compareLastMonthEarnings(earnings).percent}` : `-${compareLastMonthEarnings(earnings).percent}` ? parseFloat(compareLastMonthEarnings(earnings).percent) > 0 ? `-${compareLastMonthEarnings(earnings).percent}` : `0%` : `0%`,
                 status: compareLastMonthEarnings(earnings).status
             }
+        },
+        {
+            title: "ავტომობილები",
+            value: cars
         },
         {
             title: "რეიტინგი",

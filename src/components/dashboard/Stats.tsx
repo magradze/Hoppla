@@ -1,20 +1,11 @@
 import {cn} from "@/lib/utils";
 import {getStats} from "@/lib/actions/stats";
 
-const stats = [
-    {name: 'მგზავრობა', value: '150', change: '+4.75%', changeType: 'positive'},
-    {name: 'თანხა', value: '1257,35 ₾', change: '+54.02%', changeType: 'negative'},
-    {name: 'შეფასება', value: '4,8', change: '0%'},
-    {name: 'ხარჯი', value: '156.00 ₾', change: '+10.18%', changeType: 'negative'},
-]
-
 const DashboardStats = async ({userId}: { userId: string }) => {
     const stats = await getStats(userId)
 
-    console.log(stats)
-
     return (
-        <div className="border-b border-gray-100">
+        <div className="bg-white rounded-xl border border-gray-100 mt-6 lg:mt-0">
             <dl className="mx-auto grid max-w-7xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:px-2 xl:px-0">
                 {stats.map((stat, index) => (
                     <div
