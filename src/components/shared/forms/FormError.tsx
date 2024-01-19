@@ -10,7 +10,7 @@ const FormError = ({message}: FormErrorProps) => {
     if (!message) return null;
 
     return (
-        <Alert variant="destructive" className="alk-sanet">
+        <Alert variant="destructive" className="fira-go">
             <AlertTriangle className="h-4 w-4"/>
             <AlertTitle/>
             <AlertDescription>

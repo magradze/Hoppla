@@ -2,6 +2,8 @@ import * as React from "react";
 import RideConfirmForm from "@/components/rides/forms/RideConfirmForm";
 import prisma from "@/lib/prisma";
 import {getServerSession} from "next-auth";
+import {getCarByOwner} from "@/lib/actions/cars";
+import {getUserByEmail} from "@/lib/actions/user";
 
 const AddPageConfirm = async ({searchParams}: {
     searchParams: {
@@ -18,17 +20,20 @@ const AddPageConfirm = async ({searchParams}: {
 
     if (!session || !session.user) return null
 
-    const user = await prisma.user.findUnique({
-        where: {
-            email: session?.user?.email as string
-        }
-    })
+    const user = await getUserByEmail(session?.user?.email as string)
+
+    const cars = await getCarByOwner(user?.id as string)
 
     return (
         <>
             <main
                 className="page-wrapper flex flex-col-reverse lg:flex lg:min-h-full lg:flex-row-reverse gap-4 p-4 lg:p-8">
-                <RideConfirmForm user={user} searchParams={searchParams}/>
+                <RideConfirmForm
+                    user={user}
+                    // @ts-ignore
+                    cars={cars}
+                    searchParams={searchParams}
+                />
             </main>
         </>
     );

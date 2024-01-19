@@ -1,5 +1,5 @@
 "use client"
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Form, FormControl, FormField, FormItem, FormMessage, FormLabel} from "@/components/ui/form";
 import {useForm} from "react-hook-form";
 import * as z from "zod";
@@ -12,7 +12,7 @@ import Image from "next/image";
 import PasswordChangeInputGroup from "@/components/dashboard/inputs/PasswordChangeInputGroup";
 import {Button} from "@/components/ui/button";
 import {Check, Edit, X} from "lucide-react";
-import {updateUserPassword} from "@/lib/data/user";
+import {updateUserPassword} from "@/lib/actions/user";
 
 const providers = [
     {
@@ -40,20 +40,6 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
     });
 
     const [editing, setEditing] = React.useState(false);
-    const [passwordsMatch, setPasswordsMatch] = React.useState(false);
-
-
-    useEffect(() => {
-        console.log(form.getValues().newPassword)
-        console.log(form.getValues().confirmPassword)
-        if (form.getValues().newPassword === form.getValues().confirmPassword && form.getValues().newPassword !== "" && form.getValues().confirmPassword !== "") {
-            console.log("პაროლები ემთხვევა")
-            setPasswordsMatch(true)
-        }
-    }, [
-        form.getValues().newPassword,
-        form.getValues().confirmPassword
-    ])
 
     const handleSubmit = async (values: z.infer<typeof ChangePasswordScheme>) => {
         await updateUserPassword(user?.id as string, values)
@@ -82,7 +68,7 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
                                                     disabled={!editing}
                                                 />
                                             </FormControl>
-                                            <FormMessage className="alk-sanet text-[10px]"/>
+                                            <FormMessage className="fira-go text-[10px]"/>
                                         </FormItem>
                                     )}
                                 />
@@ -100,7 +86,7 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
                                                         disabled={!editing}
                                                     />
                                                 </FormControl>
-                                                <FormMessage className="alk-sanet text-[10px]"/>
+                                                <FormMessage className="fira-go text-[10px]"/>
                                             </FormItem>
                                         )}
                                     />
@@ -127,8 +113,11 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
                                         size="sm"
                                         type="submit"
                                         className="flex gap-x-1 items-center"
-                                        // make disabled if confirmPassword is not equal to newPassword or if newPassword is empty
-                                        disabled={!passwordsMatch}
+                                        onClick={() => {
+                                            form.handleSubmit(handleSubmit)
+                                            setEditing(false)
+                                            form.reset()
+                                        }}
                                     >
                                         <Check size={16}/>
                                         <span>შენახვა</span>
@@ -151,8 +140,8 @@ const EditPasswordForm = ({user, provider}: { user: any, provider: string }) => 
                 )
                 :
                 (
-                    <div className="mt-4 space-y-4 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">
-                        <p className="text-gray-500 py-4 flex items-center">
+                    <div className="mt-4 space-y-4 divide-y divide-gray-100 text-sm leading-6">
+                        <p className="text-gray-500 py-4 flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-0">
                             თქვენ ავტორიზბული ხართ
                             {providers.map((item) => (
                                 <span key={item.provider}>

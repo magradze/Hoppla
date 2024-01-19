@@ -10,7 +10,15 @@ export async function GET() {
                 stops: true
             }
         });
-        return NextResponse.json(rides);
+        return new Response(
+            JSON.stringify(rides),
+            {
+                headers: {
+                    'content-type': 'application/json'
+                },
+                status: 200,
+            }
+        );
     } catch (err) {
         return NextResponse.json({error: err});
     }

@@ -27,7 +27,7 @@ const TripAllowedAction = () => {
     return (
         <div className="mb-6">
             <label htmlFor="price"
-                   className="mb-3 block text-sm font-medium text-gray-900 alk-sanet">
+                   className="mb-3 block text-sm font-medium text-gray-900 fira-go">
                 მგზავრობის დაშვებული ქმედებები
             </label>
 
@@ -41,7 +41,7 @@ const TripAllowedAction = () => {
                                 <div className="w-full flex gap-2 items-center text-primary">
                                     {action.icon}
                                     <div
-                                        className="w-full text-sm font-semibold alk-sanet text-secondary">{action.title}</div>
+                                        className="w-full text-sm font-semibold fira-go text-secondary">{action.title}</div>
                                 </div>
                                 <div className="w-full text-xs mt-2">{action.description}
                                 </div>

@@ -45,12 +45,12 @@ const RideAddForm = ({
             setDurationQuery(duration)
         }
     }, [to, directionResponse, distance, duration, from, seats, price])
-    
+
     return (
         <>
             <dl className="flex flex-col gap-4 relative">
                 <div
-                    className="flex lg:hidden items-center gap-6 alk-sanet w-full text-gray-600 text-xs lg:text-base">
+                    className="flex lg:hidden items-center gap-6 fira-go w-full text-gray-600 text-xs lg:text-base">
                         <span className="flex items-center gap-2">
                             <Route width={18} height={18}/>
 
@@ -59,7 +59,7 @@ const RideAddForm = ({
                     <span className="flex items-center gap-2">
                             <Clock width={18} height={18}/>
 
-                            დრო: {!durationQuery ? "0:00" : convertSeconds(durationQuery)} სთ
+                            დრო: {!durationQuery ? "0:00" : convertSeconds(durationQuery)}
                         </span>
 
                 </div>
@@ -101,7 +101,7 @@ const RideAddForm = ({
                     {distanceQuery !== 0 && <SeatSelector setSeats={setSeats} seats={seats} disabled={disable}/>}
 
                     {!distanceQuery && <Button
-                        className={`bg-primary hover:bg-primaryDark h-12 lg:h-16 rounded-md border-0 px-24 py-0.5 text-white alk-sanet flex justify-center items-center`}
+                        className={`bg-primary hover:bg-primaryDark h-12 lg:h-16 rounded-md border-0 px-24 py-0.5 text-white fira-go flex justify-center items-center`}
                         disabled={disable}
                         onClick={() => {
                             if (!from?.current?.value || !to?.current?.value) return
@@ -115,7 +115,7 @@ const RideAddForm = ({
                             pathname: "/ride/add/confirm",
                             query: tripQuery
                         }}
-                        className={`bg-secondary hover:bg-secondaryDark h-12 lg:h-16 rounded-md border-0 px-24 py-0.5 text-white alk-sanet flex justify-center items-center`}
+                        className={`bg-secondary hover:bg-secondaryDark h-12 lg:h-16 rounded-md border-0 px-24 py-0.5 text-white fira-go flex justify-center items-center`}
                         aria-disabled={disable}
                     >
                         შემდეგი
@@ -125,7 +125,7 @@ const RideAddForm = ({
 
             </dl>
 
-            <div className="hidden mt-6 lg:flex items-center gap-6 alk-sanet w-full text-gray-600 text-xs lg:text-base">
+            <div className="hidden mt-6 lg:flex items-center gap-6 fira-go w-full text-gray-600 text-xs lg:text-base">
                 <span className="flex items-center gap-2">
                     <Route width={18} height={18}/>
 
@@ -134,7 +134,7 @@ const RideAddForm = ({
                 <span className="flex items-center gap-2">
                     <Clock width={18} height={18}/>
 
-                    დრო: {!durationQuery ? "0:00" : convertSeconds(durationQuery)} სთ
+                    დრო: {!durationQuery ? "00:00" : convertSeconds(durationQuery)} სთ
                 </span>
 
             </div>

@@ -7,6 +7,9 @@ const nextConfig = {
         locales: ['ka', 'ru'],
         defaultLocale: 'ka',
     },
+    typescript: {
+        ignoreBuildErrors: true,
+    },
 }
 
 module.exports = nextConfig

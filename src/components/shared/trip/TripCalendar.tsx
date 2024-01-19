@@ -55,7 +55,7 @@ function classNames(...classes: string[]) {
 const TripCalendar = () => {
     return (
         <>
-            <div className="flex items-center text-gray-900 alk-sanet">
+            <div className="flex items-center text-gray-900 fira-go">
                 <button
                     type="button"
                     className="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
@@ -72,7 +72,7 @@ const TripCalendar = () => {
                     <ChevronRightIcon className="h-5 w-5" aria-hidden="true"/>
                 </button>
             </div>
-            <div className="mt-6 grid grid-cols-7 text-xs leading-6 text-gray-500 alk-sanet">
+            <div className="mt-6 grid grid-cols-7 text-xs leading-6 text-gray-500 fira-go">
                 <div>ო</div>
                 <div>ს</div>
                 <div>ო</div>

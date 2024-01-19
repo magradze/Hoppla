@@ -24,7 +24,7 @@ const Hero = (
                 <div className="page-wrapper pt-8">
 
                     <div className="text-center min-h-12 lg:min-h-80 flex flex-col justify-between ">
-                        <h1 className="text-2xl font-bold tracking-tight text-white sm:text-5xl alk-sanet">
+                        <h1 className="text-2xl font-bold tracking-tight text-white sm:text-5xl fira-go">
                             გაემგზავრე HOPPLA-ს დახმარებით სასურველ ადგილას
                         </h1>
                         <div className="-mt-28 translate-y-32 lg:translate-y-8">

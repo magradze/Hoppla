@@ -28,7 +28,7 @@ const LoginWithCredentials = () => {
                         </label>
                         <input id="email-address" name="email" type="email" autoComplete="email"
                                required
-                               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm alk-sanet"
+                               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm fira-go"
                                placeholder="ელ.ფოსტა"
                                onChange={(e) => (email.current = e.target.value)}
                         />
@@ -47,12 +47,12 @@ const LoginWithCredentials = () => {
                     <div className="flex items-center">
                         <input id="remember_me" name="remember_me" type="checkbox"
                                className="h-4 w-4 text-secondary focus:ring-secondary border-gray-300 rounded"/>
-                        <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900 alk-sanet">
+                        <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900 fira-go">
                             დამიმახსოვრე
                         </label>
                     </div>
                     <div className="text-sm">
-                        <Link href="#" className="font-medium text-secondary hover:text-secondary alk-sanet">
+                        <Link href="#" className="font-medium text-secondary hover:text-secondary fira-go">
                             პაროლის აღდგენა
                         </Link>
                     </div>

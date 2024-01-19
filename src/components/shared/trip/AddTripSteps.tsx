@@ -60,9 +60,9 @@ const AddTripSteps = () => {
                                                 </span>
                                               </span>
                                               <span className="ml-4 mt-0.5 flex min-w-0 flex-col items-start">
-                                                <span className="text-sm font-medium alk-sanet">{step.name}</span>
+                                                <span className="text-sm font-medium fira-go">{step.name}</span>
                                                 <span
-                                                    className="text-[10px] alk-sanet font-medium text-gray-500 text-left">{step.description}</span>
+                                                    className="text-[10px] fira-go font-medium text-gray-500 text-left">{step.description}</span>
                                               </span>
                                         </span>
                                     </button>
@@ -86,9 +86,9 @@ const AddTripSteps = () => {
                                               </span>
                                               <span className="ml-4 mt-0.5 flex min-w-0 flex-col">
                                                 <span
-                                                    className="text-sm font-medium text-primary alk-sanet">{step.name}</span>
+                                                    className="text-sm font-medium text-primary fira-go">{step.name}</span>
                                                 <span
-                                                    className="text-[10px] alk-sanet font-medium text-gray-500">{step.description}</span>
+                                                    className="text-[10px] fira-go font-medium text-gray-500">{step.description}</span>
                                               </span>
                                         </span>
                                     </div>

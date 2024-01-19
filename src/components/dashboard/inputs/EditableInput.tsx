@@ -21,7 +21,7 @@ const EditableInput = React.forwardRef<HTMLInputElement, InputProps>(({label, ty
                     type={type}
                     ref={ref}
                     {...props}
-                    className="block w-full h-12 rounded-md border focus:border-0 focus:shadow-md outline-none py-1.5 px-6 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 alk-sanet disabled:bg-transparent disabled:border-0"
+                    className="block w-full h-12 rounded-md border focus:border-0 focus:shadow-md outline-none py-1.5 px-6 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 fira-go disabled:bg-transparent disabled:border-0"
                     disabled={!editing}
                 />
                 <div className="flex gap-x-2">

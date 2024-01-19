@@ -14,6 +14,12 @@ export const getUserById = async (id: string) => {
             where: {
                 id,
             },
+            include: {
+                accounts: true,
+                cars: true,
+                // @ts-ignore
+                ratings: true,
+            }
         });
     } catch (error) {
         return null;

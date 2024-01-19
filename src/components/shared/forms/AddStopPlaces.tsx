@@ -46,7 +46,7 @@ const AddStopPlaces = ({
 
             <form onSubmit={handleSubmit(onSubmit)} className="relative w-full">
                 <label htmlFor="place"
-                       className="mb-3 block text-sm font-medium text-gray-900 alk-sanet">
+                       className="mb-3 block text-sm font-medium text-gray-900 fira-go">
                     გაჩერების დამატება (არასავალდებულო)
                 </label>
 
@@ -60,7 +60,7 @@ const AddStopPlaces = ({
                             <input
                                 type="text"
                                 id={id}
-                                className="block w-full h-12 lg:h-16 rounded-md focus:shadow-md outline-none py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 alk-sanet"
+                                className="block w-full h-12 lg:h-16 rounded-md focus:shadow-md outline-none py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 fira-go"
                                 placeholder="დამატებითი გაჩერება"
                                 {...register(`place.${index}.name` as const, {required: true})}
                             />

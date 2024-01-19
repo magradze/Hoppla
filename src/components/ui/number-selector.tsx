@@ -1,5 +1,5 @@
 "use client"
-import React, {ChangeEvent, useRef} from 'react';
+import React from 'react';
 import {Button} from "@/components/ui/button";
 import {Minus, Plus} from "lucide-react";
 import {InputProps} from "@/components/ui/input";
@@ -41,7 +41,7 @@ const NumberSelector = React.forwardRef<HTMLInputElement, InputProps>(
         return (
             <div
                 className="absolute lg:relative lg:flex flex-row justify-between items-center p-4 bg-white lg:rounded-md">
-                <div className="flex flex-grow alk-sanet text-gray-400 text-sm">მგზავრი</div>
+                <div className="flex flex-grow fira-go text-gray-400 text-sm">მგზავრი</div>
                 <div className="flex flex-grow-o justify-between items-center">
                     <Button variant="secondary" size="sm"
                             onClick={decrement}
@@ -69,5 +69,7 @@ const NumberSelector = React.forwardRef<HTMLInputElement, InputProps>(
             </div>
         );
     });
+
+NumberSelector.displayName = 'NumberSelector';
 
 export default NumberSelector;

@@ -48,7 +48,7 @@ const RegisterForm = () => {
                         name="name"
                         render={({field}) => (
                             <FormItem>
-                                <FormLabel className="alk-sanet">
+                                <FormLabel className="fira-go">
                                     სახელი და გვარი
                                 </FormLabel>
                                 <FormControl>
@@ -58,7 +58,7 @@ const RegisterForm = () => {
                                         type="text"
                                     />
                                 </FormControl>
-                                <FormMessage className="alk-sanet text-[10px]"/>
+                                <FormMessage className="fira-go text-[10px]"/>
                             </FormItem>
                         )}
                     />
@@ -67,7 +67,7 @@ const RegisterForm = () => {
                         name="email"
                         render={({field}) => (
                             <FormItem>
-                                <FormLabel className="alk-sanet">
+                                <FormLabel className="fira-go">
                                     ელ.ფოსტა
                                 </FormLabel>
                                 <FormControl>
@@ -77,7 +77,7 @@ const RegisterForm = () => {
                                         type="email"
                                     />
                                 </FormControl>
-                                <FormMessage className="alk-sanet text-[10px]"/>
+                                <FormMessage className="fira-go text-[10px]"/>
                             </FormItem>
                         )}
                     />
@@ -86,7 +86,7 @@ const RegisterForm = () => {
                         name="password"
                         render={({field}) => (
                             <FormItem>
-                                <FormLabel className="alk-sanet">
+                                <FormLabel className="fira-go">
                                     პაროლი
                                 </FormLabel>
                                 <FormControl>
@@ -96,7 +96,7 @@ const RegisterForm = () => {
                                         type="password"
                                     />
                                 </FormControl>
-                                <FormMessage className="alk-sanet text-[10px]"/>
+                                <FormMessage className="fira-go text-[10px]"/>
                             </FormItem>
                         )}
                     />

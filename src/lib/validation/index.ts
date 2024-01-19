@@ -4,3 +4,4 @@ export {default as RegisterConfirmSchema} from './RegisterConfirmScheme';
 export {default as SearchSchema} from './SearchScheme';
 export {default as UserSchema} from './UserSchema';
 export {default as ChangePasswordScheme} from './ChangePasswordScheme';
+export {default as CarSchema} from './CarSchema';

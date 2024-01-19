@@ -14,7 +14,7 @@ const AdditionalInfo = ({
                         }: IAdditionalInfo) => {
     return (
 
-        <dl className=" space-y-6 text-sm font-medium text-gray-500 alk-sanet">
+        <dl className=" space-y-6 text-sm font-medium text-gray-500 fira-go">
             <div className="flex justify-between items-center">
                 <dt>მანძილი</dt>
                 <dd className="text-gray-900">{distance + " კმ"}</dd>

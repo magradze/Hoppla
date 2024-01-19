@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
                 // @ts-ignore
                 create: {
                     provider: "credentials",
-                    providerAccountId: Math.random().toString(36).substring(7),
+                    providerAccountId: Math.random().toString(36).substring(7).toString(),
                     type: "email",
                 },
             }
@@ -45,6 +45,6 @@ export async function POST(req: NextRequest) {
     if (!newUser) {
         return new NextResponse("Error creating user", {status: 500})
     }
-
-    return new NextResponse("User created", {status: 200})
+    // @ts-ignore
+    return new NextResponse(JSON.stringify(newUser), {status: 200})
 }

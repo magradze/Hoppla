@@ -1,5 +1,5 @@
 "use client";
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import {useForm} from "react-hook-form";
 import * as z from "zod";
@@ -10,12 +10,16 @@ import {CalendarDays, Locate, User} from "lucide-react";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
-import {format} from "date-fns";
 import {Calendar} from "@/components/ui/calendar";
 import NumberSelector from "@/components/ui/number-selector";
 import {useRouter, useSearchParams} from "next/navigation";
+import moment from "moment";
+import 'moment/locale/ka';
+import {ka} from "date-fns/locale/ka";
 
 const SearchBox = ({className, type}: { className?: string, type: string }) => {
+
+    const [disabled, setDisabled] = React.useState<boolean>(true);
 
     const searchParams = useSearchParams();
 
@@ -24,9 +28,9 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
     const form = useForm<z.infer<typeof SearchSchema>>({
         resolver: zodResolver(SearchSchema),
         defaultValues: {
-            startLocation: searchParams.get("from") || "",
-            endLocation: searchParams.get("to") || "",
-            startDate: searchParams.get("date") ? new Date(searchParams.get("date") as string) : new Date(),
+            startLocation: searchParams.get("from") || "თბილისი",
+            endLocation: searchParams.get("to") || "ბათუმი",
+            startDate: searchParams.get("date") ? new Date(moment(searchParams.get("date")).format("YYYY-MM-DD")) : new Date(),
             seats: searchParams.get("seats") ? parseInt(searchParams.get("seats") as string) : 1,
         }
     });
@@ -35,19 +39,29 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
         const query = new URLSearchParams(searchParams);
         query.set("from", values.startLocation);
         query.set("to", values.endLocation);
-        query.set("date", values.startDate.toISOString());
+        query.set("date", moment(values.startDate).format("YYYY-MM-DD"));
         query.set("seats", values.seats.toString());
         return query.toString();
     }, [searchParams]);
 
     const handleSubmit = useCallback((values: z.infer<typeof SearchSchema>) => {
-        router.push(`/${type}/search?${createQueryStr(values)}`)
-    }, [router, type, createQueryStr]);
+        //${type}/search?${createQueryStr(values)}
+        router.push(`/search?${createQueryStr(values)}`)
+    }, [router, createQueryStr]);
+
+    useEffect(() => {
+
+        if (!form.getValues().endLocation) {
+            setDisabled(true);
+        } else {
+            setDisabled(false);
+        }
+    }, [form]);
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)}
-                  className={cn(className, "rounded-md grid grid-cols-1 lg:grid-cols-12 lg:justify-between items-center w-full alk-sanet")}>
+                  className={cn(className, "rounded-md grid grid-cols-1 lg:grid-cols-12 lg:justify-between items-center w-full fira-go")}>
 
                 <FormField
                     name="startLocation"
@@ -65,7 +79,7 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                                     className="block w-full h-full rounded-t-md rounded-b-none md:rounded-l-md md:rounded-r-none border border-gray-100 border-b-0 md:border-b py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 space-y-0"
                                 />
                             </FormControl>
-                            <FormMessage className="alk-sanet text-[10px]"/>
+                            <FormMessage className="fira-go text-[10px]"/>
                         </FormItem>
                     )}
                 />
@@ -81,11 +95,19 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                                 <Input
                                     {...field}
                                     placeholder={"სად..."}
+                                    onChange={(e) => {
+                                        field.onChange(e);
+                                        if (!e.target.value) {
+                                            setDisabled(true);
+                                        } else {
+                                            setDisabled(false);
+                                        }
+                                    }}
                                     type="text"
                                     className="block w-full h-full rounded-none border border-gray-100 md:border-l-0 border-b-0 md:border-b py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                 />
                             </FormControl>
-                            <FormMessage className="alk-sanet text-[10px]"/>
+                            <FormMessage className="fira-go text-[10px]"/>
                         </FormItem>
                     )}
                 />
@@ -111,19 +133,32 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                                                 <CalendarDays/>
                                             </div>
                                             {field.value ? (
-                                                format(field.value, "PPP")
+                                                moment(field.value).locale('ka').calendar(
+                                                    null,
+                                                    {
+                                                        sameDay: '[დღეს]',
+                                                        nextDay: '[ხვალ]',
+                                                        nextWeek: 'LL',
+                                                        lastDay: '[გუშინ]',
+                                                        lastWeek: 'LL',
+                                                        sameElse: 'LL'
+                                                    }
+                                                )
                                             ) : (
                                                 <span>Pick a date</span>
                                             )}
                                         </Button>
                                     </FormControl>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-[240px] p-0" align="start">
+                                <PopoverContent className="w-[240px] fira-go p-0" align="start">
                                     <Calendar
+                                        locale={ka}
                                         mode="single"
                                         selected={field.value}
                                         onSelect={field.onChange}
-
+                                        disabled={(date) => {
+                                            return moment(date).isBefore(moment().subtract(0, 'day'), 'day')
+                                        }}
                                         initialFocus
                                     />
                                 </PopoverContent>
@@ -173,11 +208,11 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                     variant="secondary"
                     size="lg"
                     type="submit"
-                    className="col-span-12 lg:col-span-3 rounded-t-none lg:rounded-l-none lg:rounded-r-md disabled:opacity-80 py-8"
-                    // disabled={!form.getFieldState("startLocation").isDirty || form.getFieldState("endLocation").invalid}
+                    className="col-span-12 lg:col-span-3 rounded-t-none lg:rounded-l-none lg:rounded-r-md py-8 disabled:cursor-not-allowed disabled:opacity-85"
                     onClick={() => {
-                        router.push(`/${type}/search?${createQueryStr(form.getValues())}`)
+                        router.push(`/search?${createQueryStr(form.getValues())}`)
                     }}
+                    disabled={disabled}
                 >
 
                     ძებნა

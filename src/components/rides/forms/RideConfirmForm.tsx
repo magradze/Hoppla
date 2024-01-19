@@ -5,22 +5,25 @@ import TripAllowedAction from "@/components/shared/trip/TripAllowedAction";
 import AddStopPlaces from "@/components/shared/forms/AddStopPlaces";
 import {Button} from "@/components/ui/button";
 import {IRideConfirm} from "@/interfaces/IRideConfirm";
-import {addRide} from "@/lib/data/rides";
+import {addRide} from "@/lib/actions/rides";
 import PriceInput from "@/components/rides/inputs/PriceInput";
 import DirectionsInfo from "@/components/rides/DirectionsInfo";
 import AdditionalInfo from "@/components/rides/AdditionalInfo";
 import DateTimeInput from "@/components/rides/inputs/DateTimeInput";
+import moment from "moment/moment";
+import CarsInput from "@/components/rides/inputs/CarsInput";
 
-const RideConfirmForm = ({user, searchParams}: IRideConfirm) => {
+const RideConfirmForm = ({user, cars, searchParams}: IRideConfirm) => {
 
     const [stopPlaceField, setStopPlaceField] = useState([{name: ""}])
     const [disable, setDisable] = useState(true)
 
 
     const [dateToLeave, setDateToLeave] = useState(new Date().toISOString().split('T')[0])
-    const [timeToLeave, setTimeToLeave] = useState(new Date().getHours() + ":" + new Date().getMinutes())
+    const [timeToLeave, setTimeToLeave] = useState(moment().format("HH:mm"))
     const [newPrice, setNewPrice] = useState(parseFloat(searchParams.price as string))
 
+    const [carId, setCarId] = useState(null)
 
     if (!searchParams.from || !searchParams.to || !searchParams.distance || !searchParams.duration || !searchParams.seats || !searchParams.price) return null
 
@@ -33,11 +36,12 @@ const RideConfirmForm = ({user, searchParams}: IRideConfirm) => {
         duration: parseInt(String(searchParams.duration)),
         seats: parseInt(String(searchParams.seats)),
         price: newPrice,
-        startDate: dateToLeave,
+        startDate: moment(dateToLeave).format("YYYY-MM-DD"),
         startTime: timeToLeave,
         driver: {
             id: user?.id
         },
+        carId: carId,
         stops: stopPlaceField[0].name === "" ? [] : stopPlaceField,
     }
 
@@ -57,9 +61,7 @@ const RideConfirmForm = ({user, searchParams}: IRideConfirm) => {
                         size="lg"
                         className="mt-6 w-full"
                         disabled={disable}
-                        onClick={() => {
-                            addRide(rideData).then(r => r)
-                        }}
+                        onClick={() => addRide(rideData)}
                     >
                         მგზავრობის დამატება
                     </Button>
@@ -76,6 +78,8 @@ const RideConfirmForm = ({user, searchParams}: IRideConfirm) => {
 
 
                     <DateTimeInput setDateToLeave={setDateToLeave} setTimeToLeave={setTimeToLeave}/>
+
+                    <CarsInput cars={cars} setCarId={setCarId}/>
 
                     <TripAllowedAction/>
 

@@ -1,7 +1,9 @@
 import {User} from "@prisma/client";
+import {IMyCars} from "@/interfaces/IMyCars";
 
 export interface IRideConfirm {
     user: User | null,
+    cars: IMyCars,
     searchParams: {
         from: string,
         to: string,

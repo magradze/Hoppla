@@ -5,6 +5,6 @@ export const convertSeconds = (seconds: number): string => {
     if (hours > 0) {
         return `${hours}:${minutes}`
     } else {
-        return `${minutes}`
+        return `00:${minutes}`
     }
 }
