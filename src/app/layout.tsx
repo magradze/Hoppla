@@ -3,8 +3,9 @@ import {Inter} from 'next/font/google'
 import './globals.css'
 import {getServerSession} from "next-auth";
 import Navbar from "@/components/partial/NavBar";
-import {NextUIProvider, SessionProvider} from '@/providers';
+import {NextUIProvider, SessionProvider, UserProvider} from '@/providers';
 import Footer from "@/components/partial/Footer";
+import SiteSettingsProvider from "@/providers/SiteSettingsProvider";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -22,9 +23,13 @@ export default async function RootLayout({children}: { children: React.ReactNode
         <body className={inter.className}>
         <SessionProvider session={session}>
             <NextUIProvider>
-                <Navbar/>
-                {children}
-                <Footer/>
+                <SiteSettingsProvider>
+                    <UserProvider>
+                        <Navbar/>
+                        {children}
+                        <Footer/>
+                    </UserProvider>
+                </SiteSettingsProvider>
             </NextUIProvider>
         </SessionProvider>
         </body>
