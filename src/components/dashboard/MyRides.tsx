@@ -142,7 +142,7 @@ const MyRides = ({rides}: IMyRides) => {
                     <div className="flex flex-col">
                         <p className="text-bold text-small capitalize">{cellValue.toFixed(2)}₾</p>
                         <p className="text-bold text-tiny capitalize text-default-400">
-                            ერთი მგზავრი: {ride.price / ride.seats}₾
+                            ერთი მგზავრი: {(ride.price / ride.seats).toFixed(2)}₾
                         </p>
                     </div>
                 );
