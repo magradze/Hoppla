@@ -15,7 +15,6 @@ const Search = async ({searchParams}: ISearchProps) => {
 
     const date = moment(new Date(searchParams.date)).locale('ka').format('LL');
 
-
     return (
         <div className="page-wrapper pt-8">
             <SearchBox className="" type="carpool"/>
@@ -26,7 +25,7 @@ const Search = async ({searchParams}: ISearchProps) => {
                         <div className="py-10 sm:py-8">
                             <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                                 <div className="lg:col-span-2 flex flex-col gap-2">
-                                    <CarTypesTab/>
+                                    <CarTypesTab ridesCount={rides?.length as number}/>
                                     <div
                                         className="flex flex-col gap-2 px-4 fira-go text-gray-500">
 
