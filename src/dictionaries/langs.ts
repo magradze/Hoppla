@@ -7,6 +7,6 @@ const LANGS = [
     label: "English",
     value: "en",
   },
-];
+] as const;
 
 export default LANGS;

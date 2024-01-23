@@ -134,6 +134,39 @@ model Trip {
   @@map("trips")
 }
 
+enum ArticleLanguage {
+  EN
+  KA
+}
+
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model ArticleTag {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  createdAt DateTime? @default(now()) @map("created_at")
+  articles  Article[]
+
+  @@map("articles_tags")
+}
+
+model Article {
+  id        String          @id @default(cuid())
+  title     String
+  content   String
+  heading   String
+  language  ArticleLanguage
+  picture   String?
+  status    ArticleStatus   @default(DRAFT)
+  createdAt DateTime?       @default(now()) @map("created_at")
+  tags      ArticleTag[]
+
+  @@map("articles")
+}
+
 // model TripRequest {
 //   id            String   @id @default(cuid())
 //   tripId        String   @map("trip_id")

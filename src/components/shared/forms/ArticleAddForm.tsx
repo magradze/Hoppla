@@ -23,47 +23,109 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import LANGS from "@/dictionaries/langs";
-import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import S3UploadForm from "./S3UploadForm";
 import s3UploadImage from "@/lib/s3UploadImage";
 import articleSchema from "@/lib/validation/ArticleSchema";
+import { SelectTags } from "./SelectTags";
+import { Article, ArticleLanguage, ArticleStatus } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
-type ArticleAddFormProps = {};
+type ArticleAddFormProps = {
+  article?:
+    | ({
+        tags: {
+          id: string;
+          name: string;
+          createdAt: Date | null;
+        }[];
+      } & {
+        id: string;
+        title: string;
+        content: string;
+        heading: string;
+        language: ArticleLanguage;
+        picture: string | null;
+        status: ArticleStatus;
+        createdAt: Date | null;
+      })
+    | null;
+};
 
-export default function ArticleAddForm({}: ArticleAddFormProps) {
+export default function ArticleAddForm({ article }: ArticleAddFormProps) {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof articleSchema>>({
     resolver: zodResolver(articleSchema),
     defaultValues: {
       content: "",
       title: "",
-      language: "",
+      language: undefined,
       picture: "",
+      heading: "",
+      tags: [],
+      status: ArticleStatus.PUBLISHED,
     },
   });
 
   async function onSubmit(values: z.infer<typeof articleSchema>) {
-    form.reset();
+    // console.log("values", values);
+    setLoading(true);
+    // for upload
+    // values.content = NodeHtmlMarkdown.translate(
+    //   /* html */ values.content,
+    //   /* options (optional) */ {},
+    //   /* customTranslators (optional) */ undefined,
+    //   /* customCodeBlockTranslators (optional) */ undefined
+    // );
 
-    // setLoading(true);
-    // await fetch("/api/articles", {
-    //   method: "POST",
-    //   body: JSON.stringify(values),
-    // });
-    // setLoading(false);
-    localStorage.removeItem("articleAddForm");
+    // if PUT add request search param id
+
+    const result = await fetch(
+      `${"/api/articles" + (article ? `/?id=${article.id}` : "")}`,
+      {
+        method: article ? "PUT" : "POST",
+        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await result.json();
+    setLoading(false);
     // TODOS: edit page and publish page, and also single page and pagination for more articles
     // and here it is not changed when i reset form
     // go to article page
     // and also error messages doesnt hide
+
+    localStorage.removeItem("articleAddForm");
     form.reset();
+    // go to articles page redirect
+
+    router.push("/articles/" + data.id);
   }
 
   useEffect(() => {
     form.watch((value) => {
       localStorage.setItem("articleAddForm", JSON.stringify(value));
     });
+
+    if (article) {
+      const data = {
+        content: article.content,
+        heading: article.heading,
+        language: article.language,
+        picture: article.picture,
+        status: article.status,
+        title: article.title,
+        tags: article.tags.map((tag) => tag.name),
+      } as z.infer<typeof articleSchema>;
+
+      form.reset(data);
+      return;
+    }
+
     const data = localStorage.getItem("articleAddForm");
     if (data) {
       const parsedData = JSON.parse(data);
@@ -95,6 +157,34 @@ export default function ArticleAddForm({}: ArticleAddFormProps) {
         />
         <FormField
           control={form.control}
+          name="tags"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Tags</FormLabel>
+              <FormControl>
+                <SelectTags values={field.value} setValues={field.onChange} />
+              </FormControl>
+              <FormDescription>This is title of article.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="heading"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Heading</FormLabel>
+              <FormControl>
+                <Input placeholder="some heading..." {...field} />
+              </FormControl>
+              <FormDescription>This is heading of article.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="picture"
           render={({ field }) => (
             <FormItem>
@@ -102,7 +192,6 @@ export default function ArticleAddForm({}: ArticleAddFormProps) {
               <FormControl>
                 <S3UploadForm
                   onChange={(fileUrl) => {
-                    // form.setValue("picture", fileUrl);
                     field.onChange(fileUrl);
                   }}
                   value={field.value}
@@ -126,6 +215,7 @@ export default function ArticleAddForm({}: ArticleAddFormProps) {
                   onEditorChange={(v) => field.onChange(v)}
                   init={{
                     height: 500,
+
                     plugins: [
                       "advlist",
                       "autolink",
@@ -178,7 +268,7 @@ export default function ArticleAddForm({}: ArticleAddFormProps) {
                 </FormControl>
                 <SelectContent>
                   {LANGS.map((l) => (
-                    <SelectItem key={l.value} value={l.value}>
+                    <SelectItem key={l.value} value={l.value.toUpperCase()}>
                       {l.label}
                     </SelectItem>
                   ))}

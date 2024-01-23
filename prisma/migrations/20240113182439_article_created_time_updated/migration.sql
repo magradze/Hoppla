@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "articles" ALTER COLUMN "created_at" SET DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "articles_tags" ALTER COLUMN "created_at" SET DEFAULT CURRENT_TIMESTAMP;
