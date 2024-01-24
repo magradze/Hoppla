@@ -1,11 +1,12 @@
 "use server"
 import prisma from "@/lib/prisma";
 import * as z from "zod";
-import {RegisterConfirmSchema, UserSchema} from "@/lib/validation";
+import {RegisterConfirmSchema, RegisterSchema, UserSchema} from "@/lib/validation";
 import {Prisma} from ".prisma/client";
 import EnumRoleFilter = Prisma.EnumRoleFilter;
 
 import * as bcrypt from "bcrypt";
+import {signIn} from "next-auth/react";
 
 // find user by id
 export const getUserById = async (id: string) => {
@@ -65,10 +66,66 @@ export const getUserAuthProvider = async (id: string) => {
     }
 }
 
+//user registration
+export const registerUser = async (values: z.infer<typeof UserSchema>) => {
+    try {
+        const {email, password, name} = await RegisterSchema.parseAsync(values);
+
+        if (!email || !password || !name) {
+            return null;
+        }
+
+        const user = await prisma.user.findUnique({
+            where: {
+                email,
+            },
+        });
+
+        if (user) {
+            return null;
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newUser = await prisma.user.create({
+            data: {
+                email,
+                name,
+                password: hashedPassword,
+                image: "https://gravatar.com/avatar",
+                role: "USER",
+                accounts: {
+                    // @ts-ignore
+                    create: {
+                        provider: "credentials",
+                        providerAccountId: Math.random().toString(36).substring(7).toString(),
+                        type: "email",
+                    },
+                }
+            },
+            include: {
+                accounts: true,
+            },
+        });
+
+        if (!newUser) {
+            return null;
+        }
+
+        await signIn("credentials", {
+            email: newUser.email,
+            password: newUser.password,
+            callbackUrl: "/auth/new-user",
+        });
+    } catch (error) {
+        console.log("ERROR", error);
+    }
+}
+
 // Confirm registration
 export const confirmRegistration = async (values: z.infer<typeof RegisterConfirmSchema>) => {
     try {
-        return await prisma.user.update({
+        const res = await prisma.user.update({
             where: {
                 email: values.email,
             },
@@ -79,6 +136,12 @@ export const confirmRegistration = async (values: z.infer<typeof RegisterConfirm
                 birthday: new Date(values.birthday).toISOString(),
             }
         });
+
+        if (!res) {
+            return null;
+        } else {
+            return res;
+        }
     } catch (error) {
         console.log("ERROR", error);
     }

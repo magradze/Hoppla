@@ -1,6 +1,8 @@
-import UserContext from "@/context/userContext";
-import {useContext} from "react";
+import {useSession} from "next-auth/react";
 
-const useCurrentUser = () => useContext(UserContext)
+const useCurrentUser = () => {
+    const session = useSession();
+    return session?.data?.user;
+};
 
 export default useCurrentUser;

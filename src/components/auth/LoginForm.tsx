@@ -53,6 +53,7 @@ const LoginForm = () => {
                                         {...field}
                                         placeholder={"john.doe@hoppla.ge"}
                                         type="email"
+                                        autoComplete="email"
                                     />
                                 </FormControl>
                                 <FormMessage className="fira-go text-[10px]"/>
@@ -72,6 +73,7 @@ const LoginForm = () => {
                                         {...field}
                                         placeholder={"********"}
                                         type="password"
+                                        autoComplete="current-password"
                                     />
                                 </FormControl>
                                 <FormMessage className="fira-go text-[10px]"/>
