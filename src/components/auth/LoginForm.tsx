@@ -8,10 +8,11 @@ import {LoginSchema} from "@/lib/validation";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form"
 
 import LoginFormWrapper from "@/components/auth/LoginFormWrapper";
-import {Button} from "@/components/ui/button";
 import {signIn} from "next-auth/react";
-import {Input} from "@/components/ui/input";
 import FormError from "@/components/shared/forms/FormError";
+import {Input} from "@nextui-org/react";
+import {Button} from "@nextui-org/react";
+import {KeySquare, Mail} from "lucide-react";
 
 const LoginForm = () => {
 
@@ -45,15 +46,18 @@ const LoginForm = () => {
                         name="email"
                         render={({field}) => (
                             <FormItem>
-                                <FormLabel className="fira-go">
-                                    ელ.ფოსტა
-                                </FormLabel>
+                                {/*<FormLabel className="fira-go">*/}
+                                {/*    ელ.ფოსტა*/}
+                                {/*</FormLabel>*/}
                                 <FormControl>
                                     <Input
                                         {...field}
+                                        className="fira-go"
                                         placeholder={"john.doe@hoppla.ge"}
                                         type="email"
                                         autoComplete="email"
+                                        label={"ელ.ფოსტა"}
+                                        startContent={<Mail className="w-4"/>}
                                     />
                                 </FormControl>
                                 <FormMessage className="fira-go text-[10px]"/>
@@ -65,15 +69,18 @@ const LoginForm = () => {
                         name="password"
                         render={({field}) => (
                             <FormItem>
-                                <FormLabel className="fira-go">
-                                    პაროლი
-                                </FormLabel>
+                                {/*<FormLabel className="fira-go">*/}
+                                {/*    პაროლი*/}
+                                {/*</FormLabel>*/}
                                 <FormControl>
                                     <Input
                                         {...field}
                                         placeholder={"********"}
                                         type="password"
                                         autoComplete="current-password"
+                                        label={"პაროლი"}
+                                        className="fira-go"
+                                        startContent={<KeySquare className="w-4"/>}
                                     />
                                 </FormControl>
                                 <FormMessage className="fira-go text-[10px]"/>
@@ -85,10 +92,11 @@ const LoginForm = () => {
                         message={form.formState.errors.email?.message || form.formState.errors.password?.message}/>
 
                     <Button
-                        variant="secondary"
+                        variant="solid"
+                        color="secondary"
                         size="lg"
                         type="submit"
-                        className={"w-full"}
+                        className={"w-full fira-go"}
                     >
                         ავტორიზაცია
                     </Button>
