@@ -8,6 +8,23 @@ import EnumRoleFilter = Prisma.EnumRoleFilter;
 import * as bcrypt from "bcrypt";
 import {signIn} from "next-auth/react";
 
+export const getUsers = async () => {
+    try {
+        return await prisma.user.findMany({
+            include: {
+                accounts: true,
+                cars: true,
+                ratings: true,
+                rides: true,
+                trips: true,
+            }
+        });
+    } catch (error) {
+        return null;
+    }
+
+}
+
 // find user by id
 export const getUserById = async (id: string) => {
     try {

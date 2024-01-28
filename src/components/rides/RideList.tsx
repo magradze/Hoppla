@@ -1,6 +1,6 @@
 import React from 'react';
 import RideCard from "@/components/rides/RidesCard";
-import {getRides} from "@/lib/data/rides";
+import {getRides} from "@/lib/actions/rides";
 
 const RidesList = async () => {
     const rides = await getRides();
