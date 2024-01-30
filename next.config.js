@@ -8,7 +8,7 @@ const nextConfig = {
         defaultLocale: 'ka',
     },
     typescript: {
-        ignoreBuildErrors: true,
+        ignoreBuildErrors: false,
     },
 }
 

@@ -1,10 +1,6 @@
 import React from 'react';
 import Image from "next/image";
-import moment from "moment";
-
-import {getRideByDate} from "@/lib/actions/rides";
 import hopplaLogo from '@/assets/hoppla.png';
-import {sortUnique} from "@/lib/tools/sortUnique";
 import Link from "next/link";
 import RideLink from "@/components/rides/RideLink";
 

@@ -25,6 +25,7 @@ import Link from "next/link";
 import {Avatar} from "@nextui-org/avatar";
 import {cn} from "@/lib/utils";
 import AddCompanyModal from "@/components/administration/modals/AddCompanyModal";
+import {useTableActions} from "@/hooks";
 
 
 const columns = [
@@ -197,36 +198,17 @@ const CompanyTables = ({companies}: CompanyTablesProps) => {
         }
     }, []);
 
-    const onNextPage = React.useCallback(() => {
-        if (page < pages) {
-            setPage(page + 1);
+    const {
+        onSearchChange,
+        onClear,
+        onRowsPerPageChange,
+        onPreviousPage,
+        onNextPage
+    } = useTableActions(
+        {
+            page, pages, setPage, setRowsPerPage, setFilterValue
         }
-    }, [page, pages]);
-
-    const onPreviousPage = React.useCallback(() => {
-        if (page > 1) {
-            setPage(page - 1);
-        }
-    }, [page]);
-
-    const onRowsPerPageChange = React.useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-        setRowsPerPage(Number(e.target.value));
-        setPage(1);
-    }, []);
-
-    const onSearchChange = React.useCallback((value?: string) => {
-        if (value) {
-            setFilterValue(value);
-            setPage(1);
-        } else {
-            setFilterValue("");
-        }
-    }, []);
-
-    const onClear = React.useCallback(() => {
-        setFilterValue("")
-        setPage(1)
-    }, [])
+    );
 
     const topContent = React.useMemo(() => {
         return (

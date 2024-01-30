@@ -16,7 +16,6 @@ import {
     DropdownItem,
     Pagination,
     Selection,
-    ChipProps,
     SortDescriptor,
 } from "@nextui-org/react";
 import {ChevronDownIcon, Edit, Printer, StarIcon} from "lucide-react";
@@ -26,6 +25,7 @@ import Link from "next/link";
 import {Avatar} from "@nextui-org/avatar";
 import {cn} from "@/lib/utils";
 import CarColumn from "@/components/administration/tables/carsColumn";
+import {useTableActions} from "@/hooks";
 
 
 const columns = [
@@ -50,10 +50,11 @@ export function capitalize(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-const statusColorMap: Record<string, ChipProps["color"]> = {
-    USER: "warning",
-    ADMIN: "success",
-};
+//
+// const statusColorMap: Record<string, ChipProps["color"]> = {
+//     USER: "warning",
+//     ADMIN: "success",
+// };
 
 const INITIAL_VISIBLE_COLUMNS = ["name", "rides", "cars", "ratings", "role", "actions"];
 
@@ -195,36 +196,17 @@ const UserTables = ({users}: UserTablesProps) => {
         }
     }, []);
 
-    const onNextPage = React.useCallback(() => {
-        if (page < pages) {
-            setPage(page + 1);
+    const {
+        onSearchChange,
+        onClear,
+        onRowsPerPageChange,
+        onPreviousPage,
+        onNextPage
+    } = useTableActions(
+        {
+            page, pages, setPage, setRowsPerPage, setFilterValue
         }
-    }, [page, pages]);
-
-    const onPreviousPage = React.useCallback(() => {
-        if (page > 1) {
-            setPage(page - 1);
-        }
-    }, [page]);
-
-    const onRowsPerPageChange = React.useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-        setRowsPerPage(Number(e.target.value));
-        setPage(1);
-    }, []);
-
-    const onSearchChange = React.useCallback((value?: string) => {
-        if (value) {
-            setFilterValue(value);
-            setPage(1);
-        } else {
-            setFilterValue("");
-        }
-    }, []);
-
-    const onClear = React.useCallback(() => {
-        setFilterValue("")
-        setPage(1)
-    }, [])
+    );
 
     const topContent = React.useMemo(() => {
         return (

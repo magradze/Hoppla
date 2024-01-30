@@ -25,6 +25,7 @@ import {SearchIcon} from "@nextui-org/shared-icons";
 import moment from "moment";
 import 'moment/locale/ka';
 import Link from "next/link";
+import {useTableActions} from "@/hooks";
 
 
 const columns = [
@@ -102,6 +103,7 @@ const MyRides = ({rides}: IMyRides) => {
         }
 
         return filteredRides;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [rides, filterValue, statusFilter]);
 
     const pages = Math.ceil(filteredItems.length / rowsPerPage);
@@ -165,36 +167,19 @@ const MyRides = ({rides}: IMyRides) => {
         }
     }, []);
 
-    const onNextPage = React.useCallback(() => {
-        if (page < pages) {
-            setPage(page + 1);
+    const {
+        onSearchChange,
+        onClear,
+        onRowsPerPageChange,
+        onPreviousPage,
+        onNextPage
+    } = useTableActions(
+        {
+            page, pages, setPage, setRowsPerPage, setFilterValue
         }
-    }, [page, pages]);
+    );
 
-    const onPreviousPage = React.useCallback(() => {
-        if (page > 1) {
-            setPage(page - 1);
-        }
-    }, [page]);
-
-    const onRowsPerPageChange = React.useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-        setRowsPerPage(Number(e.target.value));
-        setPage(1);
-    }, []);
-
-    const onSearchChange = React.useCallback((value?: string) => {
-        if (value) {
-            setFilterValue(value);
-            setPage(1);
-        } else {
-            setFilterValue("");
-        }
-    }, []);
-
-    const onClear = React.useCallback(() => {
-        setFilterValue("")
-        setPage(1)
-    }, [])
+// Actions
 
     const topContent = React.useMemo(() => {
         return (
@@ -273,6 +258,7 @@ const MyRides = ({rides}: IMyRides) => {
                 </div>
             </div>
         );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         filterValue,
         statusFilter,
@@ -310,6 +296,7 @@ const MyRides = ({rides}: IMyRides) => {
                 </div>
             </div>
         );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
 
     return (

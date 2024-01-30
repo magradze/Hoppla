@@ -1,4 +1,4 @@
-import {NextAuthOptions} from "next-auth";
+import {AuthOptions} from "next-auth";
 import {PrismaAdapter} from "@auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -6,10 +6,8 @@ import login from "@/lib/auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import FacebookProvider from "next-auth/providers/facebook";
-import {getUserById} from "@/lib/actions/user";
-import {redirect} from "next/navigation";
 
-export const authOptions: NextAuthOptions = {
+export const authOptions: AuthOptions = {
     session: {
         strategy: "jwt",
     },
@@ -101,8 +99,9 @@ export const authOptions: NextAuthOptions = {
         // }
     },
     callbacks: {
-        async signIn({user}) {
-            const existingUser = await getUserById(user.id);
+        //{user}
+        async signIn() {
+            // const existingUser = await getUserById(user.id);
 
             return true;
         },
