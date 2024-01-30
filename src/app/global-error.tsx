@@ -1,5 +1,10 @@
 'use client'
 
+import {NextUIProvider, UserProvider} from "@/providers";
+import SiteSettingsProvider from "@/providers/SiteSettingsProvider";
+import Navbar from "@/components/partial/NavBar";
+import Footer from "@/components/partial/Footer";
+
 export default function GlobalError({
                                         error,
                                         reset,
@@ -10,8 +15,19 @@ export default function GlobalError({
     return (
         <html>
         <body>
-        <h2>Something went wrong!</h2>
-        <button onClick={() => reset()}>Try again</button>
+        <NextUIProvider>
+            <SiteSettingsProvider>
+                <UserProvider>
+                    <Navbar/>
+                    {error.message}
+                    <br/>
+                    {error.stack && <pre>{error.stack}</pre>}
+                    <br/>
+                    <button onClick={reset}>Reset</button>
+                    <Footer/>
+                </UserProvider>
+            </SiteSettingsProvider>
+        </NextUIProvider>
         </body>
         </html>
     )
