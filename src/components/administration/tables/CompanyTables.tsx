@@ -16,23 +16,22 @@ import {
     DropdownItem,
     Pagination,
     Selection,
-    ChipProps,
-    SortDescriptor,
+    SortDescriptor, useDisclosure,
 } from "@nextui-org/react";
-import {ChevronDownIcon, Edit, Printer, StarIcon} from "lucide-react";
+import {ChevronDownIcon, Edit, Plus, StarIcon} from "lucide-react";
 import {SearchIcon} from "@nextui-org/shared-icons";
 import 'moment/locale/ka';
 import Link from "next/link";
 import {Avatar} from "@nextui-org/avatar";
 import {cn} from "@/lib/utils";
-import CarColumn from "@/components/administration/tables/carsColumn";
+import AddCompanyModal from "@/components/administration/modals/AddCompanyModal";
 
 
 const columns = [
     {name: "ID", uid: "id", sortable: true},
     {name: "სახელი", uid: "name", sortable: true},
-    {name: "მგზავრობები", uid: "rides", sortable: true},
-    {name: "ავტომობილი", uid: "cars"},
+    {name: "მიმართულება", uid: "directions", sortable: true},
+    {name: "ავტომობილი", uid: "vehicles", sortable: true},
     {name: "რეიტინგი", uid: "ratings", sortable: true},
     {name: "როლი", uid: "role", sortable: true},
     // {name: "გაჩერებები", uid: "stops.count()", sortable: true},
@@ -41,7 +40,7 @@ const columns = [
 ];
 
 const statusOptions = [
-    {name: "მომხმარებელი", uid: "USER"},
+    {name: "მომხმარებელი", uid: "COMPANY"},
     {name: "ადმინისტრატორი", uid: "ADMIN"},
 ];
 
@@ -50,28 +49,25 @@ export function capitalize(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-const statusColorMap: Record<string, ChipProps["color"]> = {
-    USER: "warning",
-    ADMIN: "success",
-};
+const INITIAL_VISIBLE_COLUMNS = ["name", "directions", "vehicles", "ratings", "role", "actions"];
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "rides", "cars", "ratings", "role", "actions"];
-
-interface UserTablesProps {
-    users: any
+interface CompanyTablesProps {
+    companies: any
 }
 
-const CompanyTables = ({users}: UserTablesProps) => {
+const CompanyTables = ({companies}: CompanyTablesProps) => {
 
     const [filterValue, setFilterValue] = React.useState("");
     const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
     const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
-    const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
+    const [statusFilter] = React.useState<Selection>("all");
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
     const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
         column: "createdAt",
         direction: "ascending",
     });
+
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
     const [page, setPage] = React.useState(1);
 
@@ -84,23 +80,23 @@ const CompanyTables = ({users}: UserTablesProps) => {
     }, [visibleColumns]);
 
     const filteredItems = React.useMemo(() => {
-        let filteredUsers = [...users];
+        let filteredCompanies = [...companies];
 
         if (hasSearchFilter) {
-            filteredUsers = filteredUsers.filter((user) =>
-                // user.name.toLowerCase().includes(filterValue.toLowerCase()),
-                user.email.toLowerCase().includes(filterValue.toLowerCase()) || user.name.toLowerCase().includes(filterValue.toLowerCase()),
+            filteredCompanies = filteredCompanies.filter((company) =>
+                // company.name.toLowerCase().includes(filterValue.toLowerCase()),
+                company.email.toLowerCase().includes(filterValue.toLowerCase()) || company.name.toLowerCase().includes(filterValue.toLowerCase()),
             );
         }
         if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
-            filteredUsers = filteredUsers.filter((user) =>
-                Array.from(statusFilter).includes(user.status),
+            filteredCompanies = filteredCompanies.filter((company) =>
+                Array.from(statusFilter).includes(company.status),
             );
         }
 
-        return filteredUsers;
+        return filteredCompanies;
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [users, filterValue, statusFilter]);
+    }, [companies, filterValue, statusFilter]);
 
     const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -112,45 +108,51 @@ const CompanyTables = ({users}: UserTablesProps) => {
     }, [page, filteredItems, rowsPerPage]);
 
     const sortedItems = React.useMemo(() => {
-        return [...items].sort((a: UserTablesProps, b: UserTablesProps) => {
-            const first = a[sortDescriptor.column as keyof UserTablesProps] as number;
-            const second = b[sortDescriptor.column as keyof UserTablesProps] as number;
+        return [...items].sort((a: CompanyTablesProps, b: CompanyTablesProps) => {
+            const first = a[sortDescriptor.column as keyof CompanyTablesProps] as number;
+            const second = b[sortDescriptor.column as keyof CompanyTablesProps] as number;
             const cmp = first < second ? -1 : first > second ? 1 : 0;
 
             return sortDescriptor.direction === "descending" ? -cmp : cmp;
         });
     }, [sortDescriptor, items]);
 
-    const renderCell = React.useCallback((user: any, columnKey: React.Key) => {
-        const cellValue = user[columnKey as keyof UserTablesProps];
+    const renderCell = React.useCallback((company: any, columnKey: React.Key) => {
+        const cellValue = company[columnKey as keyof CompanyTablesProps];
 
         switch (columnKey) {
             case "name":
                 return (
                     <div className="flex flex-row gap-4">
-                        <Avatar isBordered radius="sm" src={user.image}/>
+                        <Avatar isBordered radius="sm" src={company.logo}/>
                         <div className="flex flex-col">
                             <p className="text-bold text-small capitalize">
-                                <Link href={`/user/${user.id}`}>{cellValue}</Link>
+                                <Link href={`/company/${company.id}`}>{cellValue}</Link>
                             </p>
-                            <p className="text-bold text-tiny capitalize text-default-400">{user.email}</p>
+                            <p className="text-bold text-tiny capitalize text-default-400">{company.email}</p>
                         </div>
                     </div>
                 );
-            case "rides":
+            case "directions":
+                console.log("ssss", cellValue)
                 return (
                     <div className="flex flex-col">
-                        <p className="text-bold text-xs capitalize">სულ: <span>{cellValue.map((ride: any) => ride).length}</span>
+                        <p className="text-bold text-xs capitalize">სულ: <span>{cellValue.map((direction: any) => direction).length}</span>
                         </p>
-                        <p className="text-bold text-tiny capitalize text-default-400">
-                            დასრულებული: {user.rides.filter((ride: any) => ride.status === "COMPLETED").length}
-                        </p>
+                        <div className="flex flex-col gap-2">
+                            {cellValue.map((direction: any, index: number) => (
+                                <div key={index} className="flex flex-col">
+                                    <p className="text-bold text-tiny capitalize">{direction.direction.name}</p>
+                                    <p>{direction.direction.price}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 );
-            case "cars":
+            case "vehicles":
                 return (
                     <div className="flex flex-col">
-                        <CarColumn cars={cellValue}/>
+                        {cellValue.length}
                     </div>
                 );
             case "ratings":
@@ -172,14 +174,14 @@ const CompanyTables = ({users}: UserTablesProps) => {
                             </div>
                         ))}</span>
                         <span
-                            className="text-bold text-tiny capitalize text-default-400">შეფასებები: {user.ratings.length}</span>
+                            className="text-bold text-tiny capitalize text-default-400">შეფასებები: {company.ratings.length}</span>
                     </div>
                 );
-            case "role":
+            case "address":
                 return (
                     <div className="flex flex-col">
                         <span
-                            className={cn("px-1 py-0.5 rounded-md text-xs text-center", cellValue === "ADMIN" ? "bg-danger-100 text-danger-700" : "bg-amber-100 text-amber-700")}>{cellValue}</span>
+                            className="text-bold text-tiny capitalize text-default-400">შეფასებები: {cellValue}</span>
                     </div>
                 );
             case "actions":
@@ -240,27 +242,27 @@ const CompanyTables = ({users}: UserTablesProps) => {
                         onValueChange={onSearchChange}
                     />
                     <div className="flex gap-3">
-                        <Dropdown>
-                            <DropdownTrigger className="hidden sm:flex">
-                                <Button endContent={<ChevronDownIcon className="text-small"/>} variant="flat">
-                                    როლი
-                                </Button>
-                            </DropdownTrigger>
-                            <DropdownMenu
-                                disallowEmptySelection
-                                aria-label="Table Columns"
-                                closeOnSelect={false}
-                                selectedKeys={statusFilter}
-                                selectionMode="multiple"
-                                onSelectionChange={setStatusFilter}
-                            >
-                                {statusOptions.map((status) => (
-                                    <DropdownItem key={status.uid} className="capitalize">
-                                        {capitalize(status.name)}
-                                    </DropdownItem>
-                                ))}
-                            </DropdownMenu>
-                        </Dropdown>
+                        {/*<Dropdown>*/}
+                        {/*    <DropdownTrigger className="hidden sm:flex">*/}
+                        {/*        <Button endContent={<ChevronDownIcon className="text-small"/>} variant="flat">*/}
+                        {/*            როლი*/}
+                        {/*        </Button>*/}
+                        {/*    </DropdownTrigger>*/}
+                        {/*    <DropdownMenu*/}
+                        {/*        disallowEmptySelection*/}
+                        {/*        aria-label="Table Columns"*/}
+                        {/*        closeOnSelect={false}*/}
+                        {/*        selectedKeys={statusFilter}*/}
+                        {/*        selectionMode="multiple"*/}
+                        {/*        onSelectionChange={setStatusFilter}*/}
+                        {/*    >*/}
+                        {/*        {statusOptions.map((status) => (*/}
+                        {/*            <DropdownItem key={status.uid} className="capitalize">*/}
+                        {/*                {capitalize(status.name)}*/}
+                        {/*            </DropdownItem>*/}
+                        {/*        ))}*/}
+                        {/*    </DropdownMenu>*/}
+                        {/*</Dropdown>*/}
                         <Dropdown>
                             <DropdownTrigger className="hidden sm:flex">
                                 <Button endContent={<ChevronDownIcon className="text-small"/>} variant="flat">
@@ -282,13 +284,14 @@ const CompanyTables = ({users}: UserTablesProps) => {
                                 ))}
                             </DropdownMenu>
                         </Dropdown>
-                        <Button color="primary" endContent={<Printer/>}>
-                            ამობეჭდვა
+                        <Button color="primary" startContent={<Plus/>} onPress={onOpen}>
+                            დამატება
                         </Button>
+
                     </div>
                 </div>
                 <div className="flex justify-between items-center">
-                    <span className="text-default-400 text-small">სულ {users.length} მომხმარებელი</span>
+                    <span className="text-default-400 text-small">სულ {companies.length} კომპანია</span>
                     <label className="flex items-center text-default-400 text-small">
                         რიგები თითო გვერდზე:
                         <select
@@ -310,7 +313,7 @@ const CompanyTables = ({users}: UserTablesProps) => {
         visibleColumns,
         onSearchChange,
         onRowsPerPageChange,
-        users.length,
+        companies.length,
         hasSearchFilter,
     ]);
 
@@ -345,45 +348,47 @@ const CompanyTables = ({users}: UserTablesProps) => {
     }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
 
     return (
-        <Table
-            aria-label="მომხმარებლები"
-            isHeaderSticky
-            bottomContent={bottomContent}
-            bottomContentPlacement="outside"
-            classNames={{
-                wrapper: "max-h-auto shadow-none border border-default-100 rounded-xl",
-            }}
-            selectedKeys={selectedKeys}
-            selectionMode="none"
-            sortDescriptor={sortDescriptor}
-            topContent={topContent}
-            topContentPlacement="outside"
-            onSelectionChange={setSelectedKeys}
-            onSortChange={setSortDescriptor}
-        >
-            <TableHeader columns={headerColumns} className="shadow-none">
-                {(column) => (
-                    <TableColumn
-                        key={column.uid}
-                        align={column.uid === "actions" ? "center" : "start"}
-                        allowsSorting={column.sortable}
-                        className="shadow-none border-0 bg-gray-100"
-                    >
-                        {column.name}
-                    </TableColumn>
-                )}
-            </TableHeader>
-            <TableBody emptyContent={"მომხმარებელი ვერ მოიძებნა"} items={sortedItems}>
-                {(item) => (
-                    <TableRow key={item.id}>
-                        {(columnKey) => <TableCell>
-                            {renderCell(item, columnKey)}
-                        </TableCell>}
-                    </TableRow>
-                )}
-            </TableBody>
-        </Table>
+        <>
+            <Table
+                aria-label="კომპანიები"
+                isHeaderSticky
+                bottomContent={bottomContent}
+                bottomContentPlacement="outside"
+                classNames={{
+                    wrapper: "max-h-auto shadow-none border border-default-100 rounded-xl",
+                }}
+                selectedKeys={selectedKeys}
+                selectionMode="none"
+                sortDescriptor={sortDescriptor}
+                topContent={topContent}
+                topContentPlacement="outside"
+                onSelectionChange={setSelectedKeys}
+                onSortChange={setSortDescriptor}
+            >
+                <TableHeader columns={headerColumns} className="shadow-none">
+                    {(column) => (
+                        <TableColumn
+                            key={column.uid}
+                            align={column.uid === "actions" ? "center" : "start"}
+                            allowsSorting={column.sortable}
+                            className="shadow-none border-0 bg-gray-100"
+                        >
+                            {column.name}
+                        </TableColumn>
+                    )}
+                </TableHeader>
+                <TableBody emptyContent={"კომპანია ვერ მოიძებნა"} items={sortedItems}>
+                    {(item) => (
+                        <TableRow key={item.id}>
+                            {(columnKey) => <TableCell>
+                                {renderCell(item, columnKey)}
+                            </TableCell>}
+                        </TableRow>
+                    )}
+                </TableBody>
+            </Table>
+            <AddCompanyModal isOpen={isOpen} onOpenChange={onOpenChange}/>
+        </>
     )
 };
-
 export default CompanyTables;

@@ -43,6 +43,7 @@ const AdminSidebarMenu = () => {
                         აქციები
                     </ListboxItem>
                     <ListboxItem
+                        href={"/management/directions"}
                         key="directions"
                         description="მარშრუტების მართვა"
                         startContent={<SignpostBig className={iconClasses}/>}

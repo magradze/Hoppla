@@ -1,22 +1,20 @@
 import {FC} from "react";
 import {cn} from "@/lib/utils";
-import {getCompanies} from "@/lib/actions/companies";
-import CompanyTables from "@/components/administration/tables/CompanyTables";
+import DirectionsForm from "@/components/administration/forms/DirectionsForm";
 
 interface pageProps {
 }
 
 const page: FC<pageProps> = async () => {
 
-    const companies = await getCompanies();
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full h-full">
             <div className={cn("px-4  bg-white rounded-xl shadow-md")}>
-                Company
+                <DirectionsForm/>
             </div>
             <div className={cn("mt-12 fira-go")}>
-                <CompanyTables companies={companies}/>
+                ..
             </div>
         </div>
     );

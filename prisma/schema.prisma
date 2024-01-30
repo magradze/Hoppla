@@ -114,6 +114,7 @@ model Ride {
   rideRules   RideRule[]
   status      RideStatus @default(PENDING)
   Trip        Trip[]
+  companyId   String?    @map("company_id")
   createdAt   DateTime   @default(now()) @map("created_at")
 
   @@map("rides")
@@ -237,7 +238,7 @@ model SiteSettings {
 
 // Company
 model Company {
-  id           String           @id @default(cuid())
+  id           String              @id @default(cuid())
   name         String
   email        String?
   phone        String?
@@ -247,8 +248,9 @@ model Company {
   companyUsers CompanyUser[]
   ratings      CompanyRating[]
   vehicles     CompanyVehicle[]
-  createdAt    DateTime         @default(now()) @map("created_at")
-  updatedAt    DateTime         @default(now()) @map("updated_at")
+  directions   CompanyDirections[]
+  createdAt    DateTime            @default(now()) @map("created_at")
+  updatedAt    DateTime            @default(now()) @map("updated_at")
 
   @@map("companies")
 }
@@ -302,4 +304,50 @@ enum CompanyVehicleType {
   TRUCK
   MOTORCYCLE
   BICYCLE
+}
+
+// Directions
+model Direction {
+  id                String              @id @default(cuid())
+  name              String
+  from              String
+  fromLat           Float               @map("from_lat")
+  fromLong          Float               @map("from_long")
+  to                String
+  toLat             Float               @map("to_lat")
+  toLong            Float               @map("to_long")
+  distance          Float
+  duration          Int
+  stops             DirectionStop[]
+  price             Float
+  CompanyDirections CompanyDirections[]
+  createdAt         DateTime            @default(now()) @map("created_at")
+  updatedAt         DateTime            @default(now()) @map("updated_at")
+
+  @@map("directions")
+}
+
+model DirectionStop {
+  id          String    @id @default(cuid())
+  directionId String    @map("direction_id")
+  direction   Direction @relation(fields: [directionId], references: [id], onDelete: Cascade)
+  name        String
+  lat         Float?
+  long        Float?
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @map("updated_at")
+
+  @@map("direction_stops")
+}
+
+model CompanyDirections {
+  id          String    @id @default(cuid())
+  companyId   String    @map("company_id")
+  company     Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  directionId String    @map("direction_id")
+  direction   Direction @relation(fields: [directionId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @map("updated_at")
+
+  @@map("company_directions")
 }

@@ -41,6 +41,8 @@ export const config = {
         '/ride/add',
         '/dashboard',
         '/dashboard/profile',
+        '/management',
+        '/management',
         // '/auth/new-user'
     ]
 }
