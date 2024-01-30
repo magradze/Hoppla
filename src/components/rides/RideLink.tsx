@@ -4,7 +4,7 @@ import Link from "next/link";
 import moment from "moment";
 
 const RideLink = async () => {
-    //
+
     // const rideLinks = await getRideLinks()
     //
     // if (rideLinks.length > 0) {

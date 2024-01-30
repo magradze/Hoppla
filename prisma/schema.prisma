@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Account {
@@ -27,6 +28,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
   @@map("accounts")
 }
 
@@ -37,6 +39,7 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@index([userId])
   @@map("sessions")
 }
 
@@ -55,11 +58,11 @@ model User {
   accounts      Account[]
   sessions      Session[]
   rides         Ride[]
-  createdAt     DateTime?     @map("created_at")
   trips         Trip[]
   cars          Car[]
   ratings       UserRating[]
   CompanyUser   CompanyUser[]
+  createdAt     DateTime      @default(now()) @map("created_at")
 
   @@map("users")
 }
@@ -83,6 +86,7 @@ model UserRating {
   authorId  String   @map("author_id")
   createdAt DateTime @default(now()) @map("created_at")
 
+  @@index([userId])
   @@map("user_ratings")
 }
 
@@ -117,6 +121,7 @@ model Ride {
   companyId   String?    @map("company_id")
   createdAt   DateTime   @default(now()) @map("created_at")
 
+  @@index([userId])
   @@map("rides")
 }
 
@@ -126,6 +131,7 @@ model Stop {
   rideId String @map("ride_id")
   ride   Ride   @relation(fields: [rideId], references: [id], onDelete: Cascade)
 
+  @@index([rideId])
   @@map("stops")
 }
 
@@ -137,6 +143,7 @@ model RideRule {
   value     String
   createdAt DateTime? @map("created_at")
 
+  @@index([rideId])
   @@map("ride_rules")
 }
 
@@ -154,6 +161,7 @@ model Trip {
   ride       Ride   @relation(fields: [rideId], references: [id], onDelete: Cascade)
   passangers User[]
 
+  @@index([rideId])
   @@map("trips")
 }
 
@@ -168,6 +176,7 @@ model Car {
   plateNumber String   @map("plate_number")
   createdAt   DateTime @default(now()) @map("created_at")
 
+  @@index([userId])
   @@map("cars")
 }
 
@@ -265,6 +274,8 @@ model CompanyUser {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @map("updated_at")
 
+  @@index([companyId])
+  @@index([userId])
   @@map("company_users")
 }
 
@@ -277,6 +288,7 @@ model CompanyRating {
   authorId  String   @map("author_id")
   createdAt DateTime @default(now()) @map("created_at")
 
+  @@index([companyId])
   @@map("company_ratings")
 }
 
@@ -293,6 +305,7 @@ model CompanyVehicle {
   driverId  String             @map("driver_id")
   createdAt DateTime           @default(now()) @map("created_at")
 
+  @@index([companyId])
   @@map("company_vehicles")
 }
 
@@ -337,6 +350,7 @@ model DirectionStop {
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @default(now()) @map("updated_at")
 
+  @@index([directionId])
   @@map("direction_stops")
 }
 
@@ -349,5 +363,7 @@ model CompanyDirections {
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @default(now()) @map("updated_at")
 
+  @@index([companyId])
+  @@index([directionId])
   @@map("company_directions")
 }
