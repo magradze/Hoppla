@@ -8,10 +8,13 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Input} from "@/components/ui/input";
 import FormError from "@/components/shared/forms/FormError";
 import {Button} from "@/components/ui/button";
-import {useRouter} from "next/navigation";
 import {confirmRegistration} from "@/lib/actions/user";
+import {useRouter} from "next/navigation";
+import {useSession} from "next-auth/react";
 
 const RegisterConfirmForm = () => {
+
+    const {data: session, update: sessionUpdate} = useSession()
 
     const user = useCurrentUser()
     const router = useRouter()
@@ -27,11 +30,23 @@ const RegisterConfirmForm = () => {
         }
     });
 
-    const handleSubmit = async (values: z.infer<typeof RegisterConfirmSchema>) => {
+    const handleSubmit = async (values: any) => {
         const res = await confirmRegistration(values)
-
         if (res) {
-            router.push('/dashboard')
+            await sessionUpdate(
+                {
+                    ...session,
+                    user: {
+                        ...session?.user,
+                        phone: values.phone,
+                        address: values.address,
+                        birthday: values.birthday,
+                        confirmed: true
+                    }
+                }
+            )
+            router.refresh()
+            router.replace('/dashboard')
         }
     };
 
@@ -89,7 +104,7 @@ const RegisterConfirmForm = () => {
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 flex items-center">
                                         <label htmlFor="country" className="sr-only">
-                                            Country
+                                            ტელეფონი
                                         </label>
                                         <select
                                             id="country"

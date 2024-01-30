@@ -39,34 +39,64 @@ const NumberSelector = React.forwardRef<HTMLInputElement, InputProps>(
         };
 
         return (
-            <div
-                className="absolute lg:relative lg:flex flex-row justify-between items-center p-4 bg-white lg:rounded-md">
-                <div className="flex flex-grow fira-go text-gray-400 text-sm">მგზავრი</div>
-                <div className="flex flex-grow-o justify-between items-center">
-                    <Button variant="secondary" size="sm"
-                            onClick={decrement}
-                            disabled={(props.value as number) <= 1}
-                    >
-                        <Minus className="w-3 h-3"/>
-                    </Button>
-                    <input
-                        type={type}
-                        ref={ref}
-                        {...props}
-                        min={1}
-                        max={4}
-                    />
-                    <div className="text-center text-xl min-w-12">{props.value ? props.value : 1}</div>
-                    <Button variant="secondary" size="sm"
-                            onClick={
-                                increment
-                            }
-                            disabled={props.value === 4}
-                    >
-                        <Plus className="w-3 h-3"/>
-                    </Button>
+            <>
+                <div
+                    className="hidden lg:relative lg:flex lg:flex-col justify-between items-start gap-2 px-4 py-2 bg-white lg:rounded-md">
+                    <div className="flex flex-grow fira-go text-gray-400 text-sm">მგზავრი</div>
+                    <div className="flex flex-grow-o justify-between items-center">
+                        <Button variant="secondary" size="sm"
+                                onClick={decrement}
+                                disabled={(props.value as number) <= 1}
+                        >
+                            <Minus className="w-3 h-3"/>
+                        </Button>
+                        <input
+                            type={type}
+                            ref={ref}
+                            {...props}
+                            min={1}
+                            max={4}
+                        />
+                        <div className="text-center text-xl min-w-12">{props.value ? props.value : 1}</div>
+                        <Button variant="secondary" size="sm"
+                                onClick={
+                                    increment
+                                }
+                                disabled={props.value === 4}
+                        >
+                            <Plus className="w-3 h-3"/>
+                        </Button>
+                    </div>
                 </div>
-            </div>
+
+                <div className="lg:hidden">
+                    <div className="flex flex-grow fira-go text-gray-400 text-sm">მგზავრი</div>
+                    <div className="flex flex-grow-o justify-between items-center">
+                        <Button variant="secondary" size="sm"
+                                onClick={decrement}
+                                disabled={(props.value as number) <= 1}
+                        >
+                            <Minus className="w-3 h-3"/>
+                        </Button>
+                        <input
+                            type={type}
+                            ref={ref}
+                            {...props}
+                            min={1}
+                            max={4}
+                        />
+                        <div className="text-center text-xl min-w-12">{props.value ? props.value : 1}</div>
+                        <Button variant="secondary" size="sm"
+                                onClick={
+                                    increment
+                                }
+                                disabled={props.value === 4}
+                        >
+                            <Plus className="w-3 h-3"/>
+                        </Button>
+                    </div>
+                </div>
+            </>
         );
     });
 

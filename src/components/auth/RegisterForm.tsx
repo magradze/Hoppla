@@ -9,13 +9,14 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 
 import LoginFormWrapper from "@/components/auth/LoginFormWrapper";
 import {Button} from "@/components/ui/button";
-import {signIn} from "next-auth/react";
 import {Input} from "@/components/ui/input";
 import FormError from "@/components/shared/forms/FormError";
+import {registerUser} from "@/lib/actions/user";
+import {useRouter} from "next/navigation";
 
 
 const RegisterForm = () => {
-
+    const router = useRouter()
     const form = useForm<z.infer<typeof RegisterSchema>>({
         resolver: zodResolver(RegisterSchema),
         defaultValues: {
@@ -25,13 +26,10 @@ const RegisterForm = () => {
         }
     });
     const handleSubmit = async (values: z.infer<typeof RegisterSchema>) => {
-        await signIn("credentials", {
-            redirect: true,
-            name: values.name,
-            email: values.email,
-            password: values.password,
-            callbackUrl: "/"
-        })
+        const res = await registerUser(values);
+        if (res) {
+            router.push('/auth/new-user')
+        }
     };
 
     return (

@@ -9,8 +9,8 @@ import {cn} from "@/lib/utils";
 import {User, Link} from "@nextui-org/react";
 import {convertSecondsToTime} from "@/lib/tools/convertTimeToSeconds";
 import {getCarById} from "@/lib/actions/cars";
-import {Button} from "@/components/ui/button";
 import RideRules from "@/components/rides/RideRules";
+import RideReservationBtn from "@/components/rides/buttons/RideReservationBtn";
 
 interface pageProps {
     params: {
@@ -165,12 +165,10 @@ const page: FC<pageProps> = async ({params}) => {
                         <span className="lg:self-end fira-go">ფასი</span>
                         <span className="text-5xl fira-go">{
                             // @ts-ignore
-                            ride?.price as number / ride?.seats as number
+                            (ride?.price as number / ride?.seats as number).toFixed(2)
                         }₾</span>
                     </div>
-                    <Button size="lg" variant="secondary" className="w-full lg:w-2/3 lg:self-end rounded-xl">
-                        დაჯავშნა
-                    </Button>
+                    <RideReservationBtn/>
                 </div>
             </div>
 

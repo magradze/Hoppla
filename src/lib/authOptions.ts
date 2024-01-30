@@ -7,6 +7,7 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import FacebookProvider from "next-auth/providers/facebook";
 import {getUserById} from "@/lib/actions/user";
+import {redirect} from "next/navigation";
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -46,6 +47,9 @@ export const authOptions: NextAuthOptions = {
                     email: profile.email,
                     image: profile.picture,
                     role: profile.role ? profile.role : "USER",
+                    phone: profile.phone,
+                    address: profile.address,
+                    birthday: profile.birthday,
                 };
             }
         }),
@@ -59,6 +63,9 @@ export const authOptions: NextAuthOptions = {
                     email: profile.email,
                     image: profile.avatar_url,
                     role: profile.role ? profile.role : "USER",
+                    phone: profile.phone,
+                    address: profile.address,
+                    birthday: profile.birthday,
                 };
             }
         }),
@@ -77,8 +84,8 @@ export const authOptions: NextAuthOptions = {
         }),
     ],
     events: {
-        // async signIn({user}) {
-        //     console.log("signIn", user);
+        // async signIn({user, isNewUser}) {
+        //     console.log("signIn", isNewUser);
         // },
         // async createUser({user}) {
         //     console.log("createUser", user);
@@ -87,23 +94,29 @@ export const authOptions: NextAuthOptions = {
         //     console.log("linkAccount", user);
         // },
         // async session({session, token}) {
-        //     console.log("session", session, token);
+        //     // if (token?.phone === null || token?.address === null || token?.birthday === null) {
+        //     //     // return redirect(`${process.env.NEXTAUTH_URL}/auth/new-user`)
+        //     //     console.log("redirect");
+        //     // }
         // }
     },
     callbacks: {
         async signIn({user}) {
             const existingUser = await getUserById(user.id);
 
-            // if (!existingUser || !existingUser.emailVerified) {
-            //     return "/auth/new-user";
-            // }
             return true;
         },
-        async jwt({token, user}) {
+        async jwt({token, user, trigger, session}) {
+            if (trigger === "update") {
+                return {...token, ...session.user};
+            }
             return {...token, ...user};
         },
         async session({session, token}) {
             session.user.role = token.role;
+            session.user.phone = token.phone;
+            session.user.address = token.address;
+            session.user.birthday = token.birthday;
             return session;
         }
     },

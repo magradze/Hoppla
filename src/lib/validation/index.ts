@@ -5,3 +5,5 @@ export {default as SearchSchema} from './SearchScheme';
 export {default as UserSchema} from './UserSchema';
 export {default as ChangePasswordScheme} from './ChangePasswordScheme';
 export {default as CarSchema} from './CarSchema';
+export {default as CompanyScheme} from './CompanyScheme';
+export {default as DirectionScheme} from './DirectionScheme';

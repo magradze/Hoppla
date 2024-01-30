@@ -5,17 +5,17 @@ import {useForm} from "react-hook-form";
 import * as z from "zod";
 import {SearchSchema} from "@/lib/validation";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Input} from "@/components/ui/input";
+// import {Input} from "@/components/ui/input";
 import {CalendarDays, Locate, User} from "lucide-react";
-import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
-import {Button} from "@/components/ui/button";
+import {Popover, PopoverContent, PopoverTrigger} from "@nextui-org/react";
+import {Input, Button} from "@nextui-org/react";
 import {cn} from "@/lib/utils";
 import {Calendar} from "@/components/ui/calendar";
 import NumberSelector from "@/components/ui/number-selector";
 import {useRouter, useSearchParams} from "next/navigation";
 import moment from "moment";
 import 'moment/locale/ka';
-import {ka} from "date-fns/locale/ka";
+import ka from "date-fns/locale/ka";
 
 const SearchBox = ({className, type}: { className?: string, type: string }) => {
 
@@ -61,22 +61,33 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)}
-                  className={cn(className, "rounded-md grid grid-cols-1 lg:grid-cols-12 lg:justify-between items-center w-full fira-go")}>
+                  className={cn(className, "rounded-xl grid grid-cols-1 lg:grid-cols-12 lg:justify-between items-center w-full fira-go bg-white overflow-hidden")}>
 
                 <FormField
                     name="startLocation"
                     render={({field}) => (
-                        <FormItem className="relative w-full h-16 rounded-md col-span-12 lg:col-span-3">
-                            <div
-                                className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 ">
-                                <Locate/>
-                            </div>
+                        <FormItem className="relative w-full col-span-12 lg:col-span-3">
+
                             <FormControl>
                                 <Input
+                                    radius="none"
+                                    size="lg"
+                                    startContent={<Locate/>}
                                     {...field}
                                     placeholder={"საიდან..."}
                                     type="text"
-                                    className="block w-full h-full rounded-t-md rounded-b-none md:rounded-l-md md:rounded-r-none border border-gray-100 border-b-0 md:border-b py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 space-y-0"
+                                    classNames={{
+                                        label: "text-black/50 dark:text-white/90",
+                                        input: [
+                                            "bg-transparent",
+                                            "text-black/90 dark:text-white/90",
+                                            "placeholder:text-default-700/50 dark:placeholder:text-white/60",
+                                        ],
+                                        innerWrapper: "bg-transparent",
+                                        inputWrapper: [
+                                            "bg-white text-gray-400",
+                                        ],
+                                    }}
                                 />
                             </FormControl>
                             <FormMessage className="fira-go text-[10px]"/>
@@ -86,13 +97,12 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                 <FormField
                     name="endLocation"
                     render={({field}) => (
-                        <FormItem className="relative w-full h-16 rounded-md col-span-12 lg:col-span-3">
-                            <div
-                                className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 ">
-                                <Locate/>
-                            </div>
+                        <FormItem className="relative w-full col-span-12 lg:col-span-3">
                             <FormControl>
                                 <Input
+                                    radius="none"
+                                    size="lg"
+                                    startContent={<Locate/>}
                                     {...field}
                                     placeholder={"სად..."}
                                     onChange={(e) => {
@@ -104,7 +114,18 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                                         }
                                     }}
                                     type="text"
-                                    className="block w-full h-full rounded-none border border-gray-100 md:border-l-0 border-b-0 md:border-b py-1.5 pl-10 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                    classNames={{
+                                        label: "text-gray-400",
+                                        input: [
+                                            "bg-transparent",
+                                            "text-gray-400",
+                                            "placeholder:text-gray-400",
+                                        ],
+                                        innerWrapper: "bg-transparent text-gray-400",
+                                        inputWrapper: [
+                                            "bg-white text-gray-400",
+                                        ],
+                                    }}
                                 />
                             </FormControl>
                             <FormMessage className="fira-go text-[10px]"/>
@@ -116,13 +137,13 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                     control={form.control}
                     name="startDate"
                     render={({field}) => (
-                        <FormItem className="flex flex-col col-span-2 lg:col-span-2 h-full">
-                            <Popover>
-                                <PopoverTrigger asChild>
+                        <FormItem className="flex flex-col col-span-2 lg:col-span-2 h-16">
+                            <Popover placement="bottom-end">
+                                <PopoverTrigger>
 
                                     <FormControl>
                                         <Button
-                                            variant={"outline"}
+                                            variant="light"
                                             className={cn(
                                                 "relative w-full h-full rounded-none border border-gray-100 md:border-l-0 bg-white py-5 pl-10 text-gray-400 placeholder:text-gray-400 sm:text-sm sm:leading-6",
                                                 !field.value && "text-muted-foreground"
@@ -150,7 +171,7 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                                         </Button>
                                     </FormControl>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-[240px] fira-go p-0" align="start">
+                                <PopoverContent className="w-[240px] fira-go p-0">
                                     <Calendar
                                         locale={ka}
                                         mode="single"
@@ -171,13 +192,13 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                     control={form.control}
                     name="seats"
                     render={({field}) => (
-                        <FormItem className="flex flex-col col-span-6 lg:col-span-1 h-full">
-                            <Popover>
-                                <PopoverTrigger asChild>
+                        <FormItem className="flex flex-col col-span-6 lg:col-span-1 h-16">
+                            <Popover placement="bottom-end">
+                                <PopoverTrigger>
 
                                     <FormControl>
                                         <Button
-                                            variant={"outline"}
+                                            variant="light"
                                             className={cn(
                                                 "relative w-full h-full rounded-none border border-gray-100 md:border-l-0 bg-white  py-5 pl-10 text-gray-400 placeholder:text-gray-400 sm:text-sm sm:leading-6",
                                                 !field.value && "text-muted-foreground"
@@ -191,7 +212,7 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                                         </Button>
                                     </FormControl>
                                 </PopoverTrigger>
-                                <PopoverContent className="absolute lg:relative lg:w-[260px] p-0" align="start">
+                                <PopoverContent>
                                     <FormControl>
                                         <NumberSelector
                                             type="hidden"
@@ -205,10 +226,11 @@ const SearchBox = ({className, type}: { className?: string, type: string }) => {
                 />
 
                 <Button
-                    variant="secondary"
+                    variant="solid"
+                    color="secondary"
                     size="lg"
                     type="submit"
-                    className="col-span-12 lg:col-span-3 rounded-t-none lg:rounded-l-none lg:rounded-r-md py-8 disabled:cursor-not-allowed disabled:opacity-85"
+                    className="col-span-12 lg:col-span-3 rounded-t-none lg:rounded-l-none lg:rounded-r-xl py-8 disabled:cursor-not-allowed disabled:opacity-85"
                     onClick={() => {
                         router.push(`/search?${createQueryStr(form.getValues())}`)
                     }}
